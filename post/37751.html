@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://moreant.github.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":"mac","style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Laravel 有三种数据库操作方式，DB Facades , 查询构造器 , Eloquent ORM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Laravel 基础 数据库操作">
+<meta property="og:url" content="http://moreant.github.io/post/37751.html">
+<meta property="og:site_name" content="moreant&#39;s Blog">
+<meta property="og:description" content="Laravel 有三种数据库操作方式，DB Facades , 查询构造器 , Eloquent ORM">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://markdown.yeek.top/bolg/20191007/Rn3hu10dOL71.jpg?imageslim">
+<meta property="og:image" content="http://markdown.yeek.top/bolg/20191007/2teaHlSkVfJv.jpg?imageslim">
+<meta property="article:published_time" content="2019-10-05T01:47:49.000Z">
+<meta property="article:modified_time" content="2019-10-29T01:50:22.000Z">
+<meta property="article:author" content="莫居尘 Moreant">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="Laravel">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://markdown.yeek.top/bolg/20191007/Rn3hu10dOL71.jpg?imageslim">
+
+<link rel="canonical" href="http://moreant.github.io/post/37751.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Laravel 基础 数据库操作 | moreant's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">moreant's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">学习即输入输出</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://moreant.github.io/post/37751.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
+      <meta itemprop="name" content="莫居尘 Moreant">
+      <meta itemprop="description" content="别教了，我学不动了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="moreant's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Laravel 基础 数据库操作
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-05 09:47:49" itemprop="dateCreated datePublished" datetime="2019-10-05T09:47:49+08:00">2019-10-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-29 09:50:22" itemprop="dateModified" datetime="2019-10-29T09:50:22+08:00">2019-10-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index">
+                    <span itemprop="name">php</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Laravel 有三种数据库操作方式，<strong>DB Facades</strong> , <strong>查询构造器</strong> , <strong>Eloquent ORM</strong></p>
+<a id="more"></a>
+
+
+
+<h2 id="笔记归档"><a href="#笔记归档" class="headerlink" title="笔记归档"></a>笔记归档</h2><p><a href="https://mojuchen.github.io/tags/Laravel/" target="_blank" rel="noopener">Laravel 基础教程 笔记</a></p>
+<h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><p>打开根目录的 <code>.env</code> 文件</p>
+<p>9~14行就是数据库的配置信息了：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DB_CONNECTION=mysql</span><br><span class="line">DB_HOST=localhost</span><br><span class="line">DB_PORT=<span class="number">3306</span></span><br><span class="line">DB_DATABASE=laravel</span><br><span class="line">DB_USERNAME=root</span><br><span class="line">DB_PASSWORD=</span><br></pre></td></tr></table></figure>
+
+<p>演示中的创建表：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">create table <span class="keyword">if</span> not exists student(</span><br><span class="line"></span><br><span class="line">`id` INT AUTO_INCREMENT PRIMARY KEY,</span><br><span class="line"></span><br><span class="line">`name` VARCHAR(<span class="number">255</span>) NOT <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span> COMMENT <span class="string">'姓名'</span>,</span><br><span class="line"></span><br><span class="line">`age` TINYINT UNSIGNED not <span class="keyword">null</span> <span class="keyword">DEFAULT</span> <span class="number">0</span> COMMENT <span class="string">'年龄'</span>,</span><br><span class="line"></span><br><span class="line">`sex` TINYINT UNSIGNED not <span class="keyword">null</span> <span class="keyword">DEFAULT</span> <span class="number">10</span> COMMENT <span class="string">'性别'</span>,</span><br><span class="line"></span><br><span class="line">`created_at` DATETIME <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">'新增时间'</span>,</span><br><span class="line"></span><br><span class="line">`updated_at` DATETIME <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">'修改时间'</span></span><br><span class="line"></span><br><span class="line">)ENGINE=INNODB <span class="keyword">DEFAULT</span> CHARSET=UTF8 AUTO_INCREMENT=<span class="number">1001</span> COMMENT=<span class="string">'学生表'</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="DB-Facades"><a href="#DB-Facades" class="headerlink" title="DB Facades"></a>DB Facades</h2><p>Laravel 给我们提供了 Facades 来更方便的使用静态接口。</p>
+<p>所有的 Laravel Facades 都定义在 <code>Illuminate\Support\Facades</code> 命名空间下。</p>
+<p>主要的方法有： <code>select</code> / <code>insert</code> / <code>update</code> / <code>delete</code></p>
+<p>使用 DB Facades 一定要 use：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一般 use 都放这里</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">DB</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>查询：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$arr = DB::select(<span class="string">'select * from student'</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>插入：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$bool =  DB::insert(<span class="string">'insert into student (name, age) values (?, ?)'</span>, [<span class="string">'moreant'</span>, <span class="number">18</span>]);</span><br></pre></td></tr></table></figure>
+
+<p><strong>更新</strong>：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$int = DB::update(<span class="string">'update student set age = ? where name = ?'</span>, [<span class="string">'19'</span>,<span class="string">'moreant'</span>]);</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$int2 = DB::delete(<span class="string">'delete from student where id &gt; ?'</span>, [<span class="number">1005</span>]);</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://learnku.com/docs/laravel/5.7/facades/2251" target="_blank" rel="noopener">了解更多 Facades</a></p>
+<h2 id="查询构造器"><a href="#查询构造器" class="headerlink" title="查询构造器"></a>查询构造器</h2><p>Laravel 的<strong>查询构造器</strong>使用了 PDO 参数绑定来免受 SQL 注入攻击</p>
+<h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p>常用的插入方法有： <code>insert</code> / <code>insertGetId</code></p>
+<p><strong>简单插入：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$bool = DB::table(<span class="string">'student'</span>)-&gt;insert(</span><br><span class="line">    [<span class="string">'name'</span>=&gt;<span class="string">'test'</span>,<span class="string">'age'</span>=&gt;<span class="number">20</span>]</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><strong>获得自增 id：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$id = DB::table(<span class="string">'student'</span>)-&gt;insertGetId(</span><br><span class="line">    [<span class="string">'name'</span>=&gt;<span class="string">'boob'</span>,<span class="string">'age'</span>=&gt;<span class="number">22</span>]</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><strong>插入多条数据</strong>：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$bool = DB::table(<span class="string">'student'</span>)-&gt;insertGetId(</span><br><span class="line">    [</span><br><span class="line">        [<span class="string">'name'</span>=&gt;<span class="string">'boob'</span>,<span class="string">'age'</span>=&gt;<span class="number">15</span>],</span><br><span class="line">        [<span class="string">'name'</span>=&gt;<span class="string">'sanm'</span>,<span class="string">'age'</span>=&gt;<span class="number">17</span>],</span><br><span class="line">        [<span class="string">'name'</span>=&gt;<span class="string">'job'</span>,<span class="string">'age'</span>=&gt;<span class="number">14</span>],</span><br><span class="line">    ]</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新与自增"><a href="#更新与自增" class="headerlink" title="更新与自增"></a>更新与自增</h3><p>常用的更新方法有： <code>update</code> / <code>increment</code> / <code>decrement</code></p>
+<p><strong>基本使用：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$cow = DB::table(<span class="string">'student'</span>)</span><br><span class="line">    -&gt;where(<span class="string">'age'</span>, <span class="number">19</span>)</span><br><span class="line">    -&gt;update([<span class="string">'age'</span> =&gt; <span class="number">21</span>]);</span><br></pre></td></tr></table></figure>
+
+<p><strong>自增 1：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$cow = DB::table(<span class="string">'student'</span>)-&gt;increment(<span class="string">'age'</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>自增 3：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$cow = DB::table(<span class="string">'student'</span>)-&gt;increment(<span class="string">'age'</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>自减：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$cow = DB::table(<span class="string">'student'</span>)-&gt;decrement(<span class="string">'age'</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>有条件的自增：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$cow = DB::table(<span class="string">'student'</span>)</span><br><span class="line">    -&gt;where(<span class="string">'name'</span>, <span class="string">'moreant'</span>)</span><br><span class="line">    -&gt;increment(<span class="string">'age'</span>, <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>在自增同时修改其他数据</strong>：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$cow = DB::table(<span class="string">'student'</span>)</span><br><span class="line">    -&gt;where(<span class="string">'name'</span>, <span class="string">'test'</span>)</span><br><span class="line">    -&gt;increment(<span class="string">'age'</span>, <span class="number">4</span>, [<span class="string">'name'</span> =&gt; <span class="string">'myTest'</span>]);</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>常用的删除方法有： <code>delete</code> / <code>truncate</code></p>
+<p><strong>删除指定条件：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$num = DB::table(<span class="string">'student'</span>)</span><br><span class="line">    -&gt;where(<span class="string">'id'</span>, <span class="string">'1004'</span>)</span><br><span class="line">    -&gt;delete();</span><br></pre></td></tr></table></figure>
+
+<p><strong>范围条件：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$num = DB::table(<span class="string">'student'</span>)</span><br><span class="line">    -&gt;where(<span class="string">'id'</span>, <span class="string">'&gt;='</span>, <span class="string">'1004'</span>)</span><br><span class="line">    -&gt;delete();</span><br></pre></td></tr></table></figure>
+
+<p><strong>清空表</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DB::table(<span class="string">'student'</span>)-&gt;truncate();</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p>常用的查询方法有： <code>get</code> / <code>first</code> / <code>where</code> / <code>pluck</code> / <code>select</code> / <code>chunk</code></p>
+<p><strong>get()</strong></p>
+<p>获取所有表数据：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$student = DB::table(<span class="string">'student'</span>)-&gt;get();</span><br></pre></td></tr></table></figure>
+
+<p><strong>first()</strong></p>
+<p>第一条数据：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$student = DB::table(<span class="string">'student'</span>)-&gt;first();</span><br></pre></td></tr></table></figure>
+
+<p>可以修改排序：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$student = DB::table(<span class="string">'student'</span>)</span><br><span class="line">    -&gt;orderBy(<span class="string">'id'</span>,<span class="string">'abs'</span>)</span><br><span class="line">    -&gt;first();</span><br></pre></td></tr></table></figure>
+
+<p><strong>where()</strong></p>
+<p>条件查询：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$student = DB::table(<span class="string">'student'</span>)</span><br><span class="line">    -&gt;where(<span class="string">'id'</span>, <span class="string">'&gt;='</span>, <span class="string">'1002'</span>)</span><br><span class="line">    -&gt;get();</span><br></pre></td></tr></table></figure>
+
+<p>多条件查询：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$student = DB::table(<span class="string">'student'</span>)</span><br><span class="line">    -&gt;whereRaw(<span class="string">'id &gt;= ? and age &gt;= ?'</span>,[<span class="number">1004</span>,<span class="number">19</span>])</span><br><span class="line">    -&gt;get();</span><br></pre></td></tr></table></figure>
+
+<p><strong>pluck()</strong></p>
+<p>返回指定字段：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$student = DB::table(<span class="string">'student'</span>)</span><br><span class="line">    -&gt;pluck(<span class="string">'name'</span>);</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://markdown.yeek.top/bolg/20191007/Rn3hu10dOL71.jpg?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191007/Rn3hu10dOL71.jpg?imageslim" alt="img"></a></p>
+<p>自定义键值：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$student = DB::table(<span class="string">'student'</span>)</span><br><span class="line">	-&gt;whereRaw(<span class="string">'id &gt;= ? and age &gt;= ?'</span>,[<span class="number">1004</span>,<span class="number">19</span>])</span><br><span class="line">	-&gt;pluck(<span class="string">'name'</span>,<span class="string">'id'</span>);</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://markdown.yeek.top/bolg/20191007/2teaHlSkVfJv.jpg?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191007/2teaHlSkVfJv.jpg?imageslim" alt="img"></a></p>
+<p><strong>select()</strong></p>
+<p>指定返回的字段：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$student = DB::table(<span class="string">'student'</span>)</span><br><span class="line">	-&gt;select(<span class="string">'id'</span>,<span class="string">'name'</span>)</span><br><span class="line">	-&gt;get();</span><br></pre></td></tr></table></figure>
+
+<p><strong>chunk()</strong></p>
+<p>分块结果，一次获取结果集的一小块，并将其传递给 <code>闭包</code> 函数进行处理：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DB::table(<span class="string">'student'</span>)-&gt;orderBy(<span class="string">'id'</span>)-&gt;chunk(<span class="number">3</span>, <span class="function"><span class="keyword">function</span> <span class="params">($students)</span> </span>&#123;</span><br><span class="line">    var_dump($students);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>可以通过在 <code>闭包</code> 中返回 <code>false</code> 来终止继续获取分块结果：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DB::table(<span class="string">'student'</span>)-&gt;orderBy(<span class="string">'id'</span>)-&gt;chunk(<span class="number">3</span>, <span class="function"><span class="keyword">function</span> <span class="params">($users)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Process the records...</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><p>常用的聚合函数方法有： <code>count</code> / <code>max</code> / <code>min</code> / <code>avg</code> / <code>sum</code></p>
+<p><strong>count</strong></p>
+<p>查询结果的总数：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$num = DB::table(<span class="string">'student'</span>)-&gt;count();</span><br></pre></td></tr></table></figure>
+
+<p>都可以结合其他查询语句：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$num = DB::table(<span class="string">'student'</span>)</span><br><span class="line">    -&gt;where(<span class="string">'id'</span>,<span class="string">'&gt;='</span>,<span class="string">'1005'</span>)</span><br><span class="line">    -&gt;count();</span><br></pre></td></tr></table></figure>
+
+<p><strong>max</strong></p>
+<p>查询结果的返回最大值</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$max = DB::table(<span class="string">'student'</span>)-&gt;max(<span class="string">'age'</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>min</strong></p>
+<p>查询结果的返回最小值：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$min = DB::table(<span class="string">'student'</span>)-&gt;min(<span class="string">'age'</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>avg</strong></p>
+<p>平均值：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$avg = DB::table(<span class="string">'student'</span>)-&gt;avg(<span class="string">'age'</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>sum</strong></p>
+<p>总和：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sum = DB::table(<span class="string">'student'</span>)-&gt;sum(<span class="string">'age'</span>);</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>莫居尘 Moreant
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://moreant.github.io/post/37751.html" title="Laravel 基础 数据库操作">http://moreant.github.io/post/37751.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"><i class="fa fa-tag"></i> PHP</a>
+              <a href="/tags/Laravel/" rel="tag"><i class="fa fa-tag"></i> Laravel</a>
+              <a href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 编程</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/45228.html" rel="prev" title="Laravel 基础 视图">
+      <i class="fa fa-chevron-left"></i> Laravel 基础 视图
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/39513.html" rel="next" title="Laravel 基础 Eloquent ORM 操作数据库">
+      Laravel 基础 Eloquent ORM 操作数据库 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记归档"><span class="nav-number">1.</span> <span class="nav-text">笔记归档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接数据库"><span class="nav-number">2.</span> <span class="nav-text">连接数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DB-Facades"><span class="nav-number">3.</span> <span class="nav-text">DB Facades</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询构造器"><span class="nav-number">4.</span> <span class="nav-text">查询构造器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入"><span class="nav-number">4.1.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新与自增"><span class="nav-number">4.2.</span> <span class="nav-text">更新与自增</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除"><span class="nav-number">4.3.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询"><span class="nav-number">4.4.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合函数"><span class="nav-number">4.5.</span> <span class="nav-text">聚合函数</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="莫居尘 Moreant"
+      src="http://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
+  <p class="site-author-name" itemprop="name">莫居尘 Moreant</p>
+  <div class="site-description" itemprop="description">别教了，我学不动了</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/moreant" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moreant" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:moreant@foxmail.com" title="E-Mail → mailto:moreant@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.yeek.top/" title="http:&#x2F;&#x2F;www.yeek.top" rel="noopener" target="_blank">Yeek</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://drive.yeek.top/" title="http:&#x2F;&#x2F;drive.yeek.top" rel="noopener" target="_blank">Drive</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">莫居尘 Moreant</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">41k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">38 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

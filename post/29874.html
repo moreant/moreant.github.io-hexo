@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://moreant.github.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":"mac","style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Blade 是 Laravel 提供的一个简单而又强大的模板引擎。主要参考了 Laravel 中文网的文档">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Laravel 基础 Blade模板">
+<meta property="og:url" content="http://moreant.github.io/post/29874.html">
+<meta property="og:site_name" content="moreant&#39;s Blog">
+<meta property="og:description" content="Blade 是 Laravel 提供的一个简单而又强大的模板引擎。主要参考了 Laravel 中文网的文档">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://markdown.yeek.top/bolg/20191010/Hl50d6TFsByh.jpg?imageslim">
+<meta property="og:image" content="http://markdown.yeek.top/bolg/20191010/FWTrrykRGIHn.jpg?imageslim">
+<meta property="og:image" content="http://markdown.yeek.top/bolg/20191011/ENmfbuDSPpM6.jpg?imageslim">
+<meta property="og:image" content="http://markdown.yeek.top/bolg/20191011/aI7FAQaMxSda.png?imageslim">
+<meta property="og:image" content="http://markdown.yeek.top/bolg/20191011/2THUBnqYH021.png?imageslim">
+<meta property="og:image" content="http://markdown.yeek.top/bolg/20191011/xa9JBwGNNzIm.png?imageslim">
+<meta property="article:published_time" content="2019-10-08T01:55:07.000Z">
+<meta property="article:modified_time" content="2019-10-29T13:36:54.000Z">
+<meta property="article:author" content="莫居尘 Moreant">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="Laravel">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://markdown.yeek.top/bolg/20191010/Hl50d6TFsByh.jpg?imageslim">
+
+<link rel="canonical" href="http://moreant.github.io/post/29874.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Laravel 基础 Blade模板 | moreant's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">moreant's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">学习即输入输出</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://moreant.github.io/post/29874.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
+      <meta itemprop="name" content="莫居尘 Moreant">
+      <meta itemprop="description" content="别教了，我学不动了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="moreant's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Laravel 基础 Blade模板
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-08 09:55:07" itemprop="dateCreated datePublished" datetime="2019-10-08T09:55:07+08:00">2019-10-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-29 21:36:54" itemprop="dateModified" datetime="2019-10-29T21:36:54+08:00">2019-10-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index">
+                    <span itemprop="name">php</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Blade 是 Laravel 提供的一个简单而又强大的模板引擎。主要参考了 Laravel 中文网的<a href="https://learnku.com/docs/laravel/5.7/blade/2265#displaying-data" target="_blank" rel="noopener">文档</a></p>
+<a id="more"></a>
+
+
+
+<h2 id="笔记归档"><a href="#笔记归档" class="headerlink" title="笔记归档"></a>笔记归档</h2><p><a href="https://mojuchen.github.io/tags/Laravel/" target="_blank" rel="noopener">Laravel 基础教程 笔记</a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>Blade 并不限制你在视图中使用原生 PHP 代码。</li>
+<li>所有 Blade 视图文件都将被编译成原生的 PHP 代码并缓存起来，除非它被修改，否则不会重新编译，这就意味着 Blade 基本上不会给你的应用增加任何负担。</li>
+<li>Blade 视图文件使用 <code>.blade.php</code> 作为文件扩展名，被存放在 <code>resources/views</code>目录。</li>
+</ul>
+<h2 id="模板继承"><a href="#模板继承" class="headerlink" title="模板继承"></a>模板继承</h2><h3 id="定义布局"><a href="#定义布局" class="headerlink" title="定义布局"></a>定义布局</h3><p>这个是是教程中的基础模板，位置放在 <em>resources\views\</em><code>layouts.blade.php</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Laravel 基础教程 | Moreant&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        header &#123;</span><br><span class="line">            width: 1000px;</span><br><span class="line">            height: 150px;</span><br><span class="line">            margin: 0 auto;</span><br><span class="line">            background: #f5f5f5;</span><br><span class="line">            border: 1px solid #ddd;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        main &#123;</span><br><span class="line">            width: 1000px;</span><br><span class="line">            height: 300px;</span><br><span class="line">            margin: 0 auto;</span><br><span class="line">            margin-top: 15px;</span><br><span class="line">            clear: both;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        main nav &#123;</span><br><span class="line">            float: left;</span><br><span class="line">            width: 20%;</span><br><span class="line">            height: inherit;</span><br><span class="line">            background: #f5f5f5;</span><br><span class="line">            border: 1px solid #ddd;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        main .content &#123;</span><br><span class="line">            float: right;</span><br><span class="line">            width: 75%;</span><br><span class="line">            height: inherit;</span><br><span class="line">            background: #f5f5f5;</span><br><span class="line">            border: 1px solid #ddd;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        footer &#123;</span><br><span class="line">            width: 1000px;</span><br><span class="line">            height: 150px;</span><br><span class="line">            margin: 0 auto;</span><br><span class="line">            margin-top: 15px;</span><br><span class="line">            background: #f5f5f5;</span><br><span class="line">            border: 1px solid #ddd;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;&#x2F;style&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;header&gt;</span><br><span class="line">        头部</span><br><span class="line">    &lt;&#x2F;header&gt;</span><br><span class="line">    &lt;main&gt;</span><br><span class="line">        &lt;nav&gt;</span><br><span class="line">            侧边栏</span><br><span class="line">        &lt;&#x2F;nav&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;content&quot;&gt;</span><br><span class="line">            主要内容区域</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;main&gt;</span><br><span class="line">    &lt;footer&gt;</span><br><span class="line">        底部</span><br><span class="line">    &lt;&#x2F;footer&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后在 <code>body</code> 里定义布局，添加 <code>@section</code> 和 <code>@yield</code> 标记：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;header&gt;</span><br><span class="line">        @section(&#39;header&#39;)</span><br><span class="line">        头部</span><br><span class="line">        @show</span><br><span class="line">    &lt;&#x2F;header&gt;</span><br><span class="line">    &lt;main&gt;</span><br><span class="line">        &lt;nav&gt;</span><br><span class="line">            @section(&#39;nav&#39;)</span><br><span class="line">            侧边栏</span><br><span class="line">            @show</span><br><span class="line">        &lt;&#x2F;nav&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;content&quot;&gt;</span><br><span class="line">            @yield(&#39;content&#39;,&#39;主要内容区域&#39;)</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;main&gt;</span><br><span class="line">    &lt;footer&gt;</span><br><span class="line">        @section(&#39;footer&#39;)</span><br><span class="line">        底部</span><br><span class="line">        @show</span><br><span class="line">    &lt;&#x2F;footer&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>@section</code> 和 <code>@yield</code> 的区别是：</p>
+<p><strong>@section</strong> 标记的重点是<strong>部分</strong></p>
+<p><strong>@yield</strong> 标记的重点是<strong>位置</strong></p>
+<p><a href="http://markdown.yeek.top/bolg/20191010/Hl50d6TFsByh.jpg?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191010/Hl50d6TFsByh.jpg?imageslim" alt="父视图"></a></p>
+<h3 id="继承布局"><a href="#继承布局" class="headerlink" title="继承布局"></a>继承布局</h3><p>我们创建的是 student 的视图，因此视图的位置是 <em>resource\views*</em>student***<code>section1.blade.php</code> ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@extends(&#39;layouts&#39;)</span><br><span class="line"></span><br><span class="line">@section(&#39;title&#39;,&#39;Section1&#39;)</span><br><span class="line"></span><br><span class="line">@section(&#39;header&#39;)</span><br><span class="line"></span><br><span class="line">@parent</span><br><span class="line"></span><br><span class="line">&lt;h1&gt;header&lt;&#x2F;h1&gt;</span><br><span class="line"></span><br><span class="line">@endsection</span><br><span class="line"></span><br><span class="line">@section(&#39;content&#39;)</span><br><span class="line">主要</span><br><span class="line">@endsection</span><br><span class="line"></span><br><span class="line">@section(&#39;footer&#39;,&#39;&lt;h1&gt;底部在这里&lt;h1&gt;&#39;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>@extends：</strong>指定继承的布局</p>
+<p><strong>@section：</strong>指定替换父视图的部分，有两种写法</p>
+<p><strong>@parent：</strong>指定在这个 <code>@section</code> 中是增加内容，而不是覆盖</p>
+<p>然后在 <strong>控制器</strong> 中指定渲染的视图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public function section1()</span><br><span class="line">    &#123;</span><br><span class="line">        &#x2F;&#x2F; 也可以用 &#x2F; 来表示层级 如 student&#x2F;section1</span><br><span class="line">        return view(&#39;student.section1&#39;);</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者直接在路由中输出视图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Route::view(&#39;ss&#39;,&#39;student.section1&#39;);</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://markdown.yeek.top/bolg/20191010/FWTrrykRGIHn.jpg?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191010/FWTrrykRGIHn.jpg?imageslim" alt="继承子视图"></a></p>
+<h3 id="Components-amp-Slots"><a href="#Components-amp-Slots" class="headerlink" title="Components &amp; Slots"></a>Components &amp; Slots</h3><p><strong>components</strong> 会主动引用视图，常用于设置复用的部分</p>
+<p><strong>基础使用</strong></p>
+<p>比如有一个会在整个应用中复用的警告，位置在 <em>respurces\views\</em><code>alert.blade.php</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;alert alert-danger&quot;&gt;</span><br><span class="line">    &#123;&#123; $slot &#125;&#125;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后在需要使用这个警告的地方标记：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@component(&#39;alert&#39;)</span><br><span class="line">You are not allowed to access this resource!</span><br><span class="line">@endcomponent</span><br></pre></td></tr></table></figure>
+
+<p><strong>slot</strong></p>
+<p>由于任何没有被 <code>@slot</code> 指令包裹住的内容将传递给组件中的 <code>$slot</code> 变量：</p>
+<p>显示效果是这样的</p>
+<p><a href="http://markdown.yeek.top/bolg/20191011/ENmfbuDSPpM6.jpg?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191011/ENmfbuDSPpM6.jpg?imageslim" alt="img"></a></p>
+<p><code>@slot</code> 是用于注入内容到已知的 slot 中，比如我们需要在上面的基础上添加标题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;alert alert-danger&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;alert-title&quot;&gt;&#123;&#123; $title &#125;&#125;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">    &#123;&#123; $slot &#125;&#125;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在需要使用的地方这样标记：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@component(&#39;alert&#39;)</span><br><span class="line">@slot(&#39;title&#39;)</span><br><span class="line">Forbidden</span><br><span class="line">@endslot</span><br><span class="line"></span><br><span class="line">You are not allowed to access this resource!</span><br><span class="line">@endcomponent</span><br></pre></td></tr></table></figure>
+
+<p>显示效果</p>
+<p><a href="http://markdown.yeek.top/bolg/20191011/aI7FAQaMxSda.png?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191011/aI7FAQaMxSda.png?imageslim" alt="这样就添加了标题"></a></p>
+<p><strong>传递数据</strong></p>
+<p>当然也可以传递数据，首先定义要显示的数据，在上面的基础上添加用户名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;alert alert-danger&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;alert-title&quot;&gt;&#123;&#123; $title &#125;&#125;&lt;&#x2F;div&gt;</span><br><span class="line">    &#123;&#123; $name &#125;&#125; - &#123;&#123; $slot &#125;&#125;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>使用的时候在 component 的<strong>第二个参数传入数组</strong>即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@component(&#39;alert&#39;,[&#39;name&#39;&#x3D;&gt;&#39;moreant&#39;])</span><br><span class="line">@slot(&#39;title&#39;)</span><br><span class="line">Forbidden</span><br><span class="line">@endslot</span><br><span class="line"></span><br><span class="line">You are not allowed to access this resource!</span><br><span class="line">@endcomponent</span><br></pre></td></tr></table></figure>
+
+<p>效果</p>
+<p><a href="http://markdown.yeek.top/bolg/20191011/2THUBnqYH021.png?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191011/2THUBnqYH021.png?imageslim" alt="mark"></a></p>
+<p><strong>组件别名</strong></p>
+<p>子目录中的 Blade 组件，使用别名访问更方便。现在假设有一个 Blade 组件存储在 <code>resources/views/components/alert.blade.php</code>，可以使用 <code>component</code> 方法给它起个 <code>alert</code> 的别名。通常，在 <code>AppServiceProvider</code> 的 <code>boot</code> 方法中完成这个操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use Illuminate\Support\Facades\Blade;</span><br><span class="line"></span><br><span class="line">Blade::component(&#39;components.alert&#39;, &#39;alert&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>组件定义好别名后，使用指令渲染：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@alert([&#39;type&#39; &#x3D;&gt; &#39;danger&#39;])</span><br><span class="line">    You are not allowed to access this resource!</span><br><span class="line">@endalert</span><br></pre></td></tr></table></figure>
+
+<p>也可以不传参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@alert</span><br><span class="line">    You are not allowed to access this resource!</span><br><span class="line">@endalert</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><h3 id="传入数据"><a href="#传入数据" class="headerlink" title="传入数据"></a>传入数据</h3><p>在上面的 <strong>模板继承</strong> 中已经涉及到一部分的数据传入了</p>
+<p><a href="https://mojuchen.github.io/post/46063.html#c&s-cdsj" target="_blank" rel="noopener">component的传入数据</a></p>
+<p>可以在 <code>view</code> 的第二个参数中传入数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Route::get(&#39;greeting&#39;, function () &#123;</span><br><span class="line">    return view(&#39;welcome&#39;, [&#39;name&#39; &#x3D;&gt; &#39;Samantha&#39;]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>模板是php文件，自然也<strong>能使用php函数</strong>，例如在之前的警告中加入时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;alert alert-danger&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;alert-title&quot;&gt;&#123;&#123; $title &#125;&#125; - &#123;&#123; date(&#39;H:i:s&#39;) &#125;&#125; &lt;&#x2F;div&gt;</span><br><span class="line">    &#123;&#123; $slot &#125;&#125;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://markdown.yeek.top/bolg/20191011/xa9JBwGNNzIm.png?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191011/xa9JBwGNNzIm.png?imageslim" alt="img"></a></p>
+<p><strong>示未转义数据</strong></p>
+<p>默认情况下，Blade ` {{ }} `语句会自动调用 PHP 的 <code>htmlspecialchars</code> 函数防止 XSS 攻击。不想转义的话，可以使用以下语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello, &#123;!! $name !!&#125;.</span><br></pre></td></tr></table></figure>
+
+<h3 id="渲染-JSON"><a href="#渲染-JSON" class="headerlink" title="渲染 JSON"></a>渲染 JSON</h3><p>有时，为了初始化 JavaScript 变量，需要将传入视图的数组进行 JSON 化。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var app &#x3D; &lt;?php echo json_encode($array); ?&gt;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然而，可以用 <code>@json</code> Blade 指令替代手动 <code>json_encode</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var app &#x3D; @json($array);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="原样输出"><a href="#原样输出" class="headerlink" title="原样输出"></a>原样输出</h3><p>由于许多 JavaScript 框架都使用花括号来表示给定的表达式应用在浏览器中显示，<strong>你可以使用 @ 符号来告知 Blade 渲染引擎你需要保留这个表达式的原始形态</strong>。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;Laravel&lt;&#x2F;h1&gt;</span><br><span class="line"></span><br><span class="line">Hello, @&#123;&#123; name &#125;&#125;.</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中， <code>@</code> 符号最终将会被 Blade 引擎删除；达到不受 Blade 模版引擎影响的目的， 最终 ``表达式会保持不变使得 JavaScript 框架可以使用它。</p>
+<p><strong>@verbatim 指令</strong></p>
+<p><strong>在页面中如果你需要大部分内容展现 JavaScript 变量</strong>，你可以使用 <code>@verbatim</code> 指令来包裹 HTML 内容，这样你就不必在每个 Blade 打印语句前加上 <code>@</code> 符号：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@verbatim</span><br><span class="line">    &lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">        Hello, &#123;&#123; name &#125;&#125;.</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">@endverbatim</span><br></pre></td></tr></table></figure>
+
+<h2 id="结构控制"><a href="#结构控制" class="headerlink" title="结构控制"></a>结构控制</h2><h3 id="循环控制"><a href="#循环控制" class="headerlink" title="循环控制"></a>循环控制</h3><p>blade 提供了 <code>@if</code> 、 <code>@elseif</code> 、 <code>@else</code> 和 <code>@endif</code> 来构造 if 表达式、</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@if (count($records) &#x3D;&#x3D;&#x3D; 1)</span><br><span class="line">    我有一个记录！</span><br><span class="line">@elseif (count($records) &gt; 1)</span><br><span class="line">    我有多个记录！</span><br><span class="line">@else</span><br><span class="line">    我没有任何记录！</span><br><span class="line">@endif</span><br></pre></td></tr></table></figure>
+
+<p>为了方便， Blade 还提供了一个 <code>@unless</code> 指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@unless (Auth::check())</span><br><span class="line">    您还没有登录。</span><br><span class="line">@endunless</span><br></pre></td></tr></table></figure>
+
+<p>除了上述的条件指令之外， <code>@isset</code> 和 <code>@empty</code> 指令也可以视为与 PHP 函数有相同的功能：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@isset($records)</span><br><span class="line">    &#x2F;&#x2F; $records 被定义且不为空...</span><br><span class="line">@endisset</span><br><span class="line"></span><br><span class="line">@empty($records)</span><br><span class="line">    &#x2F;&#x2F; $records 是 &quot;empty&quot; 的...</span><br><span class="line">@endempty</span><br></pre></td></tr></table></figure>
+
+<p>使用循环时，你也可以结束循环或跳过当前迭代：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@foreach ($users as $user)</span><br><span class="line">    @if ($user-&gt;type &#x3D;&#x3D; 1)</span><br><span class="line">        @continue</span><br><span class="line">    @endif</span><br><span class="line"></span><br><span class="line">    &lt;li&gt;&#123;&#123; $user-&gt;name &#125;&#125;&lt;&#x2F;li&gt;</span><br><span class="line"></span><br><span class="line">    @if ($user-&gt;number &#x3D;&#x3D; 5)</span><br><span class="line">        @break</span><br><span class="line">    @endif</span><br><span class="line">@endforeach</span><br></pre></td></tr></table></figure>
+
+<p>你也可使用单行指令来包含指令声明条件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@foreach ($users as $user)</span><br><span class="line">    @continue($user-&gt;type &#x3D;&#x3D; 1)</span><br><span class="line"></span><br><span class="line">    &lt;li&gt;&#123;&#123; $user-&gt;name &#125;&#125;&lt;&#x2F;li&gt;</span><br><span class="line"></span><br><span class="line">    @break($user-&gt;number &#x3D;&#x3D; 5)</span><br><span class="line">@endforeach</span><br></pre></td></tr></table></figure>
+
+<p><strong>forelse</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@forelse ($users as $user)</span><br><span class="line">    &lt;li&gt;&#123;&#123; $user-&gt;name &#125;&#125;&lt;&#x2F;li&gt;</span><br><span class="line">@empty</span><br><span class="line">    &lt;p&gt;No users&lt;&#x2F;p&gt;</span><br><span class="line">@endforelse</span><br></pre></td></tr></table></figure>
+
+<h3 id="循环变量"><a href="#循环变量" class="headerlink" title="循环变量"></a>循环变量</h3><p>循环时，可以在循环内使用 <code>$loop</code> 变量。这个变量可以提供一些有用的信息，比如当前循环的索引，当前循环是否为首次迭代，抑或当前循环是否为末次迭代：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@foreach ($users as $user)</span><br><span class="line">    @if ($loop-&gt;first)</span><br><span class="line">        This is the first iteration.</span><br><span class="line">    @endif</span><br><span class="line"></span><br><span class="line">    @if ($loop-&gt;last)</span><br><span class="line">        This is the last iteration.</span><br><span class="line">    @endif</span><br><span class="line"></span><br><span class="line">    &lt;p&gt;This is user &#123;&#123; $user-&gt;id &#125;&#125;&lt;&#x2F;p&gt;</span><br><span class="line">@endforeach</span><br></pre></td></tr></table></figure>
+
+<p>在一个嵌套的循环中，可以通过使用 <code>$loop</code> 变量的 <code>parent</code> 属性来获取父循环中的 <code>$loop</code> 变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@foreach ($users as $user)</span><br><span class="line">    @foreach ($user-&gt;posts as $post)</span><br><span class="line">        @if ($loop-&gt;parent-&gt;first)</span><br><span class="line">            This is first iteration of the parent loop.</span><br><span class="line">        @endif</span><br><span class="line">    @endforeach</span><br><span class="line">@endforeach</span><br></pre></td></tr></table></figure>
+
+<p><code>$loop</code> 变量也包含了其它各种有用的属性：</p>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>$loop-&gt;index</code></td>
+<td align="left">当前循环迭代的索引（从 0 开始）。</td>
+</tr>
+<tr>
+<td align="left"><code>$loop-&gt;iteration</code></td>
+<td align="left">当前循环迭代 （从 1 开始）。</td>
+</tr>
+<tr>
+<td align="left"><code>$loop-&gt;remaining</code></td>
+<td align="left">循环中剩余迭代数量。</td>
+</tr>
+<tr>
+<td align="left"><code>$loop-&gt;count</code></td>
+<td align="left">迭代中的数组元素总数。</td>
+</tr>
+<tr>
+<td align="left"><code>$loop-&gt;first</code></td>
+<td align="left">当前迭代是否为循环中的首次迭代。</td>
+</tr>
+<tr>
+<td align="left"><code>$loop-&gt;last</code></td>
+<td align="left">当前迭代是否为循环中的末次迭代。</td>
+</tr>
+<tr>
+<td align="left"><code>$loop-&gt;depth</code></td>
+<td align="left">当前循环的嵌套深度级别。</td>
+</tr>
+<tr>
+<td align="left"><code>$loop-&gt;parent</code></td>
+<td align="left">在嵌套循环中，父循环的 loop 变量。</td>
+</tr>
+</tbody></table>
+<h2 id="引入子视图"><a href="#引入子视图" class="headerlink" title="引入子视图"></a>引入子视图</h2><p>Blade 的 <code>@include</code> 指令允许你从另一个视图中引入 Blade 视图。所有在父视图的可用变量在被引入的视图中都是可用的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    @include(&#39;shared.errors&#39;)</span><br><span class="line"></span><br><span class="line">    &lt;form&gt;</span><br><span class="line">        &lt;!--表单内容 --&gt;</span><br><span class="line">    &lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>被引入的视图会继承父视图中的所有数据，同时也可以向引入的视图传递额外的数组数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@include(&#39;view.name&#39;, [&#39;some&#39; &#x3D;&gt; &#39;data&#39;])</span><br></pre></td></tr></table></figure>
+
+<p>当然，如果尝试使用 <code>@include</code> 去引入一个不存在的视图，Laravel 会抛出一个错误。如果想引入一个不能确定存在与否的视图，你应当使用 @includeIf 指令：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@includeIf(<span class="string">'view.name'</span>, [<span class="string">'some'</span> =&gt; <span class="string">'data'</span>])</span><br></pre></td></tr></table></figure>
+
+<p>如果想根据给定的布尔条件来 <code>@include</code> 一个视图，你可以使用 <code>@includeWhen</code> 指令：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@includeWhen($boolean, <span class="string">'view.name'</span>, [<span class="string">'some'</span> =&gt; <span class="string">'data'</span>])</span><br></pre></td></tr></table></figure>
+
+<p>如果想引入给定视图数组中的第一个视图，你可以使用 <code>includeFirst</code> 指令：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@includeFirst([<span class="string">'custom.admin'</span>, <span class="string">'admin'</span>], [<span class="string">'some'</span> =&gt; <span class="string">'data'</span>])</span><br></pre></td></tr></table></figure>
+
+
+<p>更多关于 Blade 模板 的使用方法在 <a href="https://learnku.com/docs/laravel/5.7/blade/2265" target="_blank" rel="noopener">这里</a></p>
+<ul>
+<li><a href="https://learnku.com/docs/laravel/5.7/blade/2265#stacks" target="_blank" rel="noopener">堆栈</a></li>
+<li><a href="https://learnku.com/docs/laravel/5.7/blade/2265#service-injection" target="_blank" rel="noopener">服务注入</a></li>
+<li>Blade 扩展<ul>
+<li><a href="https://learnku.com/docs/laravel/5.7/blade/2265#custom-if-statements" target="_blank" rel="noopener">自定义 If 语句</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>莫居尘 Moreant
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://moreant.github.io/post/29874.html" title="Laravel 基础 Blade模板">http://moreant.github.io/post/29874.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"><i class="fa fa-tag"></i> PHP</a>
+              <a href="/tags/Laravel/" rel="tag"><i class="fa fa-tag"></i> Laravel</a>
+              <a href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 编程</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/39513.html" rel="prev" title="Laravel 基础 Eloquent ORM 操作数据库">
+      <i class="fa fa-chevron-left"></i> Laravel 基础 Eloquent ORM 操作数据库
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/20398.html" rel="next" title="Docker 部署 LNMP 和 Laravel">
+      Docker 部署 LNMP 和 Laravel <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记归档"><span class="nav-number">1.</span> <span class="nav-text">笔记归档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板继承"><span class="nav-number">3.</span> <span class="nav-text">模板继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义布局"><span class="nav-number">3.1.</span> <span class="nav-text">定义布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承布局"><span class="nav-number">3.2.</span> <span class="nav-text">继承布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Components-amp-Slots"><span class="nav-number">3.3.</span> <span class="nav-text">Components &amp; Slots</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据处理"><span class="nav-number">4.</span> <span class="nav-text">数据处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#传入数据"><span class="nav-number">4.1.</span> <span class="nav-text">传入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染-JSON"><span class="nav-number">4.2.</span> <span class="nav-text">渲染 JSON</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原样输出"><span class="nav-number">4.3.</span> <span class="nav-text">原样输出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构控制"><span class="nav-number">5.</span> <span class="nav-text">结构控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#循环控制"><span class="nav-number">5.1.</span> <span class="nav-text">循环控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环变量"><span class="nav-number">5.2.</span> <span class="nav-text">循环变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入子视图"><span class="nav-number">6.</span> <span class="nav-text">引入子视图</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="莫居尘 Moreant"
+      src="http://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
+  <p class="site-author-name" itemprop="name">莫居尘 Moreant</p>
+  <div class="site-description" itemprop="description">别教了，我学不动了</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/moreant" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moreant" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:moreant@foxmail.com" title="E-Mail → mailto:moreant@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.yeek.top/" title="http:&#x2F;&#x2F;www.yeek.top" rel="noopener" target="_blank">Yeek</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://drive.yeek.top/" title="http:&#x2F;&#x2F;drive.yeek.top" rel="noopener" target="_blank">Drive</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">莫居尘 Moreant</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">41k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">38 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
