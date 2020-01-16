@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://moreant.github.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":"default","style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: true,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="本站使用的博客框架是 Hexo ，其中默认的文章链接设置是这样的 :year&#x2F;:month&#x2F;:day&#x2F;:title&#x2F; 具体到本片文章是这样的 2019&#x2F;08&#x2F;30&#x2F;URL%e7%9a%84%e7%be%8e%e5%8c%96 。 这个URL有 3 层结构，而且中文经过了 URL编码 ，很长的 URL 一方面不利于传播分享，另一方面不利于搜索引擎的抓取(虽然国内搜索引擎不会抓GitHub的内容)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="URL的美化">
+<meta property="og:url" content="http://moreant.github.io/post/52295.html">
+<meta property="og:site_name" content="moreant&#39;s Blog">
+<meta property="og:description" content="本站使用的博客框架是 Hexo ，其中默认的文章链接设置是这样的 :year&#x2F;:month&#x2F;:day&#x2F;:title&#x2F; 具体到本片文章是这样的 2019&#x2F;08&#x2F;30&#x2F;URL%e7%9a%84%e7%be%8e%e5%8c%96 。 这个URL有 3 层结构，而且中文经过了 URL编码 ，很长的 URL 一方面不利于传播分享，另一方面不利于搜索引擎的抓取(虽然国内搜索引擎不会抓GitHub的内容)。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-08-30T01:26:59.000Z">
+<meta property="article:modified_time" content="2020-01-12T10:08:09.956Z">
+<meta property="article:author" content="莫居尘 Moreant">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="hexo">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://moreant.github.io/post/52295.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>URL的美化 | moreant's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">moreant's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">学习即输入输出</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://moreant.github.io/post/52295.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
+      <meta itemprop="name" content="莫居尘 Moreant">
+      <meta itemprop="description" content="别教了，我学不动了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="moreant's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          URL的美化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-30 09:26:59" itemprop="dateCreated datePublished" datetime="2019-08-30T09:26:59+08:00">2019-08-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-12 18:08:09" itemprop="dateModified" datetime="2020-01-12T18:08:09+08:00">2020-01-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本站使用的博客框架是 <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener"><strong>Hexo</strong></a> ，其中默认的文章链接设置是这样的 <code>:year/:month/:day/:title/</code> 具体到本片文章是这样的 <code>2019/08/30/URL%e7%9a%84%e7%be%8e%e5%8c%96</code> 。</p>
+<p>这个URL有 3 层结构，而且中文经过了 <strong>URL编码</strong> ，很长的 URL 一方面不利于传播分享，另一方面不利于搜索引擎的抓取(虽然国内搜索引擎不会抓<em>GitHub</em>的内容)。</p>
+<a id="more"></a>
+
+<h2 id="v1-0"><a href="#v1-0" class="headerlink" title="v1.0"></a>v1.0</h2><p>在 Hexo 的官方文档中就有介绍 URL链接 的设置：</p>
+<blockquote>
+<p>您可以在 <code>_config.yml</code> 配置中调整网站的永久链接或者在每篇文章的 Front-matter 中指定。</p>
+<p>by: Hexo 官方文档——<a href="https://hexo.io/zh-cn/docs/permalinks" target="_blank" rel="noopener">永久链接</a>（Permalinks）</p>
+</blockquote>
+<p>我使用了这篇文档中示例的：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">:category/:title.html</span></span><br></pre></td></tr></table></figure>
+
+<p>也就是 <strong>类型/标题</strong></p>
+<p>然后在文章的的 Front-matter 中指定 permalink：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">URLBeautification</span></span><br></pre></td></tr></table></figure>
+
+<p>这样，URL就变成了：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">mix/URLBeautification.html</span></span><br></pre></td></tr></table></figure>
+
+<p>简介，望文生义。但也存在问题：</p>
+<ul>
+<li><p>需要制定 permalink ，否则中文标题还是会被 URL编码。</p>
+</li>
+<li><p>需要去找到对应的 permalink 标题，一般要去 Google翻译。</p>
+</li>
+<li><p>遇到两个类型的文章，URL就存在冲突</p>
+<p>比如在 <a href="https://moreant.github.io/post/18324.html">foreach的遍历效率高吗？</a> 中，一开始的类型是 <code>java</code> 和 <code>php</code> 。URL链接选择了 <code>java</code> ，链接是：<code>java/forOrForeach.html</code> ，但是这篇文章主要的内容还是 <code>php</code> ，URL 反而会导致对文章的误导。</p>
+</li>
+</ul>
+<h2 id="v2-0"><a href="#v2-0" class="headerlink" title="v2.0"></a>v2.0</h2><p>然后去百度搜索了一下，找到现在这个解决方案：</p>
+<p><strong>使用 hexo-abbrlink</strong></p>
+<p>实现的方案，是：</p>
+<p>对<code>标题</code>+<code>时间</code>进行 <code>crc</code> 然后用<code>十进制</code>或者<code>十六进制</code>表示，保存在<code>front-matter</code>中。</p>
+<blockquote>
+<p><a href="https://post.zz173.com/detail/hexo-abbrlink.html" target="_blank" rel="noopener">hexo-abbrlink介绍</a></p>
+</blockquote>
+<p>只需要安装 <code>hexo-addrlink</code>   in <a href="https://github.com/rozbo/hexo-abbrlink" target="_blank" rel="noopener">GitHub</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
+
+<p>然后在<code>config.yml</code>，修改<code>permalink</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">post/:abbrlink.html</span></span><br><span class="line"><span class="attr">abbrlink:</span></span><br><span class="line">  <span class="attr">alg:</span> <span class="string">crc16</span>  <span class="comment"># 算法：crc16(default) and crc32</span></span><br><span class="line">  <span class="attr">rep:</span> <span class="string">dec</span>    <span class="comment"># 进制：dec(default) and hex</span></span><br></pre></td></tr></table></figure>
+
+<p>这个是使用了各个算法、进制的效果</p>
+<table>
+<thead>
+<tr>
+<th align="left">算法</th>
+<th align="left">进制</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">crc16</td>
+<td align="left">hex</td>
+<td align="left"><code>https://post.zz173.com/posts/3ab2.html</code></td>
+</tr>
+<tr>
+<td align="left">crc16</td>
+<td align="left">dec</td>
+<td align="left"><code>https://post.zz173.com/posts/12345.html</code></td>
+</tr>
+<tr>
+<td align="left">crc32</td>
+<td align="left">hex</td>
+<td align="left"><code>https://post.zz173.com/posts/9a8b6c4d.html</code></td>
+</tr>
+<tr>
+<td align="left">crc32</td>
+<td align="left">dec</td>
+<td align="left"><code>https://post.zz173.com/posts/1690090958.html</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>by: <a href="https://post.zz173.com/detail/hexo-abbrlink-2.0.4.html" target="_blank" rel="noopener">abbrlink更新2.0.4说明</a></p>
+</blockquote>
+<p>所以最终的链接是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;moreant.github.io&#x2F;post&#x2F;8375.html</span><br></pre></td></tr></table></figure>
+
+<p>虽然不能从链接中得到关于文章的信息了，但是实现了：</p>
+<ul>
+<li>自动生成唯一连接</li>
+<li>短小精悍</li>
+</ul>
+<p>是目前URL链接的最优解了</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>莫居尘 Moreant
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://moreant.github.io/post/52295.html" title="URL的美化">http://moreant.github.io/post/52295.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag"><i class="fa fa-tag"></i> 博客</a>
+              <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/7661.html" rel="prev" title="ThinkPHP5学习笔记">
+      <i class="fa fa-chevron-left"></i> ThinkPHP5学习笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/8294.html" rel="next" title="Laravel 基础 路由">
+      Laravel 基础 路由 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#v1-0"><span class="nav-number">1.</span> <span class="nav-text">v1.0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v2-0"><span class="nav-number">2.</span> <span class="nav-text">v2.0</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="莫居尘 Moreant"
+      src="http://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
+  <p class="site-author-name" itemprop="name">莫居尘 Moreant</p>
+  <div class="site-description" itemprop="description">别教了，我学不动了</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/moreant" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moreant" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:moreant@foxmail.com" title="E-Mail → mailto:moreant@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.yeek.top/" title="http:&#x2F;&#x2F;www.yeek.top" rel="noopener" target="_blank">Yeek</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://drive.yeek.top/" title="http:&#x2F;&#x2F;drive.yeek.top" rel="noopener" target="_blank">Drive</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">莫居尘 Moreant</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">41k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">38 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '95d6df1a949eeea73df4',
+      clientSecret: '8f06d7871c1db329f5339e191c5269699f4f5d3f',
+      repo: 'moreant.github.io',
+      owner: 'moreant',
+      admin: ['moreant'],
+      id: '8b1a8af908abbfe9e07cd3401c40161b',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
