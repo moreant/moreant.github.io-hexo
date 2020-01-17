@@ -1,6 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>优雅的科学上网</title>
+    <url>/post/23204.html</url>
+    <content><![CDATA[<p>通过自定义 PAC 规则和 <a href="https://proxy-switchyomega.com/" target="_blank" rel="noopener">SwitchyOmega</a> 插件，优雅的科学上网。当然首先你得自己找到科学上网的方法，然后才能讨论如何优雅。</p>
+<p><img src="http://markdown.yeek.top/20200117220553.png" alt=""></p>
+<a id="more"></a>
+
+
+
+<p>酸酸乳 的作者已经很久没有更新了，其内置的 <code>PAC规则</code> 已经不能很好的与某墙同步了。</p>
+<p>具体的体现就是使用 PAC规则 的时候，GitHub 的图片和raw代码经常 <code>404</code> 。</p>
+<p><img src="http://markdown.yeek.top/20200117221613.png" alt=""></p>
+<p><img src="http://markdown.yeek.top/20200117221808.png" alt=""></p>
+<p>因此，就需要我们自己 *<em>手动设置 PAC规则 *</em> 了</p>
+<p>主要参考的是 某中文网 的设置（访问需要梯子）</p>
+<blockquote>
+<p><a href="https://ssr.tools/495" target="_blank" rel="noopener">各平台PAC/ACL规则文件设置</a></p>
+</blockquote>
+<p>如果有打不可以的页面或者无法获取等情况，说明 <strong>需要梯子</strong> 。</p>
+<h1 id="Windows-下的配置"><a href="#Windows-下的配置" class="headerlink" title="Windows 下的配置"></a>Windows 下的配置</h1><p> <kbd>右键->另存为</kbd> 下载规则，改名为 <code>pac.txt</code> 替换掉到 <code>酸酸乳</code> 安装目录中的 <code>pac.txt</code> 。</p>
+<p>或者直接 <kbd>复制粘贴</kbd> 到酸酸乳安装目录中的  <code>pac.txt</code> 中。</p>
+<p>选择代理模式为PAC模式。</p>
+<p><a href="https://raw.githubusercontent.com/petronny/gfwlist2pac/master/gfwlist.pac" target="_blank" rel="noopener">xxxlist.pac</a></p>
+<p><img src="http://markdown.yeek.top/20200117222841.png" alt=""></p>
+<blockquote>
+<p><a href="https://github.com/petronny/gfwlist2pac" target="_blank" rel="noopener">支持更新规则的项目</a></p>
+</blockquote>
+<h1 id="Android-下的配置"><a href="#Android-下的配置" class="headerlink" title="Android 下的配置"></a>Android 下的配置</h1><p>在下面这个项目中挑选适合你的规则，接着在客户端的 <code>路由</code> 中选择 <code>自定义ACL文件</code> ，在弹出的窗口中填入 <code>规则连接</code> 即可。</p>
+<p><a href="https://github.com/ACL4SSR/ACL4SSR" target="_blank" rel="noopener">ACL4SSR</a></p>
+<p><img src="http://markdown.yeek.top/20200117224514.jpg" alt=""></p>
+<p><img src="http://markdown.yeek.top/20200117224524.jpg" alt=""></p>
+<h1 id="Chrome-和-FireFox-下的配置"><a href="#Chrome-和-FireFox-下的配置" class="headerlink" title="Chrome 和 FireFox 下的配置"></a>Chrome 和 FireFox 下的配置</h1><p>推荐使用 <a href="https://proxy-switchyomega.com/" target="_blank" rel="noopener">SwitchyOmega</a> 这个插件，如果遇到 PAC 没有及时更新的域名，可以字节添加规则</p>
+]]></content>
+      <categories>
+        <category>mix</category>
+      </categories>
+      <tags>
+        <tag>科学上网</tag>
+        <tag>SwitchyOmega</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>攻防世界 WEB upload1</title>
+    <url>/post/17040.html</url>
+    <content><![CDATA[<h1 id="0x01-题目描述"><a href="#0x01-题目描述" class="headerlink" title="0x01 - 题目描述"></a>0x01 - 题目描述</h1><p><img src="http://markdown.yeek.top/20200117152226.png" alt=""></p>
+<a id="more"></a>
+
+<h1 id="0x02-解题过程"><a href="#0x02-解题过程" class="headerlink" title="0x02 - 解题过程"></a>0x02 - 解题过程</h1><p>打开页面，只有一个上传模块</p>
+<p><img src="http://markdown.yeek.top/20200117152444.png" alt=""></p>
+<p>既然题目是 <strong>uplaod1</strong> 那就可以试一下上传一句话木马。</p>
+<p><img src="http://markdown.yeek.top/20200117161249.png" alt=""></p>
+<p>果然有拦截，上传按钮不可用了。</p>
+<p><img src="http://markdown.yeek.top/20200117152545.png" alt="上传提示"></p>
+<p><img src="http://markdown.yeek.top/20200117155007.png" alt=""></p>
+<p>分析 js 代码，是把按钮给 <code>disable</code> 了。</p>
+<p><img src="http://markdown.yeek.top/20200117155400.png" alt=""></p>
+<p>那很简单，在 <code>html</code> 里吧 <code>disable</code> 删掉就可以继续上传了</p>
+<p><img src="http://markdown.yeek.top/20200117155937.png" alt=""></p>
+<p><img src="http://markdown.yeek.top/20200117160702.png" alt=""></p>
+<p>得到上传的地址。访问地址没有404，说明正常打开了。</p>
+<p><img src="http://markdown.yeek.top/20200117160924.png" alt=""></p>
+<p>使用中国菜刀连接。</p>
+<p><img src="http://markdown.yeek.top/20200117161215.png" alt=""></p>
+<p>能访问服务器文件。开始找flag</p>
+<p><img src="http://markdown.yeek.top/20200117161357.png" alt=""></p>
+<p>一般不是在服务器的根目录就是在网站的根目录，这道题是后者</p>
+<p><img src="http://markdown.yeek.top/20200117161513.png" alt=""></p>
+<h1 id="0x03-技术总结"><a href="#0x03-技术总结" class="headerlink" title="0x03 - 技术总结"></a>0x03 - 技术总结</h1><ul>
+<li>注意看网页的源码</li>
+</ul>
+]]></content>
+      <categories>
+        <category>ctf</category>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>信息安全</tag>
+        <tag>ctf-web-入门</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo-next-配置</title>
     <url>/post/32411.html</url>
     <content><![CDATA[<p>简单的介绍一下我是如何配置本博客的</p>
@@ -22,7 +102,7 @@
 <p>详细配置里面的注释很详细，请善用 Google 翻译</p>
 ]]></content>
       <categories>
-        <category>blog</category>
+        <category>mix</category>
       </categories>
       <tags>
         <tag>博客</tag>
@@ -312,7 +392,15 @@
   <entry>
     <title>解决 GitHub 头像加载错误</title>
     <url>/post/13173.html</url>
-    <content><![CDATA[<p>最近发现 GitHub 的头像不能正常加载了，发现是404，直接就想到了是<strong>DNS污染</strong>。挂上全局酸酸乳，<code>ping</code> 加载失败的域名，得到 <code>ip</code> 地址，然后在 <code>host</code> 里加上就行了。</p>
+    <content><![CDATA[<p>update in 1-17：</p>
+<p>现在有更好的解决办法了，那就是 <a href="chrome-extension://padekgcemlokbadohgkifijomclgjgif/options.html#!/about">SwitchyOmega</a></p>
+<hr>
+
+<p>最近发现 GitHub 的头像不能正常加载了，发现是404，直接就想到了是<strong>DNS污染</strong>。挂上全局酸酸乳，<code>ping</code> 加载失败的域名，得到 <code>ip</code> 地址，然后在 <code>host</code> 里加上就行了。</p>
+<a id="more"></a>
+
+
+
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># GitHub Start </span><br><span class="line">151.101.108.133 avatars1.githubusercontent.com</span><br><span class="line"># GitHub End</span><br></pre></td></tr></table></figure>
 
 
@@ -462,7 +550,7 @@
             <p>更多请参阅<a href="http://schacon.github.com/git/git-update-ref.html" target="_blank" rel="noopener">git-update-ref</a>命令的文档。 或者腾讯云的<a href="https://cloud.tencent.com/developer/section/1138785" target="_blank" rel="noopener">中文文档</a></p><p>方案来源地址 <a href="https://stackoverflow.com/questions/4624881/how-can-i-uncommit-the-last-commit-in-a-git-bare-repository" target="_blank" rel="noopener">栈越</a></p>
           </div>]]></content>
       <categories>
-        <category>git</category>
+        <category>oam</category>
       </categories>
       <tags>
         <tag>运维</tag>
@@ -497,6 +585,7 @@
       </categories>
       <tags>
         <tag>运维</tag>
+        <tag>VMware</tag>
       </tags>
   </entry>
   <entry>
@@ -879,9 +968,9 @@
       </categories>
       <tags>
         <tag>运维</tag>
-        <tag>Docker</tag>
         <tag>PHP</tag>
         <tag>Laravel</tag>
+        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
@@ -1082,10 +1171,10 @@
         <category>php</category>
       </categories>
       <tags>
-        <tag>PHP</tag>
-        <tag>Laravel</tag>
         <tag>编程</tag>
         <tag>笔记</tag>
+        <tag>PHP</tag>
+        <tag>Laravel</tag>
       </tags>
   </entry>
   <entry>
@@ -1188,10 +1277,10 @@
         <category>php</category>
       </categories>
       <tags>
-        <tag>PHP</tag>
-        <tag>Laravel</tag>
         <tag>编程</tag>
         <tag>笔记</tag>
+        <tag>PHP</tag>
+        <tag>Laravel</tag>
       </tags>
   </entry>
   <entry>
@@ -1335,10 +1424,10 @@
         <category>php</category>
       </categories>
       <tags>
-        <tag>PHP</tag>
-        <tag>Laravel</tag>
         <tag>编程</tag>
         <tag>笔记</tag>
+        <tag>PHP</tag>
+        <tag>Laravel</tag>
       </tags>
   </entry>
   <entry>
@@ -1376,10 +1465,10 @@
         <category>php</category>
       </categories>
       <tags>
-        <tag>PHP</tag>
-        <tag>Laravel</tag>
         <tag>编程</tag>
         <tag>笔记</tag>
+        <tag>PHP</tag>
+        <tag>Laravel</tag>
       </tags>
   </entry>
   <entry>
@@ -1405,10 +1494,10 @@
         <category>php</category>
       </categories>
       <tags>
-        <tag>PHP</tag>
-        <tag>Laravel</tag>
         <tag>编程</tag>
         <tag>笔记</tag>
+        <tag>PHP</tag>
+        <tag>Laravel</tag>
       </tags>
   </entry>
   <entry>
@@ -1504,10 +1593,10 @@
         <category>php</category>
       </categories>
       <tags>
-        <tag>PHP</tag>
-        <tag>Laravel</tag>
         <tag>编程</tag>
         <tag>笔记</tag>
+        <tag>PHP</tag>
+        <tag>Laravel</tag>
       </tags>
   </entry>
   <entry>
@@ -1599,7 +1688,7 @@
 <p>是目前URL链接的最优解了</p>
 ]]></content>
       <categories>
-        <category>blog</category>
+        <category>mix</category>
       </categories>
       <tags>
         <tag>博客</tag>
@@ -1760,12 +1849,12 @@
 
 <h3 id="input函数"><a href="#input函数" class="headerlink" title="input函数"></a>input函数</h3><h3 id="响应对象"><a href="#响应对象" class="headerlink" title="响应对象"></a>响应对象</h3>]]></content>
       <categories>
-        <category>mix</category>
+        <category>php</category>
       </categories>
       <tags>
-        <tag>PHP</tag>
         <tag>编程</tag>
         <tag>笔记</tag>
+        <tag>PHP</tag>
         <tag>ThinkPHP</tag>
       </tags>
   </entry>
