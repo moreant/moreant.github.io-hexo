@@ -4,6 +4,7 @@ categories:
   - oam
 tags:
   - 运维
+  - VMware
 abbrlink: 23562
 date: 2019-10-30 00:46:21
 ---

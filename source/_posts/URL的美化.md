@@ -1,7 +1,7 @@
 ---
 title: URL的美化
 categories:
-  - blog
+  - mix
 tags:
   - 博客
   - hexo

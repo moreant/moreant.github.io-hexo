@@ -1,7 +1,7 @@
 ---
 title: git 问题归纳
 categories:
-  - git
+  - oam
 tags:
   - 笔记
   - 运维

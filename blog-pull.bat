@@ -1,7 +1,5 @@
-cd %blog%
+cd /d %blog%
 
-git add .
-git commit -m "add post"
-git push --all
+git pull origin hexo
 
 pause

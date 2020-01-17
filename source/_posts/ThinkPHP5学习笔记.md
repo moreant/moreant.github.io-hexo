@@ -1,7 +1,7 @@
 ---
 title: ThinkPHP5学习笔记
 categories:
-  - mix
+  - php
 tags:
   - 编程
   - 笔记

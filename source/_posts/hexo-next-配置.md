@@ -1,7 +1,7 @@
 ---
 title: hexo-next-配置
 categories:
-  - blog
+  - mix
 tags:
   - 博客
   - hexo
