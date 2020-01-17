@@ -442,12 +442,12 @@ font:
   # Font settings for posts (.post-body).
   posts:
     external: true
-    family:
+    family: 
 
   # Font settings for <code> and code blocks.
   codes:
     external: true
-    family: 
+    family: consolas' , 'Noto Sans SC
 
 
 # ---------------------------------------------------------------
