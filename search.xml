@@ -13,7 +13,7 @@
 <p>具体的体现就是使用 PAC规则 的时候，GitHub 的图片和raw代码经常 <code>404</code> 。</p>
 <p><img src="http://markdown.yeek.top/20200117221613.png" alt=""></p>
 <p><img src="http://markdown.yeek.top/20200117221808.png" alt=""></p>
-<p>因此，就需要我们自己 *<em>手动设置 PAC规则 *</em> 了</p>
+<p>因此，就需要我们自己 <strong>手动设置 PAC规则</strong> 了</p>
 <p>主要参考的是 某中文网 的设置（访问需要梯子）</p>
 <blockquote>
 <p><a href="https://ssr.tools/495" target="_blank" rel="noopener">各平台PAC/ACL规则文件设置</a></p>
@@ -968,9 +968,9 @@
       </categories>
       <tags>
         <tag>运维</tag>
+        <tag>Docker</tag>
         <tag>PHP</tag>
         <tag>Laravel</tag>
-        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
@@ -1171,10 +1171,10 @@
         <category>php</category>
       </categories>
       <tags>
-        <tag>编程</tag>
-        <tag>笔记</tag>
         <tag>PHP</tag>
         <tag>Laravel</tag>
+        <tag>编程</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -1277,10 +1277,10 @@
         <category>php</category>
       </categories>
       <tags>
-        <tag>编程</tag>
-        <tag>笔记</tag>
         <tag>PHP</tag>
         <tag>Laravel</tag>
+        <tag>编程</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -1424,10 +1424,10 @@
         <category>php</category>
       </categories>
       <tags>
-        <tag>编程</tag>
-        <tag>笔记</tag>
         <tag>PHP</tag>
         <tag>Laravel</tag>
+        <tag>编程</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -1465,10 +1465,10 @@
         <category>php</category>
       </categories>
       <tags>
-        <tag>编程</tag>
-        <tag>笔记</tag>
         <tag>PHP</tag>
         <tag>Laravel</tag>
+        <tag>编程</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -1494,10 +1494,10 @@
         <category>php</category>
       </categories>
       <tags>
-        <tag>编程</tag>
-        <tag>笔记</tag>
         <tag>PHP</tag>
         <tag>Laravel</tag>
+        <tag>编程</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -1593,10 +1593,10 @@
         <category>php</category>
       </categories>
       <tags>
-        <tag>编程</tag>
-        <tag>笔记</tag>
         <tag>PHP</tag>
         <tag>Laravel</tag>
+        <tag>编程</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -1852,9 +1852,9 @@
         <category>php</category>
       </categories>
       <tags>
+        <tag>PHP</tag>
         <tag>编程</tag>
         <tag>笔记</tag>
-        <tag>PHP</tag>
         <tag>ThinkPHP</tag>
       </tags>
   </entry>
