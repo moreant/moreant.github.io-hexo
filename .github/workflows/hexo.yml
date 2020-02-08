@@ -44,6 +44,7 @@ jobs:
         GH_REF: github.com/moreant/moreant.github.io.git
         GH_TOKEN: ${{ secrets.TOKEN  }}
       run: |
+        timedatectl set-timezone Asia/Shanghai
         git config --global user.name $GH_NAME
         git config --global user.email $GH_EMAIL
         git clone https://"$GH_REF" .deploy_git
