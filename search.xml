@@ -4,6 +4,9 @@
     <title>攻防世界 WEB Web_python_template_injection</title>
     <url>/post/57753.html</url>
     <content><![CDATA[<h1 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 - 题目描述"></a>0x00 - 题目描述</h1><p><img src="http://markdown.yeek.top/20200118132746.png" alt=""></p>
+<a id="more"></a>
+
+
 <h1 id="0x01-解题过程"><a href="#0x01-解题过程" class="headerlink" title="0x01 - 解题过程"></a>0x01 - 解题过程</h1><p>打开是单一网页，注释中也没有其他提示。</p>
 <p><img src="http://markdown.yeek.top/20200118132924.png" alt=""></p>
 <p>通过百度得知，是要利用 flask 模板的代码注入漏洞。就例如下面这种</p>
