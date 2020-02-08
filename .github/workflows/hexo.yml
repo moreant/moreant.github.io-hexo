@@ -42,7 +42,7 @@ jobs:
         GH_NAME: moreant
         GH_EMAIL: 552191481@qq.com
         GH_REF: github.com/moreant/moreant.github.io.git
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global user.name $GH_NAME
         git config --global user.email $GH_EMAIL
@@ -54,4 +54,5 @@ jobs:
         cd ./public/
         git add --all .
         git commit -m "CI built at `date +"%Y-%m-%d %H:%M:%S"`"
-        git push --force "https://"$GH_TOKEN"@"$GH_REF"" master:master
+        git remote add origin https://"$GITHUB_TOKEN"@"$GH_REF"
+        git push --force "https://"$GITHUB_TOKEN"@"$GH_REF"" master:master
