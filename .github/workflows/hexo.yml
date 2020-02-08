@@ -54,6 +54,6 @@ jobs:
         cd ./public/
         git add --all .
         git commit -m "CI built at `date +"%Y-%m-%d %H:%M:%S"`"
-        git push --force "https://99c95b2e6dc4c2e99507dd188be81633866c466c@"$GH_REF"" master:master
+        git push --force "https://99c95b2e6dc4c2e99507dd188be81633866c466c@github.com/moreant/moreant.github.io.git" master:master
 
   
