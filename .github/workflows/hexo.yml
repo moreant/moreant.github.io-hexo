@@ -44,9 +44,9 @@ jobs:
         GH_REF: github.com/moreant/moreant.github.io.git
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
-        git config --global user.name ${GH_NAME}
-        git config --global user.email ${GH_EMAIL}
-        git clone https://${GH_REF} deploy
+        git config --global user.name $GH_NAME
+        git config --global user.email $GH_EMAIL
+        git clone https://"$GH_REF" deploy
         cd deploy
         git checkout master
         cd ../
@@ -54,4 +54,4 @@ jobs:
         cd ./public/
         git add --all .
         git commit -m "CI built at `date +"%Y-%m-%d %H:%M:%S"`"
-        git push --force "https://${GH_TOKEN}@${GH_REF}" master:master
+        git push --force "https://"$GH_TOKEN"@"$GH_REF"" master:master
