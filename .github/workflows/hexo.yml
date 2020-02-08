@@ -7,7 +7,7 @@ on:
       - hexo
 
 jobs:
-  build:
+  Hexo CI GAD:
 
     runs-on: ubuntu-latest
 
