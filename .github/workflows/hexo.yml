@@ -36,7 +36,16 @@ jobs:
       run: |
         hexo clean
         hexo g
-        
+    
+    - name: Set timezone
+      run: |
+        tzselect
+        4
+        9
+        1
+        1
+        cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
+    
     - name: Deploy
       env:
         GH_NAME: moreant
@@ -44,7 +53,6 @@ jobs:
         GH_REF: github.com/moreant/moreant.github.io.git
         GH_TOKEN: ${{ secrets.TOKEN  }}
       run: |
-        timedatectl set-timezone Asia/Shanghai
         git config --global user.name $GH_NAME
         git config --global user.email $GH_EMAIL
         git clone https://"$GH_REF" .deploy_git
