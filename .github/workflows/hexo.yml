@@ -54,5 +54,5 @@ jobs:
         cd ./public/
         git add --all .
         git commit -m "CI built at `date +"%Y-%m-%d %H:%M:%S"`"
-        git remote add ghpages https://"$ACCESS_TOKEN"@github.com/"$USERNAME"/"$REPOSITORY".git
+        git remote add ghpages https://"$GITHUB_TOKEN"@"$GH_REF"
         git push ghpages --force master:master
