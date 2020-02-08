@@ -9,7 +9,7 @@ on:
 jobs:
   Hexo-CI-GAD:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu@19.04
 
     steps:
     - uses: actions/checkout@v2
@@ -39,13 +39,7 @@ jobs:
     
     - name: Set timezone
       run: |
-        tzselect
-        4
-        9
-        1
-        1
-        cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
-    
+      
     - name: Deploy
       env:
         GH_NAME: moreant
@@ -53,6 +47,7 @@ jobs:
         GH_REF: github.com/moreant/moreant.github.io.git
         GH_TOKEN: ${{ secrets.TOKEN  }}
       run: |
+        timedatectl set-timezone Asia/Shanghai
         git config --global user.name $GH_NAME
         git config --global user.email $GH_EMAIL
         git clone https://"$GH_REF" .deploy_git
