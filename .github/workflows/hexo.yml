@@ -42,7 +42,7 @@ jobs:
         GH_NAME: moreant
         GH_EMAIL: 552191481@qq.com
         GH_REF: github.com/moreant/moreant.github.io.git
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+        GH_TOKEN: ${{ secrets.TOKEN  }}
       run: |
         git config --global user.name $GH_NAME
         git config --global user.email $GH_EMAIL
