@@ -9,15 +9,15 @@ abbrlink: 19479
 date: 2019-12-13 00:20:07
 ---
 
-之前使用 `Vscode` 远程连接服务器之后，不仅**编辑文件**非常方便，看**目录结构**和**下载文件**都非常方便。最近换了电脑，发现没有记下相关的设置，所以现在记录一下。
+之前使用 `VS Code` 远程连接服务器之后，不仅**编辑文件**非常方便，看**目录结构**和**下载文件**都非常方便。最近换了电脑，发现没有记下相关的设置，所以现在记录一下。
 
 <!-- more -->
 
 
 
-## Vcode
+## VS Code 远程连接
 
-首先，`vscode` 需要安装相应的插件
+首先，`VS Code` 需要安装相应的插件
 
 Remote - SSH [介绍页面](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
 
@@ -62,6 +62,22 @@ Remote - SSH [介绍页面](https://marketplace.visualstudio.com/items?itemName=
 ![](http://markdown.yeek.top/20191213012821.png)
 
 
+
+## 使用秘钥登录
+
+如果你没有使用秘钥登录，则每次连接服务器的时候都需要输入密码，比如重启和更换目录。
+
+![](http://markdown.yeek.top/20200209200607.png)
+
+{% note info%}
+
+关于登录秘钥的设置可以参考下面这篇文章
+
+> [CentOS 使用秘钥登录](/post/1528.html)
+
+
+
+{% endnote  %}
 
 
 
