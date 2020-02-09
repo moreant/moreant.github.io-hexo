@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CentOS-使用秘钥登录</title>
+    <url>/post/1528.html</url>
+    <content><![CDATA[<p>使用秘钥连接之后终端可以直接快速连接，而且使用  VS Code 的时候也可以免输密码</p>
+<p><img src="http://markdown.yeek.top/20200209201052.png" alt=""></p>
+<a id="more"></a>
+
+<br>
+
+<div class="note info">
+            <p>这里建议使用 VS Code 来当进行 ssh 连接。</p><p>VS Code 不仅可以连接终端，还可以直接对服务器上的文件进行编辑。</p><blockquote><p><a href="/post/19479.html">使用 VS Code 远程连接服务器</a></p></blockquote>
+          </div>
+
+
+
+<h2 id="开启秘钥登录"><a href="#开启秘钥登录" class="headerlink" title="开启秘钥登录"></a>开启秘钥登录</h2><p>打开 /etc/ssh/sshd_config ，将 <code>RSAAuthentication</code> 和 <code>PubkeyAuthentication</code> 前面的注释去掉</p>
+<p><img src="http://markdown.yeek.top/20200209200107.png" alt=""></p>
+<p>接着重启 sshd 服务，执行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="生成和保存秘钥"><a href="#生成和保存秘钥" class="headerlink" title="生成和保存秘钥"></a>生成和保存秘钥</h2><p>生成秘钥，执行后直接回车三下即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://markdown.yeek.top/20200209184309.png" alt=""></p>
+<p>进入 <code>/root/.ssh</code> 目录，执行以下指令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建授权秘钥</span></span><br><span class="line">touch authorized_keys</span><br><span class="line"><span class="comment"># 将公钥写进授权秘钥中</span></span><br><span class="line">cat id_rsa.pub &gt;&gt;  authorized_keys</span><br><span class="line"><span class="comment"># 为了安全，修改授权秘钥的权限</span></span><br><span class="line">chmod 600 authorized_keys</span><br></pre></td></tr></table></figure>
+
+
+
+<p>下载私钥文件 <code>id_rsa</code> 到本地，当然也可以使用 ftp 或者 sz </p>
+<p><img src="http://markdown.yeek.top/20200209185252.png" alt=""></p>
+<p>建议保存到用户名下的 <code>.ssh</code> 目录下中，以方便之后的远程连接</p>
+<p><img src="http://markdown.yeek.top/20200209201512.png" alt=""></p>
+<h2 id="配置连接信息"><a href="#配置连接信息" class="headerlink" title="配置连接信息"></a>配置连接信息</h2><p>编辑 <code>.ssh</code> 文件夹下的 <code>config</code> 文件夹，添加主机的信息。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ip地址被我用#和谐了</span></span><br><span class="line">Host Mjc_root</span><br><span class="line">  HostName 101.<span class="comment">###.###.11</span></span><br><span class="line">  User root</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa_mjc</span><br></pre></td></tr></table></figure>
+
+
+
+<p>接着就可以使用各种终端连接了</p>
+<p><img src="http://markdown.yeek.top/20200209201052.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>oam</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>攻防世界 WEB Web_python_template_injection</title>
     <url>/post/57753.html</url>
     <content><![CDATA[<h1 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 - 题目描述"></a>0x00 - 题目描述</h1><p><img src="http://markdown.yeek.top/20200118132746.png" alt=""></p>
@@ -473,12 +524,12 @@
   <entry>
     <title>使用 VS Code 远程连接服务器</title>
     <url>/post/19479.html</url>
-    <content><![CDATA[<p>之前使用 <code>Vscode</code> 远程连接服务器之后，不仅<strong>编辑文件</strong>非常方便，看<strong>目录结构</strong>和<strong>下载文件</strong>都非常方便。最近换了电脑，发现没有记下相关的设置，所以现在记录一下。</p>
+    <content><![CDATA[<p>之前使用 <code>VS Code</code> 远程连接服务器之后，不仅<strong>编辑文件</strong>非常方便，看<strong>目录结构</strong>和<strong>下载文件</strong>都非常方便。最近换了电脑，发现没有记下相关的设置，所以现在记录一下。</p>
 <a id="more"></a>
 
 
 
-<h2 id="Vcode"><a href="#Vcode" class="headerlink" title="Vcode"></a>Vcode</h2><p>首先，<code>vscode</code> 需要安装相应的插件</p>
+<h2 id="VS-Code-远程连接"><a href="#VS-Code-远程连接" class="headerlink" title="VS Code 远程连接"></a>VS Code 远程连接</h2><p>首先，<code>VS Code</code> 需要安装相应的插件</p>
 <p>Remote - SSH <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh" target="_blank" rel="noopener">介绍页面</a></p>
 <p><img src="http://markdown.yeek.top/20191213004459.png" alt=""></p>
 <p>在左侧栏会多出一个按钮，进入后点击设置按钮</p>
@@ -511,6 +562,14 @@
 <p><img src="http://markdown.yeek.top/20191213012146.png" alt=""></p>
 <p>连接成功后，就可以选择打开服务器上的文件夹了</p>
 <p><img src="http://markdown.yeek.top/20191213012821.png" alt=""></p>
+<h2 id="使用秘钥登录"><a href="#使用秘钥登录" class="headerlink" title="使用秘钥登录"></a>使用秘钥登录</h2><p>如果你没有使用秘钥登录，则每次连接服务器的时候都需要输入密码，比如重启和更换目录。</p>
+<p><img src="http://markdown.yeek.top/20200209200607.png" alt=""></p>
+<div class="note info">
+            <p>关于登录秘钥的设置可以参考下面这篇文章</p><blockquote><p><a href="/post/1528.html">CentOS 使用秘钥登录</a></p></blockquote>
+          </div>
+
+
+
 <h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><h3 id="缓存认证"><a href="#缓存认证" class="headerlink" title="缓存认证"></a>缓存认证</h3><p>第一次远程连接会询问你是否保存认证缓存，直接选第一个就行了</p>
 <h3 id="连接报错"><a href="#连接报错" class="headerlink" title="连接报错"></a>连接报错</h3><p>我遇到了 Bad owner or permissions on C:\Users\Administrator/.ssh/config 报错的问题，解决办法就是将 <code>config</code> 文件的路径写在 <code>Remote-ssh</code> 插件的 <code>Config File</code> 属性里，然后<strong>重启vscode</strong></p>
 <p><img src="http://markdown.yeek.top/20191213012014.png" alt=""></p>
