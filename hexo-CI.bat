@@ -1,7 +1,7 @@
 cd %blog%
 
 git add .
-git commit -m "update at `date +"%Y-%m-%d %H:%M:%S"`"
+git commit -m "update post"
 git push origin hexo
 
 pause
