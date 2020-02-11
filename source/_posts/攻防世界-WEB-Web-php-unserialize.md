@@ -93,7 +93,7 @@ if (preg_match('/[oc]:\d+:/i', $var)) {
 
 Q: 反序列化啥呢？
 
-A: 明显是要反序列化 2-16 的 `Demo` 对象
+A: 明显是要反序列化 2-16 行的 `Demo` 对象
 
 <br>
 
@@ -120,9 +120,9 @@ class Demo {
 }
 ```
 
-Q: 那 `__wakeup` 是干吗用的？
+Q: 那 `__wakeup` 这个方法是干吗用的？
 
-A: 是当 **反序列化构造这个类** 时执行，将本地变量 `file` 重新设置为 file
+A: 当 **反序列化构造这个类** 时执行 `__wakeup` 方法，会将本地变量 `file` 重新设置为 file
 
 <br>
 
@@ -243,7 +243,7 @@ base64 编码后：
 
 不清楚正则匹配的话，在这个网站上([regextester](https://www.regextester.com/))可以知道匹配到的部分是前面的 `O:4:`
 
-![1581437878758](C:\Users\mojuchen\AppData\Roaming\Typora\typora-user-images\1581437878758.png)
+![](http://markdown.yeek.top/20200212011140.png)
 
 可以在 `4` 前面加上 `+` 来绕过，因为在 php 语法中，`+4` = `4`
 
