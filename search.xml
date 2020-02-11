@@ -26,7 +26,7 @@
 
 <p>如果没匹配到就<strong>反序列化</strong> (后面再解释啥是 <code>序列化</code> 和 <code>反序列化</code>)。</p>
 <p>Q: 反序列化啥呢？</p>
-<p>A: 明显是要反序列化 2-16 的 <code>Demo</code> 对象</p>
+<p>A: 明显是要反序列化 2-16 行的 <code>Demo</code> 对象</p>
 <br>
 
 <p>首先如果<strong>构造Demo类</strong>，会</p>
@@ -36,8 +36,8 @@
 </ol>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> $file = <span class="string">'index.php'</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="keyword">true</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123; </span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>Q: 那 <code>__wakeup</code> 是干吗用的？</p>
-<p>A: 是当 <strong>反序列化构造这个类</strong> 时执行，将本地变量 <code>file</code> 重新设置为 file</p>
+<p>Q: 那 <code>__wakeup</code> 这个方法是干吗用的？</p>
+<p>A: 当 <strong>反序列化构造这个类</strong> 时执行 <code>__wakeup</code> 方法，会将本地变量 <code>file</code> 重新设置为 file</p>
 <br>
 
 <p>还有个注释，明示了 flag 在 fl4g.php 文件</p>
@@ -74,7 +74,7 @@
 <h4 id="绕过正则匹配"><a href="#绕过正则匹配" class="headerlink" title="绕过正则匹配"></a>绕过正则匹配</h4><p>直接传进去，果然被匹配到了</p>
 <p><img src="http://markdown.yeek.top/20200212001625.png" alt=""></p>
 <p>不清楚正则匹配的话，在这个网站上(<a href="https://www.regextester.com/" target="_blank" rel="noopener">regextester</a>)可以知道匹配到的部分是前面的 <code>O:4:</code></p>
-<p><img src="C:%5CUsers%5Cmojuchen%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1581437878758.png" alt="1581437878758"></p>
+<p><img src="http://markdown.yeek.top/20200212011140.png" alt=""></p>
 <p>可以在 <code>4</code> 前面加上 <code>+</code> 来绕过，因为在 php 语法中，<code>+4</code> = <code>4</code></p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">print</span>(<span class="number">4</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="keyword">print</span>(+<span class="number">4</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="number">-4</span>);</span><br></pre></td></tr></table></figure>
 
