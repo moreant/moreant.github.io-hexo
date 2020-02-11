@@ -107,11 +107,12 @@
 <h4 id="巨坑-私有属性"><a href="#巨坑-私有属性" class="headerlink" title="巨坑-私有属性"></a>巨坑-私有属性</h4><p>结果居然还是 <code>index.php</code> 的源码！！！</p>
 <p><strong>WTF ???</strong></p>
 <p>经过多方百度后，发现了一个<strong>盲点</strong>——由于 <code>Demo</code> 类的 <code>file</code> 属性是<strong>私有属性</strong>序列化之后，在类名前后会有 %00 阻断。</p>
+<p>并且在 <code>s:10:&quot;Demofile&quot;</code> 也有提示，<code>Demofile</code> 是 8 个字符，为什么是 <code>s:10</code>  呢？就是因为前后有 %00</p>
 <p>图形化就是这样：</p>
-<p><code>%44%65%6d%6f</code>进行 hex 转化后 就是 <code>Demo</code> ，可以在这个网站上测试 <a href="https://www.107000.com/T-Hex/" target="_blank" rel="noopener">Hex编码/解码</a></p>
 <p><img src="http://markdown.yeek.top/20200212004354.png" alt=""></p>
+<p><code>%44%65%6d%6f</code>进行 hex 转化后 就是 <code>Demo</code> ，可以在这个网站上测试 <a href="https://www.107000.com/T-Hex/" target="_blank" rel="noopener">Hex编码/解码</a></p>
 <p><strong>坑来了：</strong></p>
-<p>如果直接复制文本样式，在别的地方进行<strong>base64编码</strong>会丢失掉 <code>%00</code> 的信息！！然后再 base64解码-&gt;反序列化 自然不可能是 <code>O:+4:&quot;Demo&quot;:2:{s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;}</code> 序列化的后的结果！</p>
+<p>如果直接复制文本样式，在别的地方进行base64编码会<strong>丢失掉 <code>%00</code> 的信息</strong>！！再 解码-&gt;反序列化 自然与我之前序列化的 Demo <strong>不是同一个东西</strong></p>
 <br>
 
 <p>Q: 那咋办呢？</p>
