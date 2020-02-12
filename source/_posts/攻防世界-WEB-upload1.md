@@ -2,7 +2,6 @@
 title: 攻防世界 WEB upload1
 categories:
   - ctf
-  - web
 tags:
   - 信息安全
   - ctf-web-入门
