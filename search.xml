@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>分享B站视频时如何定位到具体时间</title>
+    <url>/post/8085.html</url>
+    <content><![CDATA[<p>总所周知，B站视频的 url 一般是这样的</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;av38657363</span><br></pre></td></tr></table></figure>
+
+<p>偶然发现在历史记录中的 url 带了个 t 参数，可以定位到视频的时间，单位是秒。</p>
+<p>eg:</p>
+<p><a href="https://www.bilibili.com/video/av89085561?t=121" target="_blank" rel="noopener">https://www.bilibili.com/video/av89085561?t=121</a></p>
+]]></content>
+      <categories>
+        <category>mix</category>
+      </categories>
+      <tags>
+        <tag>编程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>修改右键新建菜单</title>
     <url>/post/61502.html</url>
     <content><![CDATA[<p>经常使用</p>
