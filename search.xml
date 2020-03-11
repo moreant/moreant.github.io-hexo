@@ -1,6 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>使用 acme.sh 配置泛域名 htpps</title>
+    <url>/post/25493.html</url>
+    <content><![CDATA[<p>在服务商里，一张泛域名的 SSL 证书需要 1700￥。免费的 SSL 只支持单域名，并且一个主域名最多申请 <strong>20</strong> 次</p>
+<p><img src="http://markdown.yeek.top/20200311203410.png" alt=""></p>
+<p>而 <strong>acme.sh</strong> 利用 <code>acme</code> 协议，可以在 <code>letsencrypt</code>  <strong>全自动且免费</strong>的申请证书。</p>
+<a id="more"></a>
+
+
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>申请泛域名证书需要使用 DNS API ，请确认你的 DNS 供应商在 <code>acme.sh</code> 的<a href="https://github.com/acmesh-official/acme.sh/wiki/dnsapi" target="_blank" rel="noopener">支持范围内</a></p>
+<p>本文以阿里云为例</p>
+<div class="note info">
+            <p>如果你只需要单域名的证书，其实官方的 <a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">中文文档</a> 已经足够了，可以用更简单的 HTTP 方法。</p><blockquote><p>本文主要参考自简书的 <a href="https://www.jianshu.com/p/dbe180979e77" target="_blank" rel="noopener">acme.sh 配合 letsencrypt 配置泛域名</a></p></blockquote>
+          </div>
+
+
+
+<h2 id="安装-acme-sh"><a href="#安装-acme-sh" class="headerlink" title="安装 acme.sh"></a>安装 acme.sh</h2><p>在服务器中执行以下指令，会将 acme.sh 安装到 <code>~/</code> 目录中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl  https://get.acme.sh | sh</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>创建 一个 bash 的 alias, 方便你的使用</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">alias</span> acme.sh=~/.acme.sh/acme.sh</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>acme.sh 自动为你创建 cronjob, 每天 0:00 点自动检测所有的证书, 如果快过期了, 需要更新, 则会自动更新证书.</p>
+<p>可以执行以下指令看到自动脚本</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">crontab -l</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="创建-Accesskey"><a href="#创建-Accesskey" class="headerlink" title="创建 Accesskey"></a>创建 Accesskey</h2><p>图方便的话，可以使用全局 Accesskey。</p>
+<p><img src="http://markdown.yeek.top/20200311204841.png" alt=""></p>
+<br>
+
+<p>为了安全，也是为了<strong>方便管理</strong>，最好创建一个专门用于 acme.sh 的子账号来生成 Accesskey</p>
+<p><a href="https://ram.console.aliyun.com/users/new" target="_blank" rel="noopener">https://ram.console.aliyun.com/users/new</a></p>
+<p><img src="http://markdown.yeek.top/20200311205057.png" alt=""></p>
+<br>
+
+<p>复制并<strong>保存</strong>创建好的 AccessKey 和 AccessKeySecret 后，给新用户添加 DNS API 权限</p>
+<p><img src="http://markdown.yeek.top/20200311205534.png" alt=""></p>
+<h2 id="申请证书"><a href="#申请证书" class="headerlink" title="申请证书"></a>申请证书</h2><p>在 ~/.acme.sh 中进行 Key 和 Secret 的设置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> Ali_Key=<span class="string">"thisIsYouKey"</span></span><br><span class="line"><span class="built_in">export</span> Ali_Secret=<span class="string">"thisIsYouSecret"</span></span><br></pre></td></tr></table></figure>
+
+<p>acme.sh 会自动保存到 <code>~/.acme.sh/account.conf</code> 中，方便以后再次使用。</p>
+<br>
+
+<p>发起申请，<strong>记得修改成你的域名</strong>： </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">acme.sh --issue --dns dns_ali -d *.example.com</span><br></pre></td></tr></table></figure>
+
+<p>之后会利用 DNS API 添加一条 <code>txt</code> 解析用于验证，验证过后会自动删除。</p>
+<p>申请成功后，证书会生成在 <code>~/.acme.sh/*.example.com</code>。</p>
+<p>别自己复制到 Nginx 目录里了，以后续订不会自动更新 Nginx 目录中的。</p>
+<h2 id="使用证书"><a href="#使用证书" class="headerlink" title="使用证书"></a>使用证书</h2><p>这里仅介绍 <code>Nginx</code> 的使用， <code>Apache</code>以及其他的 <code>web</code> 服务可以在<a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">官方wiki</a>中找到相关设置。</p>
+<p>首先开启 Nginx 的证书使用。<img src="http://markdown.yeek.top/20200311211644.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">listen 443 ssl default_server;</span><br><span class="line">listen [::]:443 ssl default_server ipv6only&#x3D;on;</span><br><span class="line">ssl_certificate &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;example.com&#x2F;cert.pem;</span><br><span class="line">ssl_certificate_key &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;example.com&#x2F;key.pem;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>输入以下指令创建对应的空白证书文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /etc/nginx/ssl/</span><br><span class="line">touch /etc/nginx/ssl/example.com cert.pem</span><br><span class="line">touch /etc/nginx/ssl/example.com key.pem</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>接着输入以下指令写入到 Nginx 的证书目录中。<strong>记得修改成你的目录</strong>，如果没有就自己挑个位置。</p>
+<p> <strong><code>\</code> 代表转义换行符，所以下面是一条指令</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">acme.sh --installcert -d *.example.com \</span><br><span class="line">--key-file       /etc/nginx/ssl/example.com/key.pem  \</span><br><span class="line">--fullchain-file /etc/nginx/ssl/example.com/cert.pem \</span><br><span class="line">--reloadcmd    <span class="string">"nginx -s reload"</span></span><br></pre></td></tr></table></figure>
+
+<p>终端中显示 <code>Reload success</code>  就可以使用 <code>https</code>  访问了</p>
+<p><img src="http://markdown.yeek.top/20200311215531.png" alt=""></p>
+<p><img src="http://markdown.yeek.top/20200311215436.png" alt=""></p>
+<p>最后，如果你想使用其他高级功能，建议去看官方的 wik，也顺便给个 start 吧。</p>
+<p><a href="https://github.com/Neilpang/acme.sh/wiki" target="_blank" rel="noopener">https://github.com/Neilpang/acme.sh/wiki</a></p>
+]]></content>
+      <categories>
+        <category>oam</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>分享B站视频时如何定位到具体时间</title>
     <url>/post/8085.html</url>
     <content><![CDATA[<p>总所周知，B站视频的 url 一般是这样的</p>
@@ -259,13 +344,6 @@
 
 
 
-<h2 id="开启秘钥登录"><a href="#开启秘钥登录" class="headerlink" title="开启秘钥登录"></a>开启秘钥登录</h2><p>打开 /etc/ssh/sshd_config ，将 <code>RSAAuthentication</code> 和 <code>PubkeyAuthentication</code> 前面的注释去掉</p>
-<p><img src="http://markdown.yeek.top/20200209200107.png" alt=""></p>
-<p>接着重启 sshd 服务，执行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="生成和保存秘钥"><a href="#生成和保存秘钥" class="headerlink" title="生成和保存秘钥"></a>生成和保存秘钥</h2><p>生成秘钥，执行后直接回车三下即可</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
 
@@ -279,6 +357,15 @@
 <p><img src="http://markdown.yeek.top/20200209185252.png" alt=""></p>
 <p>建议保存到用户名下的 <code>.ssh</code> 目录下中，以方便之后的远程连接</p>
 <p><img src="http://markdown.yeek.top/20200209201512.png" alt=""></p>
+<h2 id="开启秘钥登录"><a href="#开启秘钥登录" class="headerlink" title="开启秘钥登录"></a>开启秘钥登录</h2><p>打开 /etc/ssh/sshd_config ，将 <code>RSAAuthentication</code> 和 <code>PubkeyAuthentication</code> 前面的注释去掉</p>
+<p><img src="http://markdown.yeek.top/20200209200107.png" alt=""></p>
+<p>接着重启 sshd 服务，执行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h2 id="配置连接信息"><a href="#配置连接信息" class="headerlink" title="配置连接信息"></a>配置连接信息</h2><p>编辑 <code>.ssh</code> 文件夹下的 <code>config</code> 文件夹，添加主机的信息。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ip地址被我用#和谐了</span></span><br><span class="line">Host Mjc_root</span><br><span class="line">  HostName 101.<span class="comment">###.###.11</span></span><br><span class="line">  User root</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa_mjc</span><br></pre></td></tr></table></figure>
 
@@ -376,8 +463,9 @@
 <h1 id="0x01-解题过程"><a href="#0x01-解题过程" class="headerlink" title="0x01 - 解题过程"></a>0x01 - 解题过程</h1><p>打开页面，只有一个上传模块</p>
 <p><img src="http://markdown.yeek.top/20200117152444.png" alt=""></p>
 <p>既然题目是 <strong>uplaod1</strong> 那就可以试一下上传一句话木马。</p>
+<p>下面就是一句话木马的内容，只要上传到服务器后，就可以用工具连接控制服务器了。</p>
 <p><img src="http://markdown.yeek.top/20200117161249.png" alt=""></p>
-<p>果然有拦截，上传按钮不可用了。</p>
+<p>选择完木马文件之后果然被阻止了，上传按钮不可用了。</p>
 <p><img src="http://markdown.yeek.top/20200117152545.png" alt="上传提示"></p>
 <p><img src="http://markdown.yeek.top/20200117155007.png" alt=""></p>
 <p>分析 js 代码，是把按钮给 <code>disable</code> 了。</p>
