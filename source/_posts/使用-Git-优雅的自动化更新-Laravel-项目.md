@@ -245,7 +245,7 @@ ssh-keygen
 
 将 **home/git/.ssh/id_rsa.pub** 文件的内容复制到 `GitHub` 上的 [SSH and GPG keys](https://github.com/settings/keys) 中
 
-![](http://markdown.yeek.top/20191218224637.png)
+![](https://markdown.yeek.top/20191218224637.png)
 
 
 
@@ -260,5 +260,5 @@ git push github
 
 自此，已经完成了以 `git` 为基础的的自动化更新以及自动推送
 
-![](http://markdown.yeek.top/20191218225117.png)
+![](https://markdown.yeek.top/20191218225117.png)
 

@@ -27,19 +27,19 @@ VMware版本：15.1.0
 
 首先打开 **虚拟机网络编辑机**
 
-![mark](http://markdown.yeek.top/bolg/20191030/wlYrcC9BacsH.png?imageslim)
+![mark](https://markdown.yeek.top/bolg/20191030/wlYrcC9BacsH.png?imageslim)
 
 
 
 然后选择 **NAT 模式** ，子网 IP 自己定义
 
-![mark](http://markdown.yeek.top/bolg/20191030/npN7mSyuk7rt.png?imageslim)
+![mark](https://markdown.yeek.top/bolg/20191030/npN7mSyuk7rt.png?imageslim)
 
 
 
 进入 **DHCP 设置**，起始 IP 地址 和 结束 IP 地址根据上面的 子网 IP 进行配置
 
-![mark](http://markdown.yeek.top/bolg/20191030/mEiKS3lY8imx.png?imageslim)
+![mark](https://markdown.yeek.top/bolg/20191030/mEiKS3lY8imx.png?imageslim)
 
 
 
@@ -47,7 +47,7 @@ VMware版本：15.1.0
 
 进入网络连接，如图设置
 
-![mark](http://markdown.yeek.top/bolg/20191030/U71bWtX64Hh3.jpg?imageslim)
+![mark](https://markdown.yeek.top/bolg/20191030/U71bWtX64Hh3.jpg?imageslim)
 
 
 

@@ -21,25 +21,25 @@ date: 2019-12-13 00:20:07
 
 Remote - SSH [介绍页面](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
 
-![](http://markdown.yeek.top/20191213004459.png)
+![](https://markdown.yeek.top/20191213004459.png)
 
 
 
 在左侧栏会多出一个按钮，进入后点击设置按钮
 
-![](http://markdown.yeek.top/20191213004423.png)
+![](https://markdown.yeek.top/20191213004423.png)
 
 
 
 这里选择用户名下的 `.ssh` 文件夹，因为这台电脑的其他用户不需要远程连接。
 
-![](http://markdown.yeek.top/20191213004555.png)
+![](https://markdown.yeek.top/20191213004555.png)
 
 
 
 然后在 `config` 文件中填写远程连接的信息
 
-![](http://markdown.yeek.top/20191213010851.png)
+![](https://markdown.yeek.top/20191213010851.png)
 
 
 
@@ -53,13 +53,13 @@ Remote - SSH [介绍页面](https://marketplace.visualstudio.com/items?itemName=
 
 之后点击这个进行远程连接了
 
-![](http://markdown.yeek.top/20191213012146.png)
+![](https://markdown.yeek.top/20191213012146.png)
 
 
 
 连接成功后，就可以选择打开服务器上的文件夹了
 
-![](http://markdown.yeek.top/20191213012821.png)
+![](https://markdown.yeek.top/20191213012821.png)
 
 
 
@@ -67,7 +67,7 @@ Remote - SSH [介绍页面](https://marketplace.visualstudio.com/items?itemName=
 
 如果你没有使用秘钥登录，则每次连接服务器的时候都需要输入密码，比如重启和更换目录。
 
-![](http://markdown.yeek.top/20200209200607.png)
+![](https://markdown.yeek.top/20200209200607.png)
 
 {% note info%}
 
@@ -93,13 +93,13 @@ Remote - SSH [介绍页面](https://marketplace.visualstudio.com/items?itemName=
 
 我遇到了 Bad owner or permissions on C:\\Users\\Administrator/.ssh/config 报错的问题，解决办法就是将 `config` 文件的路径写在 `Remote-ssh` 插件的 `Config File` 属性里，然后**重启vscode**
 
-![](http://markdown.yeek.top/20191213012014.png)
+![](https://markdown.yeek.top/20191213012014.png)
 
 
 
 之后我还是遇到了这种问题，实在被烦到不行，在设置中换成了 `Git` 的 `ssh`
 
-![](http://markdown.yeek.top/20191218004612.png)
+![](https://markdown.yeek.top/20191218004612.png)
 
 
 

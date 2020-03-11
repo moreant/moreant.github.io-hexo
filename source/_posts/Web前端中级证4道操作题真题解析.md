@@ -50,13 +50,13 @@ date: 2019-12-19 01:50:46
 
 ### 题目
 
-![](http://markdown.yeek.top/20191219015217.png)
+![](https://markdown.yeek.top/20191219015217.png)
 
 ### 源码
 
 目录如下图：
 
-![](http://markdown.yeek.top/20191219022040.png)
+![](https://markdown.yeek.top/20191219022040.png)
 
 **index.html :** 
 
@@ -196,23 +196,23 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 可以从42、43行中找到答案
 
-![](http://markdown.yeek.top/20191219022618.png)
+![](https://markdown.yeek.top/20191219022618.png)
 
 
 
-![](http://markdown.yeek.top/20191219022655.png)
+![](https://markdown.yeek.top/20191219022655.png)
 
 
 
 直接就是点击复选框里面的事件了，先注释掉这个点击事件，看看1、2空有没有填对。
 
-![](http://markdown.yeek.top/20191219022950.png)
+![](https://markdown.yeek.top/20191219022950.png)
 
 
 
 可以从 **todo.php** 里请求到json数据，页面显示也正常。
 
-![](http://markdown.yeek.top/20191219023020.png)
+![](https://markdown.yeek.top/20191219023020.png)
 
 
 
@@ -220,19 +220,19 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 回到**3空**，不知道要 `new` 什么，后面更不知道要填什么，总之可以看出是跟后台有**数据交互**就对了，那就去 **todo.php** 里找答案。
 
-![](http://markdown.yeek.top/20191219024139.png)
+![](https://markdown.yeek.top/20191219024139.png)
 
 通过分析可知，修改列表需要用 `POST` 类型，同时还要用 `GET` 类型传入 **`id`** 这个值
 
-![](http://markdown.yeek.top/20191219023856.png)
+![](https://markdown.yeek.top/20191219023856.png)
 
 
 
 用 `GET` 传入的参数肯定是在 `URL` 里的，并且**6空**后面还有 `item.id` 来拼接，所以**6空**的答案是 **?id=**
 
-![](http://markdown.yeek.top/20191219024101.png)
+![](https://markdown.yeek.top/20191219024101.png)
 
-![](http://markdown.yeek.top/20191219024732.png)
+![](https://markdown.yeek.top/20191219024732.png)
 
 
 
@@ -240,15 +240,15 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 前面也说了，点击事件里的 `fetch` 是 `POST类型` ，根据参考资料需要用传入  `method: 'POST'`  来指定是POST 类型
 
-![](http://markdown.yeek.top/20191219025054.png)
+![](https://markdown.yeek.top/20191219025054.png)
 
 显而易见不可能是7空，因为后面有 `data`，所以只能填入**8、9空**。你问我为什么参考（其他地方）的 `method` 没有用单引号括起来，题目里的却括起来了？咱不知道，也不敢问。
 
-![](http://markdown.yeek.top/20191219025207.png)
+![](https://markdown.yeek.top/20191219025207.png)
 
 那么**7空**毫无疑问就是 **body** 了
 
-![](http://markdown.yeek.top/20191219030147.png)
+![](https://markdown.yeek.top/20191219030147.png)
 
 
 
@@ -260,15 +260,15 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 分析可知，POST传入的参数名是 `status`
 
-![](http://markdown.yeek.top/20191219030515.png)
+![](https://markdown.yeek.top/20191219030515.png)
 
 回到 **index.html** 里，第37行里题目给的注释是：**设置提交的参数**。并且看到第35行将**选中情况**赋值给了常量 `newStatus`。
 
-![](http://markdown.yeek.top/20191219030741.png)
+![](https://markdown.yeek.top/20191219030741.png)
 
 可以大胆猜测4、5空是 **status** 和 **newStatus**，如果不信，可以接着往下看。
 
-![](http://markdown.yeek.top/20191219031027.png)
+![](https://markdown.yeek.top/20191219031027.png)
 
 
 
@@ -276,13 +276,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 到现在还是不知道**3空**是什么，总之是用 `append方法` 添加数据的。实在不行，搜百度符合条件的就只有 `FormData` 了（具体用法见第三条参考链接）
 
-![](http://markdown.yeek.top/20191219032447.png)
+![](https://markdown.yeek.top/20191219032447.png)
 
 所以**3空**应该填的是 **FormData**
 
-![](http://markdown.yeek.top/20191219032525.png)
+![](https://markdown.yeek.top/20191219032525.png)
 
-![](http://markdown.yeek.top/20191219032541.png)
+![](https://markdown.yeek.top/20191219032541.png)
 
 
 
@@ -290,9 +290,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 10空根据下面那行可以判断出填的应该是 **error**  ，如果有 `error(错误信息)` 就用 `alert方法` 弹出错误信息。
 
-![](http://markdown.yeek.top/20191219034348.png)
+![](https://markdown.yeek.top/20191219034348.png)
 
-![](http://markdown.yeek.top/20191219034518.png)
+![](https://markdown.yeek.top/20191219034518.png)
 
 
 
@@ -308,7 +308,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 或者是有其他问题吧
 
-![](http://markdown.yeek.top/20191219095951.png)
+![](https://markdown.yeek.top/20191219095951.png)
 
 
 
@@ -351,7 +351,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 **make:model** 、 **messages** 、 **table**
 
-![](http://markdown.yeek.top/20191219090330.png)
+![](https://markdown.yeek.top/20191219090330.png)
 
 
 
@@ -380,7 +380,7 @@ Route::prefix('message')->group(function ($app){
 
 
 
-![](http://markdown.yeek.top/20191219091052.png)
+![](https://markdown.yeek.top/20191219091052.png)
 
 
 
@@ -388,7 +388,7 @@ Route::prefix('message')->group(function ($app){
 
 **vaildata** 、**max**
 
-![](http://markdown.yeek.top/20191219093507.png)
+![](https://markdown.yeek.top/20191219093507.png)
 
 IndexController.php：
 
@@ -430,7 +430,7 @@ class IndexController extends Controller
 
 **@yield** 、**$loop->last** 
 
-![](http://markdown.yeek.top/20191219093936.png)
+![](https://markdown.yeek.top/20191219093936.png)
 
 layout.balde.php:
 
@@ -502,9 +502,9 @@ index.balde.php:
 
 可以在 meta 的补全里看到答案
 
-![](http://markdown.yeek.top/20191219101159.png)
+![](https://markdown.yeek.top/20191219101159.png)
 
-![](http://markdown.yeek.top/20191219101252.png)
+![](https://markdown.yeek.top/20191219101252.png)
 
 
 
@@ -514,7 +514,7 @@ index.balde.php:
 
 **flex-md-column**
 
-![](http://markdown.yeek.top/20191219101738.png)
+![](https://markdown.yeek.top/20191219101738.png)
 
 
 
@@ -524,7 +524,7 @@ index.balde.php:
 
 **modal** 、 **data-target**
 
-![](http://markdown.yeek.top/20191219103351.png)
+![](https://markdown.yeek.top/20191219103351.png)
 
 
 
@@ -534,13 +534,13 @@ index.balde.php:
 
 **modal-dialog-centered**
 
-![](http://markdown.yeek.top/20191219104203.png)
+![](https://markdown.yeek.top/20191219104203.png)
 
 话外题，百度是真的菜，搜出来的都是3的，或者自己diy的。我用Google搜，第一个就是正确答案
 
-![](http://markdown.yeek.top/20191219215108.png)
+![](https://markdown.yeek.top/20191219215108.png)
 
-![](http://markdown.yeek.top/20191219220040.png)
+![](https://markdown.yeek.top/20191219220040.png)
 
 
 
@@ -552,7 +552,7 @@ index.balde.php:
 
 **flex-direction、column、flex-grow**
 
-![](http://markdown.yeek.top/20191219110913.png)
+![](https://markdown.yeek.top/20191219110913.png)
 
 
 
@@ -560,7 +560,7 @@ index.balde.php:
 
 **linear-gradient**
 
-![](http://markdown.yeek.top/20191219104948.png)
+![](https://markdown.yeek.top/20191219104948.png)
 
 
 
@@ -570,9 +570,9 @@ index.balde.php:
 
 **submit**
 
-![](http://markdown.yeek.top/20191219111516.png)
+![](https://markdown.yeek.top/20191219111516.png)
 
-![](http://markdown.yeek.top/20191219220533.png)
+![](https://markdown.yeek.top/20191219220533.png)
 
 
 
@@ -582,7 +582,7 @@ index.balde.php:
 
 **val 、 trim**
 
-![](http://markdown.yeek.top/20191219220613.png)
+![](https://markdown.yeek.top/20191219220613.png)
 
 
 
@@ -590,7 +590,7 @@ index.balde.php:
 
 **append**
 
-![](http://markdown.yeek.top/20191219220633.png)
+![](https://markdown.yeek.top/20191219220633.png)
 
 
 
@@ -598,7 +598,7 @@ index.balde.php:
 
 **preventDefault**
 
-![](http://markdown.yeek.top/20191219114433.png)
+![](https://markdown.yeek.top/20191219114433.png)
 
 
 
@@ -608,7 +608,7 @@ index.balde.php:
 
 **:checked**
 
-![](http://markdown.yeek.top/20191219114342.png)
+![](https://markdown.yeek.top/20191219114342.png)
 
 
 
@@ -618,21 +618,21 @@ index.balde.php:
 
 #### 第 1、2 空
 
-![](http://markdown.yeek.top/20191220010309.png)
+![](https://markdown.yeek.top/20191220010309.png)
 
 id肯定是主键和自增，这个可以不用背。直接到 phpmyadmin 里新建表，然后预览SQL语句就可以了
 
 **PRIMARY KEY、AUTO_INCREMENT**
 
-![](http://markdown.yeek.top/20191219231942.png)
+![](https://markdown.yeek.top/20191219231942.png)
 
-![](http://markdown.yeek.top/20191219232417.png)
+![](https://markdown.yeek.top/20191219232417.png)
 
 
 
 #### 第 3、4 空
 
-![](http://markdown.yeek.top/20191220010328.png)
+![](https://markdown.yeek.top/20191220010328.png)
 
 mysqli是个连接数据库的对象
 
@@ -640,7 +640,7 @@ mysqli是个连接数据库的对象
 
 **new、password**
 
-![](http://markdown.yeek.top/20191219232858.png)
+![](https://markdown.yeek.top/20191219232858.png)
 
 
 
@@ -650,19 +650,19 @@ mysqli是个连接数据库的对象
 
 #### 第 5、6 空
 
-![](http://markdown.yeek.top/20191220010531.png)
+![](https://markdown.yeek.top/20191220010531.png)
 
 这两空就是白送分
 
 **session_start()、$query**
 
-![](http://markdown.yeek.top/20191219234117.png)
+![](https://markdown.yeek.top/20191219234117.png)
 
 
 
 #### 第 7、8、9 空
 
-![](http://markdown.yeek.top/20191220010602.png)
+![](https://markdown.yeek.top/20191220010602.png)
 
 第 7 空是填标识符，因为默认是 `MYSQLI_BOTH` 而题目让你填一个，并且结合短标签里指定了 `id` 还好 `HbuildX` 里有补全提示，只要记住前面的 `MYSQLI` 就行了
 
@@ -678,7 +678,7 @@ mysqli是个连接数据库的对象
 
 **$row[‘title’]**
 
-![](http://markdown.yeek.top/20191220004635.png)
+![](https://markdown.yeek.top/20191220004635.png)
 
 
 
@@ -686,7 +686,7 @@ mysqli是个连接数据库的对象
 
 **close()**
 
-![](http://markdown.yeek.top/20191220004926.png)
+![](https://markdown.yeek.top/20191220004926.png)
 
 
 
@@ -694,13 +694,13 @@ mysqli是个连接数据库的对象
 
 #### 第 10、11 空
 
-![](http://markdown.yeek.top/20191220010414.png)
+![](https://markdown.yeek.top/20191220010414.png)
 
 两个送分题，`ACTION` 指定表单提交的地址， `onsubmit` 指定提交时处理的JavaScript方法，而这个页面就一个JavaScript方法
 
 **postAdd.php、checkpost()**
 
-![](http://markdown.yeek.top/20191220005801.png)
+![](https://markdown.yeek.top/20191220005801.png)
 
 
 
@@ -708,7 +708,7 @@ mysqli是个连接数据库的对象
 
 #### 第 12、13、14 空
 
-![](http://markdown.yeek.top/20191220010628.png)
+![](https://markdown.yeek.top/20191220010628.png)
 
 因为在第 5 行用了之前在 **conn.php** 创建的 `$mysqli` 所以是第 12 空是
 
@@ -722,17 +722,17 @@ mysqli是个连接数据库的对象
 
 **INSERT INTO **
 
-![](http://markdown.yeek.top/20191220010841.png)
+![](https://markdown.yeek.top/20191220010841.png)
 
 
 
 #### 第 15、16 空
 
-![](http://markdown.yeek.top/20191220011642.png)
+![](https://markdown.yeek.top/20191220011642.png)
 
 在 **list.php** 里用 `get方法` 传入了 `id`
 
-![](http://markdown.yeek.top/20191220012239.png)
+![](https://markdown.yeek.top/20191220012239.png)
 
 所以第 15 空填入
 
@@ -742,7 +742,7 @@ mysqli是个连接数据库的对象
 
 **<?=$rs[‘id’]>**
 
-![](http://markdown.yeek.top/20191220011710.png)
+![](https://markdown.yeek.top/20191220011710.png)
 
 
 
@@ -750,7 +750,7 @@ mysqli是个连接数据库的对象
 
 #### 第 17、18 空
 
-![](http://markdown.yeek.top/20191220020049.png)
+![](https://markdown.yeek.top/20191220020049.png)
 
 第 17 空明显是更新数据，所以是
 
@@ -760,7 +760,7 @@ mysqli是个连接数据库的对象
 
 **$result**
 
-![](http://markdown.yeek.top/20191220020212.png)
+![](https://markdown.yeek.top/20191220020212.png)
 
 
 
@@ -772,19 +772,19 @@ mysqli是个连接数据库的对象
 
 **$id**
 
-![](http://markdown.yeek.top/20191220015933.png)
+![](https://markdown.yeek.top/20191220015933.png)
 
 
 
 #### 第 20 空
 
-![](http://markdown.yeek.top/20191220020623.png)
+![](https://markdown.yeek.top/20191220020623.png)
 
 又是一道送分题
 
 **$url**
 
-![](http://markdown.yeek.top/20191220020710.png)
+![](https://markdown.yeek.top/20191220020710.png)
 
 
 

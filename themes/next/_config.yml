@@ -168,7 +168,7 @@ sidebar:
 # Sidebar Avatar
 avatar:
   # Replace the default image and set the url here.
-  url: http://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim
+  url: https://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim
   # If true, the avatar will be dispalyed in circle.
   rounded: false
   # If true, the avatar will be rotated with the cursor.

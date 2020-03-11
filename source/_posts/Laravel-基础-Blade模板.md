@@ -139,7 +139,7 @@ Blade 是 Laravel 提供的一个简单而又强大的模板引擎。主要参�
 
 **@yield** 标记的重点是**位置**
 
-[![父视图](http://markdown.yeek.top/bolg/20191010/Hl50d6TFsByh.jpg?imageslim)](http://markdown.yeek.top/bolg/20191010/Hl50d6TFsByh.jpg?imageslim)
+[![父视图](https://markdown.yeek.top/bolg/20191010/Hl50d6TFsByh.jpg?imageslim)](https://markdown.yeek.top/bolg/20191010/Hl50d6TFsByh.jpg?imageslim)
 
 ### 继承布局
 
@@ -188,7 +188,7 @@ public function section1()
 Route::view('ss','student.section1');
 ```
 
-[![继承子视图](http://markdown.yeek.top/bolg/20191010/FWTrrykRGIHn.jpg?imageslim)](http://markdown.yeek.top/bolg/20191010/FWTrrykRGIHn.jpg?imageslim)
+[![继承子视图](https://markdown.yeek.top/bolg/20191010/FWTrrykRGIHn.jpg?imageslim)](https://markdown.yeek.top/bolg/20191010/FWTrrykRGIHn.jpg?imageslim)
 
 ### Components & Slots
 
@@ -218,7 +218,7 @@ You are not allowed to access this resource!
 
 显示效果是这样的
 
-[![img](http://markdown.yeek.top/bolg/20191011/ENmfbuDSPpM6.jpg?imageslim)](http://markdown.yeek.top/bolg/20191011/ENmfbuDSPpM6.jpg?imageslim)
+[![img](https://markdown.yeek.top/bolg/20191011/ENmfbuDSPpM6.jpg?imageslim)](https://markdown.yeek.top/bolg/20191011/ENmfbuDSPpM6.jpg?imageslim)
 
 `@slot` 是用于注入内容到已知的 slot 中，比如我们需要在上面的基础上添加标题：
 
@@ -244,7 +244,7 @@ You are not allowed to access this resource!
 
 显示效果
 
-[![这样就添加了标题](http://markdown.yeek.top/bolg/20191011/aI7FAQaMxSda.png?imageslim)](http://markdown.yeek.top/bolg/20191011/aI7FAQaMxSda.png?imageslim)
+[![这样就添加了标题](https://markdown.yeek.top/bolg/20191011/aI7FAQaMxSda.png?imageslim)](https://markdown.yeek.top/bolg/20191011/aI7FAQaMxSda.png?imageslim)
 
 
 
@@ -273,7 +273,7 @@ You are not allowed to access this resource!
 
 效果
 
-[![mark](http://markdown.yeek.top/bolg/20191011/2THUBnqYH021.png?imageslim)](http://markdown.yeek.top/bolg/20191011/2THUBnqYH021.png?imageslim)
+[![mark](https://markdown.yeek.top/bolg/20191011/2THUBnqYH021.png?imageslim)](https://markdown.yeek.top/bolg/20191011/2THUBnqYH021.png?imageslim)
 
 **组件别名**
 
@@ -326,7 +326,7 @@ Route::get('greeting', function () {
 </div>
 ```
 
-[![img](http://markdown.yeek.top/bolg/20191011/xa9JBwGNNzIm.png?imageslim)](http://markdown.yeek.top/bolg/20191011/xa9JBwGNNzIm.png?imageslim)
+[![img](https://markdown.yeek.top/bolg/20191011/xa9JBwGNNzIm.png?imageslim)](https://markdown.yeek.top/bolg/20191011/xa9JBwGNNzIm.png?imageslim)
 
 **示未转义数据**
 

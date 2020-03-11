@@ -12,7 +12,7 @@ date: 2020-01-18 13:25:19
 
 # 0x00 - 题目描述
 
-![](http://markdown.yeek.top/20200118132746.png)
+![](https://markdown.yeek.top/20200118132746.png)
 
 
 <!-- MORE -->
@@ -22,13 +22,13 @@ date: 2020-01-18 13:25:19
 
 打开是单一网页，注释中也没有其他提示。
 
-![](http://markdown.yeek.top/20200118132924.png)
+![](https://markdown.yeek.top/20200118132924.png)
 
 
 
 通过百度得知，是要利用 flask 模板的代码注入漏洞。就例如下面这种
 
-![](http://markdown.yeek.top/20200118133342.png)
+![](https://markdown.yeek.top/20200118133342.png)
 
 
 
@@ -50,9 +50,9 @@ date: 2020-01-18 13:25:19
 
 效果如下
 
-![](http://markdown.yeek.top/20200118133907.png)
+![](https://markdown.yeek.top/20200118133907.png)
 
-![](http://markdown.yeek.top/20200118133951.png)
+![](https://markdown.yeek.top/20200118133951.png)
 
 
 
