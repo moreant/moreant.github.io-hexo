@@ -12,7 +12,7 @@ date: 2020-03-11 20:23:37
 
 在服务商里，一张泛域名的 SSL 证书需要 1700￥。免费的 SSL 只支持单域名，并且一个主域名最多申请 **20** 次
 
-![](http://markdown.yeek.top/20200311203410.png)
+![](https://markdown.yeek.top/20200311203410.png)
 
 
 
@@ -72,7 +72,7 @@ crontab -l
 
 图方便的话，可以使用全局 Accesskey。
 
-![](http://markdown.yeek.top/20200311204841.png)
+![](https://markdown.yeek.top/20200311204841.png)
 
 <br>
 
@@ -80,13 +80,13 @@ crontab -l
 
 https://ram.console.aliyun.com/users/new
 
-![](http://markdown.yeek.top/20200311205057.png)
+![](https://markdown.yeek.top/20200311205057.png)
 
 <br>
 
 复制并**保存**创建好的 AccessKey 和 AccessKeySecret 后，给新用户添加 DNS API 权限
 
-![](http://markdown.yeek.top/20200311205534.png)
+![](https://markdown.yeek.top/20200311205534.png)
 
 
 
@@ -125,7 +125,7 @@ acme.sh --issue --dns dns_ali -d *.example.com
 
 这里仅介绍 `Nginx` 的使用， `Apache`以及其他的 `web` 服务可以在[官方wiki](https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E)中找到相关设置。
 
-首先开启 Nginx 的证书使用。![](http://markdown.yeek.top/20200311211644.png)
+首先开启 Nginx 的证书使用。![](https://markdown.yeek.top/20200311211644.png)
 
 ```
 listen 443 ssl default_server;
@@ -159,9 +159,9 @@ acme.sh --installcert -d *.example.com \
 
 终端中显示 `Reload success`  就可以使用 `https`  访问了
 
-![](http://markdown.yeek.top/20200311215531.png)
+![](https://markdown.yeek.top/20200311215531.png)
 
-![](http://markdown.yeek.top/20200311215436.png)
+![](https://markdown.yeek.top/20200311215436.png)
 
 最后，如果你想使用其他高级功能，建议去看官方的 wik，也顺便给个 start 吧。
 
