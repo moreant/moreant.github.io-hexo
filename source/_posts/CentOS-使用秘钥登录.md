@@ -33,22 +33,6 @@ VS Code 不仅可以连接终端，还可以直接对服务器上的文件进行
 
 
 
-## 开启秘钥登录
-
-打开 /etc/ssh/sshd_config ，将 `RSAAuthentication` 和 `PubkeyAuthentication` 前面的注释去掉
-
-![](http://markdown.yeek.top/20200209200107.png)
-
-
-
-接着重启 sshd 服务，执行
-
-```bash
-systemctl restart sshd
-```
-
-
-
 ## 生成和保存秘钥
 
 生成秘钥，执行后直接回车三下即可
@@ -83,6 +67,26 @@ chmod 600 authorized_keys
 建议保存到用户名下的 `.ssh` 目录下中，以方便之后的远程连接
 
 ![](http://markdown.yeek.top/20200209201512.png)
+
+
+
+
+
+## 开启秘钥登录
+
+打开 /etc/ssh/sshd_config ，将 `RSAAuthentication` 和 `PubkeyAuthentication` 前面的注释去掉
+
+![](http://markdown.yeek.top/20200209200107.png)
+
+
+
+接着重启 sshd 服务，执行
+
+```bash
+systemctl restart sshd
+```
+
+
 
 
 
