@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>nginx 强制转https</title>
+    <url>/post/10147.html</url>
+    <content><![CDATA[<p>有了 <code>SSL</code> 证书，就要好好的利用。将 <code>nginx</code> 站点配置中原来监听的 80 端口拎出来，用来重定向到 <code>https</code></p>
+<p>注释掉 80 端口的监听</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="comment"># listen 80 default_server;</span></span><br><span class="line">    <span class="comment"># listen [::]:80 default_server;</span></span><br><span class="line">    </span><br><span class="line">    <span class="attribute">server_name</span> <span class="regexp">*.example.top</span>;</span><br><span class="line">    <span class="attribute">root</span> /var/www/public;</span><br><span class="line">    <span class="attribute">index</span> index.html index.htm;</span><br><span class="line">    // 其他配置略</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另起一个 80 端口监听用于重定向</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> server&#123;</span><br><span class="line">    listen  80 default_server;</span><br><span class="line">    listen [::]:80  ipv6only&#x3D;on;</span><br><span class="line"></span><br><span class="line">    server_name *.*.*;</span><br><span class="line">    rewrite ^(.*)$  https:&#x2F;&#x2F;$host$1 permanent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>检测配置，重新加载</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nginx -t</span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>oam</category>
+      </categories>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用 acme.sh 配置泛域名 htpps</title>
     <url>/post/25493.html</url>
     <content><![CDATA[<p>在服务商里，一张泛域名的 SSL 证书需要 1700￥。免费的 SSL 只支持单域名，并且一个主域名最多申请 <strong>20</strong> 次</p>
