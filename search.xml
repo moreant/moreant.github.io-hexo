@@ -28,7 +28,7 @@
       </tags>
   </entry>
   <entry>
-    <title>使用 acme.sh 配置泛域名 htpps</title>
+    <title>使用 acme.sh 配置泛域名 https</title>
     <url>/post/25493.html</url>
     <content><![CDATA[<p>在服务商里，一张泛域名的 SSL 证书需要 1700￥。免费的 SSL 只支持单域名，并且一个主域名最多申请 <strong>20</strong> 次</p>
 <p><img src="https://markdown.yeek.top/20200311203410.png" alt=""></p>
