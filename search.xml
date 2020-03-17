@@ -3,7 +3,8 @@
   <entry>
     <title>nginx 强制转https</title>
     <url>/post/10147.html</url>
-    <content><![CDATA[<p>有了 <code>SSL</code> 证书，就要好好的利用。</p>
+    <content><![CDATA[<center>有了 SSL 证书，就要好好的利用。</center>
+
 <a id="more"></a>
 
 <p>将 <code>nginx</code> 站点配置中原来监听的 80 端口拎出来，用来重定向到 <code>https</code>。</p>
