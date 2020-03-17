@@ -1,5 +1,5 @@
 ---
-title: 使用 acme.sh 配置泛域名 htpps
+title: 使用 acme.sh 配置泛域名 https
 categories:
   - oam
 tags:
