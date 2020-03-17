@@ -3,15 +3,21 @@
   <entry>
     <title>nginx 强制转https</title>
     <url>/post/10147.html</url>
-    <content><![CDATA[<p>有了 <code>SSL</code> 证书，就要好好的利用。将 <code>nginx</code> 站点配置中原来监听的 80 端口拎出来，用来重定向到 <code>https</code></p>
-<p>注释掉 80 端口的监听</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="comment"># listen 80 default_server;</span></span><br><span class="line">    <span class="comment"># listen [::]:80 default_server;</span></span><br><span class="line">    </span><br><span class="line">    <span class="attribute">server_name</span> <span class="regexp">*.example.top</span>;</span><br><span class="line">    <span class="attribute">root</span> /var/www/public;</span><br><span class="line">    <span class="attribute">index</span> index.html index.htm;</span><br><span class="line">    // 其他配置略</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<p>有了 <code>SSL</code> 证书，就要好好的利用。</p>
+<a id="more"></a>
+
+<p>将 <code>nginx</code> 站点配置中原来监听的 80 端口拎出来，用来重定向到 <code>https</code>。</p>
+<p>注释掉原先的 80 端口的监听</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="comment"># listen 80 default_server;</span></span><br><span class="line">    <span class="comment"># listen [::]:80 default_server;</span></span><br><span class="line">    </span><br><span class="line">    <span class="attribute">listen</span> <span class="number">443</span> ssl ;</span><br><span class="line">    <span class="attribute">listen</span> [::]:<span class="number">443</span> ssl  ipv6only=<span class="literal">on</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">server_name</span> <span class="regexp">*.example.top</span>;</span><br><span class="line">    // 其他配置略</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>另起一个 80 端口监听用于重定向</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> server&#123;</span><br><span class="line">    listen  80 default_server;</span><br><span class="line">    listen [::]:80  ipv6only&#x3D;on;</span><br><span class="line"></span><br><span class="line">    server_name *.*.*;</span><br><span class="line">    rewrite ^(.*)$  https:&#x2F;&#x2F;$host$1 permanent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"> server&#123;</span><br><span class="line">    <span class="attribute">listen</span>  <span class="number">80</span> default_server;</span><br><span class="line">    <span class="attribute">listen</span> [::]:<span class="number">80</span>  ipv6only=<span class="literal">on</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">server_name</span> <span class="regexp">*.example.top</span>;</span><br><span class="line">    <span class="attribute">return</span> <span class="number">301</span> https://<span class="variable">$server_name</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>检测配置，重新加载</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nginx -t</span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nginx -t</span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<p>有<strong>多个站点</strong>的话就弄多个监听 80 端口的 <code>server</code></p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"> server&#123;</span><br><span class="line">    <span class="attribute">listen</span>  <span class="number">80</span> default_server;</span><br><span class="line">    <span class="attribute">listen</span> [::]:<span class="number">80</span>  ipv6only=<span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">server_name</span> www.example.top example.top <span class="regexp">*.example.top</span>;</span><br><span class="line">    <span class="attribute">return</span>  <span class="number">301</span> https://<span class="variable">$server_name</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server&#123;</span><br><span class="line">    <span class="attribute">listen</span>  <span class="number">80</span> ;</span><br><span class="line">    <span class="attribute">listen</span> [::]:<span class="number">80</span>  ;</span><br><span class="line">    <span class="attribute">server_name</span> www.example.com example.com <span class="regexp">*.example.com</span>;</span><br><span class="line">    <span class="attribute">return</span>  <span class="number">301</span> https://<span class="variable">$server_name</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
