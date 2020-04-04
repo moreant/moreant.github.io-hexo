@@ -39,7 +39,6 @@ date: 2020-04-04 16:47:28
             lang: 'zh_CN',
             success: (res) => {
               const userInfo = res.userInfo
-              userInfo.role = '学生'
               wx.cloud.callFunction({
                 name: 'getOpenId'
               }).then(res => {
@@ -85,8 +84,6 @@ date: 2020-04-04 16:47:28
             lang: 'zh_CN',
             success: (res) => {
               const userInfo = res.userInfo
-              // 在用户信息中添加角色
-              userInfo.role = '学生'
               // 用云函数获取用户的 openid
               wx.cloud.callFunction({
                 name: 'getOpenId'
@@ -130,8 +127,6 @@ date: 2020-04-04 16:47:28
     // 是否授权了用户信息
     if (!!setting["scope.userInfo"]) {
       const userInfo = await this.getUserInfo()
-      // 补充角色
-      userInfo.role = '学生'
       const url = '/pages/my/my'
       // 是否注册过
       if (!await this.isRegistered(_openid)) {
@@ -251,8 +246,6 @@ getSetting() {
     // 是否授权了用户信息
     if (!!setting["scope.userInfo"]) {
       const userInfo = await this.getUserInfo()
-      // 补充角色
-      userInfo.role = '学生'
       const url = '/pages/my/my'
       // 是否注册过
       if (!await this.isRegistered(_openid)) {
