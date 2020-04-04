@@ -1,7 +1,7 @@
 cd %blog%
 
 git add -A
-git commit -m "update post"
+git commit -m "ci update"
 git push
 
 pause
