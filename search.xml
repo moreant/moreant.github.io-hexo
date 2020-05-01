@@ -126,10 +126,6 @@
 <div class="note info">
             <ul><li>佛系更新的官方都支持 Promise 了，说明 异步API Promise 化这条路是正确的。</li><li>在官方更新 Promise 调用的片段（提示）前，萌新还是建议使用 Promise 「包装」异步API。<strong>毕竟拼写错误导致的报错的问题不是一次两次了，依赖片段提示可以极大的避免拼写错误。</strong></li></ul>
           </div>
-
-
-
-<p>最后，展示一下</p>
 ]]></content>
       <categories>
         <category>js</category>
