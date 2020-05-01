@@ -2,20 +2,9 @@
 title: {{ title }}
 date: {{ date }}
 categories: 
-  - php
+  - js
 tags: 
   - 编程
-  - 笔记
-  - PHP
-  - Laravel
+  - 微信小程序
 ---
 
-
-
-摘要
-
-<!-- more -->
-
-
-
-正文

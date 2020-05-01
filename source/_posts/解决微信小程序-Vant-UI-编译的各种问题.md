@@ -1,9 +1,11 @@
 ---
 title: 解决微信小程序 Node 模块编译的各种问题
 categories:
-  - mix
+  - js
 tags:
   - 编程
+  - 微信小程序
+abbrlink: 38725
 date: 2020-04-01 21:10:38
 ---
 
