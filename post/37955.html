@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Noto Sans SC:300,300italic,400,400italic,700,700italic|consolas' , 'Noto Sans SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://moreant.github.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},
+    copycode: {"enable":true,"show_result":"default","style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: true,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="由于历史原因，微信小程序的 异步API 大部分使用的都是 回调函数 或者 then() 的方法；虽然很直观，但是一旦逻辑复杂起来就会变成「屎山」。什么叫屎山？下面这个就叫屎山。 1234567891011121314151617181920212223242526272829303132333435363738394041424344&#x2F;&#x2F; 忽略了 this.setData()setUserInfo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手教你解决小程序地狱回调">
+<meta property="og:url" content="http://moreant.github.io/post/37955.html">
+<meta property="og:site_name" content="莫居尘">
+<meta property="og:description" content="由于历史原因，微信小程序的 异步API 大部分使用的都是 回调函数 或者 then() 的方法；虽然很直观，但是一旦逻辑复杂起来就会变成「屎山」。什么叫屎山？下面这个就叫屎山。 1234567891011121314151617181920212223242526272829303132333435363738394041424344&#x2F;&#x2F; 忽略了 this.setData()setUserInfo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://markdown.yeek.top/20200430182821.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200430184034.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200430193313.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200501183213.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200501184048.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200501184655.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200501184723.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200501185050.png">
+<meta property="og:image" content="https://markdown.yeek.top/20200501184937.png">
+<meta property="article:published_time" content="2020-04-30T09:26:10.000Z">
+<meta property="article:modified_time" content="2020-05-01T11:19:37.901Z">
+<meta property="article:author" content="莫居尘 Moreant">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="微信小程序">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://markdown.yeek.top/20200430182821.png">
+
+<link rel="canonical" href="http://moreant.github.io/post/37955.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>手把手教你解决小程序地狱回调 | 莫居尘</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">莫居尘</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">学习即输入输出</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">33</span></a>
+
+  </li>
+        <li class="menu-item menu-item-笔记本">
+
+    <a href="https://moreant.github.io/notebook/" rel="section"><i class="fa fa-fw fa-book"></i>笔记本</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://moreant.github.io/post/37955.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
+      <meta itemprop="name" content="莫居尘 Moreant">
+      <meta itemprop="description" content="别教了，我学不动了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="莫居尘">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          手把手教你解决小程序地狱回调<a href="https://github.com/moreant/moreant.github.io/edit/hexo/source/_posts/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E8%A7%A3%E5%86%B3%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%9C%B0%E7%8B%B1%E5%9B%9E%E8%B0%83.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-30 17:26:10" itemprop="dateCreated datePublished" datetime="2020-04-30T17:26:10+08:00">2020-04-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-01 19:19:37" itemprop="dateModified" datetime="2020-05-01T19:19:37+08:00">2020-05-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>由于历史原因，微信小程序的 <code>异步API</code> 大部分使用的都是 <code>回调函数</code> 或者 <code>then()</code> 的方法；虽然很直观，但是一旦逻辑复杂起来就会变成「屎山」。什么叫屎山？下面这个就叫屎山。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 忽略了 this.setData()</span></span><br><span class="line">setUserInfo(event) &#123;</span><br><span class="line">  <span class="keyword">const</span> userInfos = wx.cloud.database().collection(<span class="string">'userInfo'</span>)</span><br><span class="line">  wx.getSetting(&#123;</span><br><span class="line">    success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (!!res.authSetting[<span class="string">"scope.userInfo"</span>]) &#123;</span><br><span class="line">        wx.getUserInfo(&#123;</span><br><span class="line">          lang: <span class="string">'zh_CN'</span>,</span><br><span class="line">          success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">            wx.cloud.callFunction(&#123;</span><br><span class="line">              name: <span class="string">'getOpenId'</span></span><br><span class="line">            &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">              userInfos.where(&#123;</span><br><span class="line">                _openid: res.result.openId</span><br><span class="line">              &#125;).count().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (res.total === <span class="number">0</span>) &#123;</span><br><span class="line">                  userInfos.add(&#123;</span><br><span class="line">                    data: event.detail.userInfo</span><br><span class="line">                  &#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                    wx.showToast(&#123;</span><br><span class="line">                      title:<span class="string">'注册成功'</span></span><br><span class="line">                    &#125;)</span><br><span class="line">                    wx.reLaunch(&#123;</span><br><span class="line">                      url: <span class="string">'/pages/my/my'</span>,</span><br><span class="line">                    &#125;)</span><br><span class="line">                  &#125;)</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                  wx.showToast(&#123;</span><br><span class="line">                    title:<span class="string">'登录成功'</span></span><br><span class="line">                  &#125;)</span><br><span class="line">                  wx.reLaunch(&#123;</span><br><span class="line">                    url: <span class="string">'/pages/my/my'</span>,</span><br><span class="line">                  &#125;)</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">          &#125;,</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        Toast.fail(<span class="string">'请允许'</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>本文将通过 <code>Promise对象</code> , <code>async/await函数</code>  从「简单」到「高级」的化解、切割、消灭屎山。（之后简称 Promise 和 async/await）</p>
+<a id="more"></a>
+
+<br>
+
+<h2 id="何来：什么是「异步」"><a href="#何来：什么是「异步」" class="headerlink" title="何来：什么是「异步」"></a>何来：什么是「异步」</h2><p>就是  </p>
+<p>刚入门的童鞋可能不清楚什么是异步，建议先看下面这篇文章<strong>初步</strong>的了解一下。</p>
+<p><a href="http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html" target="_blank" rel="noopener">Javascript异步编程的4种方法</a></p>
+<div class="note info">
+            <p>着重了解概念和第一，第四个方法即可</p>
+          </div>
+
+
+
+<p>小程序有非常多的 <code>异步API</code> ，只要是提供了 <code>回调函数</code> 的，都可以视为是 <code>异步API</code></p>
+<p><img src="https://markdown.yeek.top/20200430182821.png" alt=""></p>
+<p>在实际的业务中，经常需要根据上一个 <code>API</code> 的结果来执行下一个 <code>API</code>。与 <code>回调函数</code> 结合起来就形成下面这个屎山 的原因</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">setUserInfo(event) &#123;</span><br><span class="line">  <span class="keyword">const</span> userInfos = wx.cloud.database().collection(<span class="string">'userInfo'</span>)</span><br><span class="line">  wx.getSetting(&#123;</span><br><span class="line">    success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (!!res.authSetting[<span class="string">"scope.userInfo"</span>]) &#123;</span><br><span class="line">        wx.getUserInfo(&#123;</span><br><span class="line">          lang: <span class="string">'zh_CN'</span>,</span><br><span class="line">          success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> userInfo = event.detail.userInfo</span><br><span class="line">            wx.cloud.callFunction(&#123;</span><br><span class="line">              name: <span class="string">'getOpenId'</span></span><br><span class="line">            &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">              userInfos.where(&#123;</span><br><span class="line">                _openid: res.result.openId</span><br><span class="line">              &#125;).get().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (res.total === <span class="number">0</span>) &#123;</span><br><span class="line">                  userInfos.add(&#123;</span><br><span class="line">                    data: userInfo</span><br><span class="line">                  &#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">                    userInfo._id = res._id</span><br><span class="line">                    userInfo._openid = _openid</span><br><span class="line">                    <span class="keyword">this</span>.setData(&#123; userInfo &#125;)</span><br><span class="line">                    wx.showToast(&#123;</span><br><span class="line">                      title: <span class="string">'注册成功'</span></span><br><span class="line">                    &#125;)</span><br><span class="line">                    wx.reLaunch(&#123;</span><br><span class="line">                      url: <span class="string">'/pages/my/my'</span>,</span><br><span class="line">                    &#125;)</span><br><span class="line">                  &#125;)</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                  <span class="keyword">this</span>.setData(&#123; <span class="attr">userInfo</span>: res.data &#125;)</span><br><span class="line">                  wx.showToast(&#123;</span><br><span class="line">                    title: <span class="string">'注册成功'</span></span><br><span class="line">                  &#125;)</span><br><span class="line">                  wx.reLaunch(&#123;</span><br><span class="line">                    url: <span class="string">'/pages/my/my'</span>,</span><br><span class="line">                  &#125;)</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">          &#125;,</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        Toast.fail(<span class="string">'请允许'</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;)</span><br><span class="line">  wx.getUserInfo(&#123;</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(res.userInfo)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://markdown.yeek.top/20200430184034.png" alt=""></p>
+<p>回调函数写起来很爽，但是哪天你需要改变某个回调后的逻辑时；你就得像手剥洋葱含着泪一层一层的「剥开」它</p>
+<br>
+
+<p>既然 <code>回调函数</code> 这么麻烦，那么把回调的结果赋值给外面，或者把逻辑用方法分离出去不行吗？</p>
+<ol>
+<li>没等你异步函数执行回调，后面的代码就执行了，值都是undefined</li>
+</ol>
+<p><img src="https://markdown.yeek.top/20200430193313.png" alt=""></p>
+<ol start="2">
+<li>抽象成方法「治标不治本」，改嵌套的还是嵌套了</li>
+</ol>
+<br>
+
+<p>天下苦回调久矣，所以就有了「<strong>事件监听</strong>」、「<strong>发布/订阅</strong>」、「<strong>Promises对象</strong>」等等的改良方法；但是他们都有各自的缺点。</p>
+<p>直到五年前 <code>Promise</code>、<code>async/await</code> 的面世，JavaScript 的异步才算迎来了它的「终极解决」办法</p>
+<br>
+<div class="note info">
+            <ul><li>English (中文)：Promise (承诺)、async (异步)、await (等待)。</li><li>Promises 对象可以看做 Promise 的前世，他们两个不是同一个东西 。</li><li>由于 Promise （ES6加入）和 async/await （ES7加入）太「新」了，需要 Babel 等转码器转码之后才能运行到旧浏览器。<ul><li>vue-cli 的 build 和 小程序编译就是在干这件事</li></ul></li><li>在 Nodejs 的 API 中使用的就是 发布/订阅 （事件）的异步方法，例如 <a href="http://nodejs.cn/api/fs.html#fs_class_fs_fswatcher" target="_blank" rel="noopener">fs</a> 。<ul><li>Node不支持 ES6 语法<ul><li>可以使用 Babel转换来支持 ES6</li></ul></li></ul></li></ul>
+          </div>
+
+
+<br>
+
+<h2 id="化解：async-await-函数"><a href="#化解：async-await-函数" class="headerlink" title="化解：async / await 函数"></a>化解：async / await 函数</h2><p><strong>使用 async/await 可以简化 回调中的 then</strong></p>
+<p><code>async</code> 和 <code>await</code> 是 JavaScript 中的关键字，<code>await</code> 顾名思义就是 「等待」。</p>
+<p>他的使用我直接举个例子吧，虽然微信小程序新 <code>API</code> 都提供了 <code>Promise</code> 对象的调用类型，但是使用 <code>then()</code> 还是会出现「嵌套」问题的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">getUserInfo() &#123;</span><br><span class="line">  <span class="comment">// 调用 getOpenId 云函数 获取 openid 之后查询数据库并将结果打印出来</span></span><br><span class="line">  wx.cloud.callFunction(&#123;</span><br><span class="line">    name: <span class="string">'getOpenId'</span></span><br><span class="line">  &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;    </span><br><span class="line">    userinfos.where(&#123;</span><br><span class="line">      openid: res.result.openid</span><br><span class="line">    &#125;).get().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(res.data)          </span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 async / await 之后      </span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">async</span> getUserInfo() &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 调用云函数获取 openid</span></span><br><span class="line">  <span class="keyword">var</span> openid = <span class="keyword">await</span> wx.cloud.callFunction(&#123;</span><br><span class="line">    name: <span class="string">'getOpenId'</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 根据 openid 查询数据库中的用户信息</span></span><br><span class="line">  <span class="keyword">var</span> res = <span class="keyword">await</span> userinfos.where(&#123;</span><br><span class="line">    openid: openid.result.openid</span><br><span class="line">  &#125;).get()</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 打印用户信息</span></span><br><span class="line">  <span class="built_in">console</span>.log(res.data)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>async / await</code> 之前， <code>Promise</code> 的结果只能在 <code>then</code> 里取到，然后再进行下一步操作；</p>
+<p>使用 <code>async / await</code> 之后会将结果赋值给前面的变量，没赋值的话 <code>await</code> 也会等待异步执行完成才执行下一步。是不是有点像之前 「回调函数」里幻想的「赋值给外面」，从嵌套解构变成了个线性解构。</p>
+<br>
+
+<p>对了，不要以为 <code>then</code> 就没用了，它可以这样使用：返回只需要的值，简化后续的使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> getUserInfo() &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 调用云函数获取 openid</span></span><br><span class="line">  <span class="keyword">var</span> openid = <span class="keyword">await</span> wx.cloud.callFunction(&#123;</span><br><span class="line">    name: <span class="string">'getOpenId'</span></span><br><span class="line">  &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> res.result.openid</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 根据 openid 查询数据库中的用户信息</span></span><br><span class="line">  <span class="keyword">var</span> userInfo = <span class="keyword">await</span> userinfos.where(&#123;</span><br><span class="line">    openid</span><br><span class="line">  &#125;).get().then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> res.data</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 打印用户信息</span></span><br><span class="line">  <span class="built_in">console</span>.log(userInfo)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<br>
+
+
+
+<p>学会使用 async/await 之后，那坨屎山就是这个样子了</p>
+<div class="note info">
+            <ul><li>由于使用了async 标记了整个函数，整个函数已经是「异步」了，所以执行异步函数时页面并不会「假死」。</li><li>await 后面只能是 Promise ，标记使用 <code>回调函数</code> 的小程序的 API 是没有用的（目前来说）。</li></ul>
+          </div>
+
+<br>
+
+<h2 id="切割：用-Promise-「包装」-回调函数"><a href="#切割：用-Promise-「包装」-回调函数" class="headerlink" title="切割：用 Promise 「包装」 回调函数"></a>切割：用 Promise 「包装」 回调函数</h2><p><strong>await 后面只能是 Promise ，标记使用「回调函数」的小程序的 API 是没有用的。</strong></p>
+<p>那么，对于 <code>回调函数</code> 就没有办法了吗。当然不是，不然 <code>Promise</code> 也不会被称为「终极解决」方法了。</p>
+<p>这是获取用户设置的例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wx.getSetting(&#123;</span><br><span class="line">  success(res) &#123;       </span><br><span class="line">    <span class="built_in">console</span>.log(res);          </span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>可以使用 <code>Promise</code> 来「包装」这个 <code>回调函数</code> 。</p>
+<p>当 success 回调函数执行到 resolve (解决) 这一行时，就会调用外层的 <code>then()</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">  wx.getSetting(&#123;</span><br><span class="line">    success(res) &#123;</span><br><span class="line">      resolve(res)          </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>结合上面的 <code>async/await</code> ，「完美」解决了嵌套问题</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> res = <span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">  wx.getSetting(&#123;</span><br><span class="line">    success(res) &#123;</span><br><span class="line">      resolve(res)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(res);</span><br></pre></td></tr></table></figure>
+
+
+
+<br>
+
+<div class="note info">
+            <ul><li>不是所有回调函数都需要「包装」，当出现两层以上回调函数嵌套的，才<strong>推荐</strong>使用 Promise 进行 「包装」。简而言之：<strong>禁止过度「包装」</strong></li></ul>
+          </div>
+
+<br>
+
+
+
+
+
+
+<h2 id="消灭：-微信API-支持-Promise"><a href="#消灭：-微信API-支持-Promise" class="headerlink" title="消灭： 微信API  支持 Promise"></a>消灭： 微信API  支持 Promise</h2><p>在学会了使用 async/await 标记函数 和用 Promise 包装 异步API 之后，就再也没有被异步嵌套困扰过。</p>
+<p>直到某天老师给的实验作业中出现了个意想不到的骚操作，之前需要「包装」的 API 可以直接使用 await 来等待回调，并将结果赋值给前面的变量。</p>
+<p><img src="https://markdown.yeek.top/20200501183213.png" alt=""></p>
+<p>原来在2月份的时候微信更新了一波。<strong>基础库 <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html" target="_blank" rel="noopener">2.10.2</a> 版本起，异步 API 支持 callback &amp; promise 两种调用方式</strong></p>
+<p><img src="https://markdown.yeek.top/20200501184048.png" alt=""></p>
+<p>也就是说，之后再也不需要「包装」异步 API 了；因为已经支持 Promise 调用了。</p>
+<p>不过实际感受并不是特别完善，开发者工具并没有进行适配。使用 await 会有警告。</p>
+<p><img src="https://markdown.yeek.top/20200501184655.png" alt=""></p>
+<br>
+
+<p>并且没有片段提示</p>
+<p><img src="https://markdown.yeek.top/20200501184723.png" alt=""></p>
+<br>
+
+<p>相比之下，云开发的 API 是有提示的</p>
+<p><img src="https://markdown.yeek.top/20200501185050.png" alt=""></p>
+<br>
+
+<p>当然你可以使用 JSDoc 的 <code>@type</code> 来强行标记类型，是会有提示的。</p>
+<p><img src="https://markdown.yeek.top/20200501184937.png" alt=""></p>
+<p>所以，建议基础不太好的童鞋还是老老实实用「包装」的方法来解决回调嵌套比较好；</p>
+<div class="note info">
+            <ul><li>佛系更新的官方都支持 Promise 了，说明 异步API Promise 化这条路是正确的。</li><li>在官方更新 Promise 调用的片段（提示）前，萌新还是建议使用 Promise 「包装」异步API。<strong>毕竟拼写错误导致的报错的问题不是一次两次了，依赖片段提示可以极大的避免拼写错误。</strong></li></ul>
+          </div>
+
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>莫居尘 Moreant
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://moreant.github.io/post/37955.html" title="手把手教你解决小程序地狱回调">http://moreant.github.io/post/37955.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 编程</a>
+              <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag"><i class="fa fa-tag"></i> 微信小程序</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/22871.html" rel="prev" title="改造微信小程序的地狱回调">
+      <i class="fa fa-chevron-left"></i> 改造微信小程序的地狱回调
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#何来：什么是「异步」"><span class="nav-number">1.</span> <span class="nav-text">何来：什么是「异步」</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#化解：async-await-函数"><span class="nav-number">2.</span> <span class="nav-text">化解：async &#x2F; await 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切割：用-Promise-「包装」-回调函数"><span class="nav-number">3.</span> <span class="nav-text">切割：用 Promise 「包装」 回调函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消灭：-微信API-支持-Promise"><span class="nav-number">4.</span> <span class="nav-text">消灭： 微信API  支持 Promise</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="莫居尘 Moreant"
+      src="https://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
+  <p class="site-author-name" itemprop="name">莫居尘 Moreant</p>
+  <div class="site-description" itemprop="description">别教了，我学不动了</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/moreant" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moreant" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:moreant@foxmail.com" title="E-Mail → mailto:moreant@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.yeek.top/" title="http:&#x2F;&#x2F;www.yeek.top" rel="noopener" target="_blank">Yeek</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://drive.yeek.top/" title="http:&#x2F;&#x2F;drive.yeek.top" rel="noopener" target="_blank">Drive</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">莫居尘 Moreant</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">63k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">58 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '95d6df1a949eeea73df4',
+      clientSecret: '8f06d7871c1db329f5339e191c5269699f4f5d3f',
+      repo: 'moreant.github.io',
+      owner: 'moreant',
+      admin: ['moreant'],
+      id: 'bb97c90d6091e3be1bd6716076e66cbc',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
