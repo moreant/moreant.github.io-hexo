@@ -3,7 +3,7 @@
   <entry>
     <title>教你从头到尾解决小程序回调地狱</title>
     <url>/post/37955.html</url>
-    <content><![CDATA[<p>示例代码逻辑上有点小 bug ，但不影响主要内容。稍后更新改造，并提供示例项目。</p>
+    <content><![CDATA[<p>示例代码逻辑上有点小 bug ，但不影响。</p>
 <hr>
 
 <p>由于历史原因，微信小程序的 <code>异步API</code> 大部分使用的都是 <code>回调函数</code> 或者 <code>then()</code> 的方法；虽然很直观，但是一旦逻辑复杂起来就会变成「屎山」。什么叫屎山？下面这个就叫屎山。</p>
