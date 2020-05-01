@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>从头到尾教你解决小程序回调地狱</title>
+    <title>教你从头到尾解决小程序回调地狱</title>
     <url>/post/37955.html</url>
     <content><![CDATA[<p>示例代码逻辑上有点小 bug ，但不影响主要内容。稍后更新改造，并提供示例项目。</p>
 <hr>
