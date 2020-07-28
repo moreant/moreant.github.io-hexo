@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>解决 IDEA 控制台乱码</title>
+    <url>/post/62768.html</url>
+    <content><![CDATA[<p>百度到的办法基本都试过了，只有一个有用。</p>
+<p>在 <code>Help -&gt; Edit Custom VM Options...</code> 中的最后一行加上</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-Dfile.encoding&#x3D;UTF-8</span><br></pre></td></tr></table></figure>
+
+<p>接着重启 IDEA 就 ok 了</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>编程</tag>
+        <tag>后端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>教你从头到尾解决小程序回调地狱</title>
     <url>/post/37955.html</url>
     <content><![CDATA[<p>示例代码逻辑上有点小 bug ，但不影响。</p>
