@@ -1,8 +1,9 @@
 ---
 title: VMware 设置手动固定 ip
 categories:
-  - oam
+  - tool
 tags:
+  - 工具
   - 运维
   - VMware
 abbrlink: 23562

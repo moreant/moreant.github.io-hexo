@@ -1,10 +1,11 @@
 ---
 title: 解决 IDEA 控制台乱码
 categories:
-  - java
+  - tool
 tags:
-  - 编程
   - 后端
+  - 工具
+abbrlink: 62768
 date: 2020-07-29 00:52:34
 ---
 
