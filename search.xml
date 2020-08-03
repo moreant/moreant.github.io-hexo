@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>解决Window s Treminal 中 git bash 中文转义/乱码</title>
+    <url>/post/60086.html</url>
+    <content><![CDATA[<p><img src="http://markdown.yeek.top/20200804002829.png" alt=""></p>
+<p>在 git 安装目录下的 <code>etc/bash.bashrc</code> 文件中末尾添上这两行，保存重启 bash 即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> LANG=<span class="string">"zh_CN.UTF-8"</span></span><br><span class="line"><span class="built_in">export</span> LC_ALL=<span class="string">"zh_CN.UTF-8"</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="http://markdown.yeek.top/20200804003011.png" alt=""></p>
+<p>这种在 status 里中文转义的输入以下指令并执行即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global core.quotepath <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>tool</category>
+      </categories>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>解决 IDEA 控制台乱码</title>
     <url>/post/62768.html</url>
     <content><![CDATA[<p>百度到的办法基本都试过了，只有一个有用。</p>
@@ -10,10 +31,10 @@
 <p>接着重启 IDEA 就 ok 了</p>
 ]]></content>
       <categories>
-        <category>java</category>
+        <category>tool</category>
       </categories>
       <tags>
-        <tag>编程</tag>
+        <tag>工具</tag>
         <tag>后端</tag>
       </tags>
   </entry>
@@ -1275,10 +1296,11 @@
 </ul>
 ]]></content>
       <categories>
-        <category>oam</category>
+        <category>tool</category>
       </categories>
       <tags>
         <tag>运维</tag>
+        <tag>工具</tag>
         <tag>VMware</tag>
       </tags>
   </entry>
