@@ -48,18 +48,20 @@
   };
 </script>
 
-  <meta name="description" content="别教了，我学不动了">
-<meta property="og:type" content="website">
-<meta property="og:title" content="莫居尘">
-<meta property="og:url" content="http://moreant.github.io/tags/Vs-Code/index.html">
+  <meta name="description" content="接手项目导入时遇到的坑  IDEA运行报Command line is too long vue 编译时堆栈溢出如： &lt;— Last few GCs —&gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="接手项目的各种坑">
+<meta property="og:url" content="http://moreant.github.io/post/54002.html">
 <meta property="og:site_name" content="莫居尘">
-<meta property="og:description" content="别教了，我学不动了">
+<meta property="og:description" content="接手项目导入时遇到的坑  IDEA运行报Command line is too long vue 编译时堆栈溢出如： &lt;— Last few GCs —&gt;">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-17T14:58:11.000Z">
+<meta property="article:modified_time" content="2020-08-17T15:04:51.620Z">
 <meta property="article:author" content="莫居尘 Moreant">
-<meta property="article:tag" content="前端 后端 运维">
+<meta property="article:tag" content="编程">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://moreant.github.io/tags/Vs-Code/">
+<link rel="canonical" href="http://moreant.github.io/post/54002.html">
 
 
 <script id="page-configurations">
@@ -67,11 +69,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>标签: Vs Code | 莫居尘</title>
+  <title>接手项目的各种坑 | 莫居尘</title>
   
 
 
@@ -206,54 +208,153 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">Vs Code
-          <small>标签</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://moreant.github.io/post/54002.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
+      <meta itemprop="name" content="莫居尘 Moreant">
+      <meta itemprop="description" content="别教了，我学不动了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="莫居尘">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          接手项目的各种坑<a href="https://github.com/moreant/moreant.github.io/edit/hexo/source/_posts/%E6%8E%A5%E6%89%8B%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%90%84%E7%A7%8D%E5%9D%91.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil"></i></a>
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-17 22:58:11 / 修改时间：23:04:51" itemprop="dateCreated datePublished" datetime="2020-08-17T22:58:11+08:00">2020-08-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mix/" itemprop="url" rel="index">
+                    <span itemprop="name">mix</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>585</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
+        <p>接手项目导入时遇到的坑</p>
+<ol>
+<li>IDEA运行报Command line is too long</li>
+<li>vue 编译时堆栈溢出如： &lt;— Last few GCs —&gt;</li>
+</ol>
+<a id="more"></a>
+
+
+
+<h3 id="1-IDEA运行报Command-line-is-too-long"><a href="#1-IDEA运行报Command-line-is-too-long" class="headerlink" title="1. IDEA运行报Command line is too long"></a>1. IDEA运行报Command line is too long</h3><p>修改项目下 <code>.idea\workspace.xml</code>，找到标签 <code>&lt;component name=&quot;PropertiesComponent&quot;&gt;</code> ， 在标签里加一行 </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dynamic.classpath"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-vue-堆栈溢出"><a href="#2-vue-堆栈溢出" class="headerlink" title="2. vue 堆栈溢出"></a>2. vue 堆栈溢出</h3><p>在编译时出现以下错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;--- Last few GCs ---&gt;</span><br><span class="line"></span><br><span class="line">……</span><br><span class="line"></span><br><span class="line">FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>直接在<code>package.json</code>替换<code>scripts</code>下的<code>serve</code>指令内容：</li>
+<li><code>&quot;serve&quot;: &quot;npx --max_old_space_size=4096 vue-cli-service serve&quot;</code></li>
+<li>开发时运行<code>npm run serve</code>或<code>yarn serve</code>即可。</li>
+</ul>
+<blockquote>
+<p>参考地址：<a href="https://zhuweisheng.com.cn/framework/vue-cli-leap-out/" target="_blank" rel="noopener">https://zhuweisheng.com.cn/framework/vue-cli-leap-out/</a></p>
+</blockquote>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
+        
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-12-13T00:20:07+08:00"
-              content="2019-12-13">
-          12-13
-        </time>
-      </div>
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>莫居尘 Moreant
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://moreant.github.io/post/54002.html" title="接手项目的各种坑">http://moreant.github.io/post/54002.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/post/19479.html" itemprop="url">
-            <span itemprop="name">使用 VS Code 远程连接服务器</span>
-          </a>
-      </h2>
 
-    </header>
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 编程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/60086.html" rel="prev" title="解决Window s Treminal 中 git bash 中文转义/乱码">
+      <i class="fa fa-chevron-left"></i> 解决Window s Treminal 中 git bash 中文转义/乱码
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-    </div>
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -300,6 +401,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-IDEA运行报Command-line-is-too-long"><span class="nav-number">1.</span> <span class="nav-text">1. IDEA运行报Command line is too long</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-vue-堆栈溢出"><span class="nav-number">2.</span> <span class="nav-text">2. vue 堆栈溢出</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -458,6 +560,25 @@
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '95d6df1a949eeea73df4',
+      clientSecret: '8f06d7871c1db329f5339e191c5269699f4f5d3f',
+      repo: 'moreant.github.io',
+      owner: 'moreant',
+      admin: ['moreant'],
+      id: '573af97fa24ba82da43891a92182146e',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>

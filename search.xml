@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>接手项目的各种坑</title>
+    <url>/post/54002.html</url>
+    <content><![CDATA[<p>接手项目导入时遇到的坑</p>
+<ol>
+<li>IDEA运行报Command line is too long</li>
+<li>vue 编译时堆栈溢出如： &lt;— Last few GCs —&gt;</li>
+</ol>
+<a id="more"></a>
+
+
+
+<h3 id="1-IDEA运行报Command-line-is-too-long"><a href="#1-IDEA运行报Command-line-is-too-long" class="headerlink" title="1. IDEA运行报Command line is too long"></a>1. IDEA运行报Command line is too long</h3><p>修改项目下 <code>.idea\workspace.xml</code>，找到标签 <code>&lt;component name=&quot;PropertiesComponent&quot;&gt;</code> ， 在标签里加一行 </p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dynamic.classpath"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-vue-堆栈溢出"><a href="#2-vue-堆栈溢出" class="headerlink" title="2. vue 堆栈溢出"></a>2. vue 堆栈溢出</h3><p>在编译时出现以下错误</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;--- Last few GCs ---&gt;</span><br><span class="line"></span><br><span class="line">……</span><br><span class="line"></span><br><span class="line">FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>直接在<code>package.json</code>替换<code>scripts</code>下的<code>serve</code>指令内容：</li>
+<li><code>&quot;serve&quot;: &quot;npx --max_old_space_size=4096 vue-cli-service serve&quot;</code></li>
+<li>开发时运行<code>npm run serve</code>或<code>yarn serve</code>即可。</li>
+</ul>
+<blockquote>
+<p>参考地址：<a href="https://zhuweisheng.com.cn/framework/vue-cli-leap-out/" target="_blank" rel="noopener">https://zhuweisheng.com.cn/framework/vue-cli-leap-out/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>mix</category>
+      </categories>
+      <tags>
+        <tag>编程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>解决Window s Treminal 中 git bash 中文转义/乱码</title>
     <url>/post/60086.html</url>
     <content><![CDATA[<p><img src="http://markdown.yeek.top/20200804002829.png" alt=""></p>
