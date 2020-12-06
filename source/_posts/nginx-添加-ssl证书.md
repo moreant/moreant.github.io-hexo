@@ -26,4 +26,4 @@ ssl_prefer_server_ciphers on;
 
 
 
-![](https://markdown.yeek.top/20191218232943.png)
+![](.md_img/20191218232943.png)

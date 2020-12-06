@@ -273,7 +273,11 @@ $student = DB::table('student')
     ->pluck('name');
 ```
 
-[![img](https://markdown.yeek.top/bolg/20191007/Rn3hu10dOL71.jpg?imageslim)](https://markdown.yeek.top/bolg/20191007/Rn3hu10dOL71.jpg?imageslim)
+
+
+![](.md_img/Rn3hu10dOL71.jpg)
+
+
 
 自定义键值：
 
@@ -283,7 +287,11 @@ $student = DB::table('student')
 	->pluck('name','id');
 ```
 
-[![img](https://markdown.yeek.top/bolg/20191007/2teaHlSkVfJv.jpg?imageslim)](https://markdown.yeek.top/bolg/20191007/2teaHlSkVfJv.jpg?imageslim)
+
+
+![](.md_img/2teaHlSkVfJv.jpg)
+
+
 
 **select()**
 

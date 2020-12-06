@@ -279,17 +279,19 @@ docker-compose up -d nginx mysql
 3. 期间看到红色的不要慌张，都是正常情况
 4. 这里有特别多的[坑](https://mojuchen.github.io/post/16264.html#天坑)
 
-[![红色不一定是错误](https://markdown.yeek.top/bolg/20191016/6BFgQCKfGjU7.jpg?imageslim)](https://markdown.yeek.top/bolg/20191016/6BFgQCKfGjU7.jpg?imageslim)
+![](.md_img/6BFgQCKfGjU7.jpg)
 
 ### 安装完成
 
 看到这几个容器都 `done` 则说明 `Nginx` 和 `MySQL` 安装完成了
 
-![](https://markdown.yeek.top/20191218022119.png)
+![](.md_img/20191218022119.png)
 
 此时访问服务器，返回的应该是 `404 Not Found nginx`
 
-[![404](https://markdown.yeek.top/bolg/20191016/t69uSXfnsrXV.jpg?imageslim)](https://markdown.yeek.top/bolg/20191016/t69uSXfnsrXV.jpg?imageslim)
+
+
+![](.md_img/t69uSXfnsrXV.jpg)
 
 在 **/web/yeek/public** 下新建一个 `index.php` ，内容是
 
@@ -334,7 +336,7 @@ sudo chmod -R 777 storage bootstrap/cache
 
 访问服务器，页面出现 Laravel 的 **欢迎页面**
 
-[![恭喜你安装成功](https://markdown.yeek.top/bolg/20191016/vvWgBqPpcBUw.png?imageslim)](https://markdown.yeek.top/bolg/20191016/vvWgBqPpcBUw.png?imageslim)
+![](.md_img/vvWgBqPpcBUw.png)
 
 ### 数据库
 

@@ -16,11 +16,11 @@ date: 2020-02-11 21:51:36
 
 PHP 反序列，老题新做了。
 
-![](https://markdown.yeek.top/20200211215026.png)
+![](.md_img/20200211215026.png)
 
 打开 `index.php` 是这样的
 
-![](https://markdown.yeek.top/20200211215256.png)
+![](.md_img/20200211215256.png)
 
 <!-- MORE -->
 
@@ -190,7 +190,7 @@ string(93) "O:4:"User":4:{s:4:"name";N;s:10:"Usermale";b:1;s:8:"*money";i:1000;s
 
 不过证明的确实有这个文件，并且 flag 就存在这个文件的代码中，需要我们使用 `highlight_file` 方法来显示出来。
 
-![](https://markdown.yeek.top/20200211233941.png)
+![](.md_img/20200211233941.png)
 
 
 
@@ -239,11 +239,11 @@ base64 编码后：
 
 直接传进去，果然被匹配到了
 
-![](https://markdown.yeek.top/20200212001625.png)
+![](.md_img/20200212001625.png)
 
 不清楚正则匹配的话，在这个网站上([regextester](https://www.regextester.com/))可以知道匹配到的部分是前面的 `O:4:`
 
-![](https://markdown.yeek.top/20200212011140.png)
+![](.md_img/20200212011140.png)
 
 可以在 `4` 前面加上 `+` 来绕过，因为在 php 语法中，`+4` = `4`
 
@@ -267,7 +267,7 @@ var?=TzorNDoiRGVtbyI6MTp7czoxMDoiRGVtbyAgZmlsZSI7czo4OiJmbDRnLnBocCI7fQ
 
 果不其然的显示回 index.php 的源码了。
 
-![](https://markdown.yeek.top/20200212003517.png)
+![](.md_img/20200212003517.png)
 
 这是因为 **反序列化 Demo 对象**后调用了 `__wakeup` 方法，重新将传入的 `fl4g.php` 设置为 `index.php` 了
 
@@ -318,7 +318,7 @@ var?=TzorNDoiRGVtbyI6Mjp7czoxMDoiRGVtb2ZpbGUiO3M6ODoiZmw0Zy5waHAiO30=
 
 图形化就是这样：
 
-![](https://markdown.yeek.top/20200212004354.png)
+![](.md_img/20200212004354.png)
 
 `%44%65%6d%6f`进行 hex 转化后 就是 `Demo` ，可以在这个网站上测试 [Hex编码/解码](https://www.107000.com/T-Hex/)
 
@@ -374,7 +374,7 @@ print_r(base64_encode($s));
 
 `TzorNDoiRGVtbyI6Mjp7czoxMDoiAERlbW8AZmlsZSI7czo4OiJmbDRnLnBocCI7fQ==`
 
-![](https://markdown.yeek.top/20200212005224.png)
+![](.md_img/20200212005224.png)
 
 载荷
 
@@ -382,7 +382,7 @@ print_r(base64_encode($s));
 ?var=TzorNDoiRGVtbyI6Mjp7czoxMDoiAERlbW8AZmlsZSI7czo4OiJmbDRnLnBocCI7fQ==
 ```
 
-![](https://markdown.yeek.top/20200212005244.png)
+![](.md_img/20200212005244.png)
 
 
 

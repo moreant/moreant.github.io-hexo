@@ -30,4 +30,4 @@ git --version
 
 
 
-![](https://markdown.yeek.top/20191218001848.png)
+![](.md_img/20191218001848.png)
