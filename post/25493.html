@@ -55,19 +55,19 @@
 <meta property="og:site_name" content="莫居尘">
 <meta property="og:description" content="在服务商里，一张泛域名的 SSL 证书需要 1700￥。免费的 SSL 只支持单域名，并且一个主域名最多申请 20 次  而 acme.sh 利用 acme 协议，可以在 letsencrypt  全自动且免费的申请证书。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://markdown.yeek.top/20200311203410.png">
-<meta property="og:image" content="https://markdown.yeek.top/20200311204841.png">
-<meta property="og:image" content="https://markdown.yeek.top/20200311205057.png">
-<meta property="og:image" content="https://markdown.yeek.top/20200311205534.png">
-<meta property="og:image" content="https://markdown.yeek.top/20200311211644.png">
-<meta property="og:image" content="https://markdown.yeek.top/20200311215531.png">
-<meta property="og:image" content="https://markdown.yeek.top/20200311215436.png">
+<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200311203410.png">
+<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200311204841.png">
+<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200311205057.png">
+<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200311205534.png">
+<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200311211644.png">
+<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200311215531.png">
+<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200311215436.png">
 <meta property="article:published_time" content="2020-03-11T12:23:37.000Z">
-<meta property="article:modified_time" content="2020-12-01T01:33:13.195Z">
+<meta property="article:modified_time" content="2020-12-06T01:54:14.588Z">
 <meta property="article:author" content="莫居尘 Moreant">
 <meta property="article:tag" content="运维">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://markdown.yeek.top/20200311203410.png">
+<meta name="twitter:image" content="http://moreant.github.io/post/.md_img/20200311203410.png">
 
 <link rel="canonical" href="http://moreant.github.io/post/25493.html">
 
@@ -251,7 +251,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-01 09:33:13" itemprop="dateModified" datetime="2020-12-01T09:33:13+08:00">2020-12-01</time>
+                <time title="修改时间：2020-12-06 09:54:14" itemprop="dateModified" datetime="2020-12-06T09:54:14+08:00">2020-12-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -291,7 +291,7 @@
 
       
         <p>在服务商里，一张泛域名的 SSL 证书需要 1700￥。免费的 SSL 只支持单域名，并且一个主域名最多申请 <strong>20</strong> 次</p>
-<p><img src="https://markdown.yeek.top/20200311203410.png" alt=""></p>
+<p><img src=".md_img/20200311203410.png" alt=""></p>
 <p>而 <strong>acme.sh</strong> 利用 <code>acme</code> 协议，可以在 <code>letsencrypt</code>  <strong>全自动且免费</strong>的申请证书。</p>
 <a id="more"></a>
 
@@ -322,16 +322,16 @@
 
 
 <h2 id="创建-Accesskey"><a href="#创建-Accesskey" class="headerlink" title="创建 Accesskey"></a>创建 Accesskey</h2><p>图方便的话，可以使用全局 Accesskey。</p>
-<p><img src="https://markdown.yeek.top/20200311204841.png" alt=""></p>
+<p><img src=".md_img/20200311204841.png" alt=""></p>
 <br>
 
 <p>为了安全，也是为了<strong>方便管理</strong>，最好创建一个专门用于 acme.sh 的子账号来生成 Accesskey</p>
 <p><a href="https://ram.console.aliyun.com/users/new" target="_blank" rel="noopener">https://ram.console.aliyun.com/users/new</a></p>
-<p><img src="https://markdown.yeek.top/20200311205057.png" alt=""></p>
+<p><img src=".md_img/20200311205057.png" alt=""></p>
 <br>
 
 <p>复制并<strong>保存</strong>创建好的 AccessKey 和 AccessKeySecret 后，给新用户添加 DNS API 权限</p>
-<p><img src="https://markdown.yeek.top/20200311205534.png" alt=""></p>
+<p><img src=".md_img/20200311205534.png" alt=""></p>
 <h2 id="申请证书"><a href="#申请证书" class="headerlink" title="申请证书"></a>申请证书</h2><p>在 ~/.acme.sh 中进行 Key 和 Secret 的设置</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> Ali_Key=<span class="string">"thisIsYouKey"</span></span><br><span class="line"><span class="built_in">export</span> Ali_Secret=<span class="string">"thisIsYouSecret"</span></span><br></pre></td></tr></table></figure>
 
@@ -345,7 +345,7 @@
 <p>申请成功后，证书会生成在 <code>~/.acme.sh/*.example.com</code>。</p>
 <p>别自己复制到 Nginx 目录里了，以后续订不会自动更新 Nginx 目录中的。</p>
 <h2 id="使用证书"><a href="#使用证书" class="headerlink" title="使用证书"></a>使用证书</h2><p>这里仅介绍 <code>Nginx</code> 的使用， <code>Apache</code>以及其他的 <code>web</code> 服务可以在<a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">官方wiki</a>中找到相关设置。</p>
-<p>首先开启 Nginx 的证书使用。<img src="https://markdown.yeek.top/20200311211644.png" alt=""></p>
+<p>首先开启 Nginx 的证书使用。<img src=".md_img/20200311211644.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">listen 443 ssl default_server;</span><br><span class="line">listen [::]:443 ssl default_server ipv6only&#x3D;on;</span><br><span class="line">ssl_certificate &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;example.com&#x2F;cert.pem;</span><br><span class="line">ssl_certificate_key &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;example.com&#x2F;key.pem;</span><br></pre></td></tr></table></figure>
 
 <br>
@@ -360,8 +360,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">acme.sh --installcert -d *.example.com \</span><br><span class="line">--key-file       /etc/nginx/ssl/example.com/key.pem  \</span><br><span class="line">--fullchain-file /etc/nginx/ssl/example.com/cert.pem \</span><br><span class="line">--reloadcmd    <span class="string">"nginx -s reload"</span></span><br></pre></td></tr></table></figure>
 
 <p>终端中显示 <code>Reload success</code>  就可以使用 <code>https</code>  访问了</p>
-<p><img src="https://markdown.yeek.top/20200311215531.png" alt=""></p>
-<p><img src="https://markdown.yeek.top/20200311215436.png" alt=""></p>
+<p><img src=".md_img/20200311215531.png" alt=""></p>
+<p><img src=".md_img/20200311215436.png" alt=""></p>
 <p>最后，如果你想使用其他高级功能，建议去看官方的 wik，也顺便给个 start 吧。</p>
 <p><a href="https://github.com/Neilpang/acme.sh/wiki" target="_blank" rel="noopener">https://github.com/Neilpang/acme.sh/wiki</a></p>
 

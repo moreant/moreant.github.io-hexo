@@ -55,22 +55,22 @@
 <meta property="og:site_name" content="莫居尘">
 <meta property="og:description" content="示例代码逻辑上有点小 bug ，但不影响。   由于历史原因，微信小程序的 异步API 大部分使用的都是 回调函数 或者 then() 的方法；虽然很直观，但是一旦逻辑复杂起来就会变成「屎山」。什么叫屎山？下面这个就叫屎山。 1234567891011121314151617181920212223242526272829303132333435363738394041424344&#x2F;&#x2F; 忽略了 t">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://markdown.yeek.top/20200430182821.png">
-<meta property="og:image" content="https://markdown.yeek.top/20200430184034.png">
-<meta property="og:image" content="https://markdown.yeek.top/20200430193313.png">
-<meta property="og:image" content="https://markdown.yeek.top/20200501183213.png">
-<meta property="og:image" content="https://markdown.yeek.top/20200501184048.png">
-<meta property="og:image" content="https://markdown.yeek.top/20200501184655.png">
-<meta property="og:image" content="https://markdown.yeek.top/20200501184723.png">
-<meta property="og:image" content="https://markdown.yeek.top/20200501185050.png">
-<meta property="og:image" content="https://markdown.yeek.top/20200501184937.png">
+<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200430182821.png">
+<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200430184034.png">
+<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200430193313.png">
+<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200501183213.png">
+<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200501184048.png">
+<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200501184655.png">
+<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200501184723.png">
+<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200501185050.png">
+<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200501184937.png">
 <meta property="article:published_time" content="2020-04-30T09:26:10.000Z">
-<meta property="article:modified_time" content="2020-12-01T01:33:13.195Z">
+<meta property="article:modified_time" content="2020-12-06T01:54:14.588Z">
 <meta property="article:author" content="莫居尘 Moreant">
 <meta property="article:tag" content="编程">
 <meta property="article:tag" content="微信小程序">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://markdown.yeek.top/20200430182821.png">
+<meta name="twitter:image" content="http://moreant.github.io/post/.md_img/20200430182821.png">
 
 <link rel="canonical" href="http://moreant.github.io/post/37955.html">
 
@@ -254,7 +254,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-01 09:33:13" itemprop="dateModified" datetime="2020-12-01T09:33:13+08:00">2020-12-01</time>
+                <time title="修改时间：2020-12-06 09:54:14" itemprop="dateModified" datetime="2020-12-06T09:54:14+08:00">2020-12-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -314,11 +314,11 @@
 
 
 <p>小程序有非常多的 <code>异步API</code> ，只要是提供了 <code>回调函数</code> 的，都可以视为是 <code>异步API</code></p>
-<p><img src="https://markdown.yeek.top/20200430182821.png" alt=""></p>
+<p><img src=".md_img/20200430182821.png" alt=""></p>
 <p>在实际的业务中，经常需要根据上一个 <code>API</code> 的结果来执行下一个 <code>API</code>。与 <code>回调函数</code> 结合起来就形成下面这个屎山 的原因</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">setUserInfo(event) &#123;</span><br><span class="line">  <span class="keyword">const</span> userInfos = wx.cloud.database().collection(<span class="string">'userInfo'</span>)</span><br><span class="line">  wx.getSetting(&#123;</span><br><span class="line">    success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (!!res.authSetting[<span class="string">"scope.userInfo"</span>]) &#123;</span><br><span class="line">        wx.getUserInfo(&#123;</span><br><span class="line">          lang: <span class="string">'zh_CN'</span>,</span><br><span class="line">          success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> userInfo = res.userInfo</span><br><span class="line">            wx.cloud.callFunction(&#123;</span><br><span class="line">              name: <span class="string">'getOpenId'</span></span><br><span class="line">            &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">              userInfos.where(&#123;</span><br><span class="line">                _openid: res.result.openId</span><br><span class="line">              &#125;).get().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (res.total === <span class="number">0</span>) &#123;</span><br><span class="line">                  userInfos.add(&#123;</span><br><span class="line">                    data: userInfo</span><br><span class="line">                  &#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">                    userInfo._id = res._id</span><br><span class="line">                    userInfo._openid = _openid</span><br><span class="line">                    <span class="keyword">this</span>.setData(&#123; userInfo &#125;)</span><br><span class="line">                    wx.showToast(&#123;</span><br><span class="line">                      title: <span class="string">'注册成功'</span></span><br><span class="line">                    &#125;)</span><br><span class="line">                    wx.reLaunch(&#123;</span><br><span class="line">                      url: <span class="string">'/pages/my/my'</span>,</span><br><span class="line">                    &#125;)</span><br><span class="line">                  &#125;)</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                  <span class="keyword">this</span>.setData(&#123; <span class="attr">userInfo</span>: res.data &#125;)</span><br><span class="line">                  wx.showToast(&#123;</span><br><span class="line">                    title: <span class="string">'注册成功'</span></span><br><span class="line">                  &#125;)</span><br><span class="line">                  wx.reLaunch(&#123;</span><br><span class="line">                    url: <span class="string">'/pages/my/my'</span>,</span><br><span class="line">                  &#125;)</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">          &#125;,</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        Toast.fail(<span class="string">'请允许'</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;)</span><br><span class="line">  wx.getUserInfo(&#123;</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(res.userInfo)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://markdown.yeek.top/20200430184034.png" alt=""></p>
+<p><img src=".md_img/20200430184034.png" alt=""></p>
 <p>回调函数写起来很爽，但是哪天你需要改变某个回调后的逻辑时；你就得像手剥洋葱含着泪一层一层的「剥开」它</p>
 <br>
 
@@ -326,7 +326,7 @@
 <ol>
 <li>没等你异步函数执行回调，后面的代码就执行了，值都是undefined</li>
 </ol>
-<p><img src="https://markdown.yeek.top/20200430193313.png" alt=""></p>
+<p><img src=".md_img/20200430193313.png" alt=""></p>
 <ol start="2">
 <li>抽象成方法「治标不治本」，改嵌套的还是嵌套了</li>
 </ol>
@@ -394,24 +394,24 @@
 
 <h2 id="消灭：-微信API-支持-Promise"><a href="#消灭：-微信API-支持-Promise" class="headerlink" title="消灭： 微信API  支持 Promise"></a>消灭： 微信API  支持 Promise</h2><p>在学会了使用 async/await 标记函数 和用 Promise 包装 异步API 之后，就再也没有被异步嵌套困扰过。</p>
 <p>直到某天老师给的实验作业中出现了个意想不到的骚操作，之前需要「包装」的 API 可以直接使用 await 来等待回调，并将结果赋值给前面的变量。</p>
-<p><img src="https://markdown.yeek.top/20200501183213.png" alt=""></p>
+<p><img src=".md_img/20200501183213.png" alt=""></p>
 <p>原来在2月份的时候微信更新了一波。<strong>基础库 <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html" target="_blank" rel="noopener">2.10.2</a> 版本起，异步 API 支持 callback &amp; promise 两种调用方式</strong></p>
-<p><img src="https://markdown.yeek.top/20200501184048.png" alt=""></p>
+<p><img src=".md_img/20200501184048.png" alt=""></p>
 <p>也就是说，之后再也不需要「包装」异步 API 了；因为已经支持 Promise 调用了。</p>
 <p>不过实际感受并不是特别完善，开发者工具并没有进行适配。使用 await 会有警告。</p>
-<p><img src="https://markdown.yeek.top/20200501184655.png" alt=""></p>
+<p><img src=".md_img/20200501184655.png" alt=""></p>
 <br>
 
 <p>并且没有片段提示</p>
-<p><img src="https://markdown.yeek.top/20200501184723.png" alt=""></p>
+<p><img src=".md_img/20200501184723.png" alt=""></p>
 <br>
 
 <p>相比之下，云开发的 API 是有提示的</p>
-<p><img src="https://markdown.yeek.top/20200501185050.png" alt=""></p>
+<p><img src=".md_img/20200501185050.png" alt=""></p>
 <br>
 
 <p>当然你可以使用 JSDoc 的 <code>@type</code> 来强行标记类型，是会有提示的。</p>
-<p><img src="https://markdown.yeek.top/20200501184937.png" alt=""></p>
+<p><img src=".md_img/20200501184937.png" alt=""></p>
 <p>所以，建议基础不太好的童鞋还是老老实实用「包装」的方法来解决回调嵌套比较好；</p>
 <div class="note info">
             <ul><li>佛系更新的官方都支持 Promise 了，说明 异步API Promise 化这条路是正确的。</li><li>在官方更新 Promise 调用的片段（提示）前，萌新还是建议使用 Promise 「包装」异步API。<strong>毕竟拼写错误导致的报错的问题不是一次两次了，依赖片段提示可以极大的避免拼写错误。</strong></li></ul>
