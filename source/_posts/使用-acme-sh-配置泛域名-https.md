@@ -30,13 +30,13 @@ date: 2020-03-11 20:23:37
 
 本文以阿里云为例
 
-{% note info %}
+
 
 如果你只需要单域名的证书，其实官方的 [中文文档](https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E) 已经足够了，可以用更简单的 HTTP 方法。
 
 > 本文主要参考自简书的 [acme.sh 配合 letsencrypt 配置泛域名](https://www.jianshu.com/p/dbe180979e77)
 
-{% endnote %}
+
 
 
 

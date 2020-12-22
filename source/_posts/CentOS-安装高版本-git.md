@@ -9,11 +9,11 @@ abbrlink: 24889
 date: 2019-10-29 21:45:30
 ---
 
-{% note info %}
+
 
 来源：[栈越](https://stackoverflow.com/questions/21820715/how-to-install-latest-version-of-git-on-centos-7-x-6-x)
 
-{% endnote %}
+
 
 ```shell
 yum install http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm

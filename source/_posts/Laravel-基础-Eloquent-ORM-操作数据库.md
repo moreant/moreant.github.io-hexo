@@ -65,8 +65,6 @@ $student = Student::where('id','>=','1005')->get();
 
 
 
-{% tabs select %}
-
 <!-- tab all -->
 
 **all**
@@ -102,12 +100,6 @@ $student = Student::findOrFail(1010);
 ```
 
 <!-- endtab -->
-
-
-
-{% endtabs %}
-
-
 
 
 

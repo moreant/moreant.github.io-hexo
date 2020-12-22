@@ -18,7 +18,7 @@ date: 2020-01-12 15:33:01
 
 # 博客设置
 
-是{% label danger@根目录 %}下的 `_config.yml` 文件
+是label danger@根目录下的 `_config.yml` 文件
 
 
 

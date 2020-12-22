@@ -69,7 +69,7 @@ Remote - SSH [介绍页面](https://marketplace.visualstudio.com/items?itemName=
 
 ![](.md_img/20200209200607.png)
 
-{% note info%}
+
 
 关于登录秘钥的设置可以参考下面这篇文章
 
@@ -77,7 +77,7 @@ Remote - SSH [介绍页面](https://marketplace.visualstudio.com/items?itemName=
 
 
 
-{% endnote  %}
+
 
 
 
@@ -107,11 +107,11 @@ Remote - SSH [介绍页面](https://marketplace.visualstudio.com/items?itemName=
 
 如果不指定私钥的地址，就需要在每次远程连接时输入密码，这是一件非常麻烦的事情。如何在服务器里开启私钥登录，可以去菜鸟教程里了解
 
-{% note info%}
+
 
 《[设置 SSH 通过密钥登录](https://www.runoob.com/w3cnote/set-ssh-login-key.html)》
 
-{% endnote %}
+
 
 
 

@@ -35,11 +35,11 @@ date: 2019-10-15 21:37:26
 
 ## Docker
 
-{% note info %}
+
 
 建议直接参阅 **菜鸟教程** 的 [CentOS Docker 安装](https://www.runoob.com/docker/centos-docker-install.html) ，非常的简洁易懂
 
-{% endnote %}
+
 
 ### 安装
 
@@ -89,11 +89,11 @@ sudo systemctl start docker
 
 ## Laradock
 
-{% note info %}
+
 
 建议结合 laradock 的 [文档](https://laradock.io/) / [中文文档](https://laradock.linganmin.cn/) 进行阅读，预先了解 laradock 中关于 docker-compose 的相关指令
 
-{% endnote %}
+
 
 ### 安装
 
@@ -199,11 +199,11 @@ WORKSPACE_NPM_REGISTRY=https://registry.npm.taobao.org
 
 #### MySQL版本
 
-{% note danger %}
+
 
 `MySQL` 建议使用 5.7 或者其他低版本，否则密码可能不兼容远程连接软件，
 
-{% endnote %}
+
 
 ```
 MYSQL_VERSION=5.7

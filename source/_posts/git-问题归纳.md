@@ -87,10 +87,9 @@ git update-ref refs/heads/branch-name branch-name^
 git update-ref refs/heads/branch-name a12d48e2
 ```
 
-{% note info %}
+
 
 更多请参阅[git-update-ref](http://schacon.github.com/git/git-update-ref.html)命令的文档。 或者腾讯云的[中文文档](https://cloud.tencent.com/developer/section/1138785)
 
 方案来源地址 [栈越](https://stackoverflow.com/questions/4624881/how-can-i-uncommit-the-last-commit-in-a-git-bare-repository)
 
-{% endnote %}

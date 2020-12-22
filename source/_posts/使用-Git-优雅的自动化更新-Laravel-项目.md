@@ -14,7 +14,7 @@ date: 2019-10-29 22:13:14
 
 <!-- more -->
 
-{% note info %}
+
 
 **无论如何**，都要先去了解一下 Git 的基本使用，否则你会大概率听不懂我在讲什么：
 
@@ -24,7 +24,7 @@ Git最佳实践：[Git 菜单](https://github.com/geeeeeeeeek/git-recipes)
 
 Git之道文档：[Pro Git](http://iissnan.com/progit/)
 
-{% endnote %}
+
 
 
 
